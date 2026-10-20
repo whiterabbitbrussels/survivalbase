@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { BOOK, CATS, CAT_BY_ID, FEET, TIP_X, pad, type CartLine } from '../data';
+import { BOOK, CATS, CAT_BY_ID, FEET, TIP_X, money, pad, type CartLine } from '../data';
 import type { WalkerState } from '../useWalker';
 
 const SCENE_W = 1600;
@@ -147,7 +147,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
           {Box({ left: 276, top: 122, width: 56, height: 62, background: '#5a4030' })}
           <div style={abs({ left: 236, top: 64, width: 136, height: 60, background: 'var(--orange)', border: '2px solid var(--ink)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: 'rotate(-4deg)' })}>
             <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 22, lineHeight: 0.9, color: 'var(--ink)' }}>SURVIVAL BASE</div>
-            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--ink)' }}>THE GUIDE · $49</div>
+            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--ink)' }}>THE GUIDE · €49</div>
           </div>
         </>)}
 
@@ -255,8 +255,8 @@ function buildPanel(
     return {
       kicker: 'BUNKER · LIBRARY', title: 'Survival Base',
       blurb: 'The guide behind the shop. Eleven chapters, one for every zone of this base. Printed on paper, which still works in a blackout.',
-      items: [{ n: '01', name: 'Print + PDF edition', price: '$49', open: () => a.onAdd(BOOK) }],
-      cta: 'Add the guide · $49', onCta: () => a.onAdd(BOOK),
+      items: [{ n: '01', name: 'Print + PDF edition', price: '€49', open: () => a.onAdd(BOOK) }],
+      cta: 'Add the guide · €49', onCta: () => a.onAdd(BOOK),
     };
   }
   if (id === 'stash') {
@@ -266,10 +266,10 @@ function buildPanel(
     const total = cart.reduce((sum, c) => sum + c.price, 0);
     return {
       kicker: 'BUNKER · YOUR STASH',
-      title: lines.length ? '$' + total : 'Empty',
+      title: lines.length ? money(total) : 'Empty',
       blurb: lines.length ? cart.length + ' items packed and waiting.' : 'Like the shelves after the first rumour. Go shopping.',
       items: lines.map((l, i) => ({
-        n: pad(i + 1), name: l.name + (l.q > 1 ? ' ×' + l.q : ''), price: '$' + l.price * l.q,
+        n: pad(i + 1), name: l.name + (l.q > 1 ? ' ×' + l.q : ''), price: money(l.price * l.q),
         open: () => (l.id === 'book' ? a.onZone('library') : a.onOpenProduct(l.id)),
       })),
       cta: lines.length ? 'Checkout' : 'Back to the surface',
@@ -279,7 +279,7 @@ function buildPanel(
   const c = CAT_BY_ID[id];
   return {
     kicker: c.where.toUpperCase() + ' · CHAPTER ' + pad(c.ch), title: c.name, blurb: c.blurb,
-    items: c.items.slice(0, 3).map((p, i) => ({ n: pad(i + 1), name: p.name, price: '$' + p.price, open: () => a.onOpenProduct(p.id) })),
+    items: c.items.slice(0, 3).map((p, i) => ({ n: pad(i + 1), name: p.name, price: money(p.price), open: () => a.onOpenProduct(p.id) })),
     cta: 'Enter ' + c.name + ' · ' + c.items.length + ' items', onCta: () => a.onZone(c.id),
   };
 }
@@ -290,7 +290,7 @@ function Tooltip({ id, cartCount }: { id: string; cartCount: number }) {
   const tip = c
     ? { kicker: (c.lvl ? 'BUNKER ROOM' : 'SURFACE ZONE') + ' · CHAPTER ' + pad(c.ch), title: c.name, blurb: c.blurb, hint: c.items.length + ' items · click to enter →' }
     : id === 'library'
-      ? { kicker: 'BUNKER · LIBRARY', title: 'The Guide', blurb: 'Survival Base, the book behind the shop. One chapter for every zone of this base.', hint: '$49 · click to open →' }
+      ? { kicker: 'BUNKER · LIBRARY', title: 'The Guide', blurb: 'Survival Base, the book behind the shop. One chapter for every zone of this base.', hint: '€49 · click to open →' }
       : { kicker: 'BUNKER · STASH', title: 'Your Stash', blurb: 'Everything you have packed so far.', hint: cartCount + ' items · click to open →' };
   const w = 400;
   const left = Math.max(16, Math.min(SCENE_W - w - 16, TIP_X[id] - w / 2));

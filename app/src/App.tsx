@@ -69,6 +69,7 @@ export default function App() {
   }, []);
 
   const add = useCallback((p: CartLine | Product, n = 1) => {
+    if (p.price === null) return; // not sellable until the supplier price is confirmed
     const line = { id: p.id, name: p.name, price: p.price };
     setCart(c => c.concat(Array.from({ length: n }, () => line)));
     flash('Added to stash: ' + p.name + (n > 1 ? ' ×' + n : ''));
@@ -85,7 +86,7 @@ export default function App() {
         </a>
         <nav style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 500 }}>
           <button onClick={goHome} className="link-btn nav-btn">BASE</button>
-          <button onClick={() => goHomeThen('library')} className="link-btn nav-btn">THE GUIDE · $49</button>
+          <button onClick={() => goHomeThen('library')} className="link-btn nav-btn">THE GUIDE · €49</button>
           <button onClick={() => setNight(n => !n)} className="btn btn-ink">{night ? '◑ BLACKOUT' : '◐ DAYLIGHT'}</button>
           <button onClick={() => goHomeThen('stash')} className="btn btn-orange btn-shadow" style={{ padding: '7px 12px' }}>STASH · {cart.length}</button>
         </nav>

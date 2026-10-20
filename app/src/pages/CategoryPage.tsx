@@ -25,7 +25,7 @@ export function CategoryPage({ cat, onHome, onAddBook, onOpenProduct, onAdd }: P
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap', background: 'var(--ink)', color: 'var(--paper)', padding: '16px 20px' }}>
         <div style={{ fontSize: 15, lineHeight: 1.4 }}>This zone is <strong>Chapter {pad(cat.ch)}</strong> of <em>Survival Base</em>, the guide. How to choose it, set it up and fix it with what's left.</div>
-        <button onClick={onAddBook} className="btn btn-orange" style={{ border: '2px solid var(--paper)', padding: '10px 14px', whiteSpace: 'nowrap' }}>ADD THE GUIDE · $49</button>
+        <button onClick={onAddBook} className="btn btn-orange" style={{ border: '2px solid var(--paper)', padding: '10px 14px', whiteSpace: 'nowrap' }}>ADD THE GUIDE · €49</button>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: '2px solid var(--ink)', paddingBottom: 8 }}>

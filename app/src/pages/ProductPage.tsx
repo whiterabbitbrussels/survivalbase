@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { CAT_BY_ID, pad, type Product } from '../data';
-import { RelatedCard } from '../components/ProductCard';
+import { CAT_BY_ID, money, pad, type Product } from '../data';
+import { ProductShot, RelatedCard } from '../components/ProductCard';
 
 interface Props {
   product: Product;
@@ -25,9 +25,9 @@ export function ProductPage({ product: p, onHome, onOpenCat, onOpenProduct, onAd
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,380px),1fr))', gap: 40 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div className="ph ph-lg" style={{ aspectRatio: '1/1', border: '2px solid var(--ink)', fontSize: 12 }}>hero product shot</div>
+          <ProductShot product={p} label="hero product shot" style={{ aspectRatio: '1/1', border: '2px solid var(--ink)', fontSize: 12 }} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
-            {['in use', 'detail', 'packed'].map(label => (
+            {['AI visual · in use', 'AI visual · detail', 'AI visual · packed'].map(label => (
               <div key={label} className="ph ph-sm" style={{ aspectRatio: '1/1', border: '2px solid var(--ink)', fontSize: 10 }}>{label}</div>
             ))}
           </div>
@@ -37,7 +37,7 @@ export function ProductPage({ product: p, onHome, onOpenCat, onOpenProduct, onAd
           <div style={{ fontFamily: 'var(--mono)', fontSize: 13, letterSpacing: '.06em' }}>{cat.where.toUpperCase()} · {cat.name.toUpperCase()}</div>
           <h1 style={{ margin: 0, fontFamily: 'var(--display)', fontWeight: 900, fontSize: 'clamp(44px,5vw,64px)', lineHeight: 0.9, textWrap: 'balance' }}>{p.name}</h1>
           <p style={{ margin: 0, fontSize: 18, lineHeight: 1.45, textWrap: 'pretty' }}>{p.tagline}</p>
-          <div style={{ fontFamily: 'var(--mono)', fontSize: 32, fontWeight: 600 }}>${p.price}</div>
+          <div style={{ fontFamily: 'var(--mono)', fontSize: 32, fontWeight: 600 }}>{money(p.price)}</div>
 
           <div style={{ display: 'flex', flexDirection: 'column', borderTop: '2px solid var(--ink)' }}>
             {p.spec.split(' · ').map(sp => (
@@ -51,13 +51,13 @@ export function ProductPage({ product: p, onHome, onOpenCat, onOpenProduct, onAd
               <div style={{ width: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--mono)', fontSize: 16 }}>{qty}</div>
               <button onClick={() => setQty(q => Math.min(99, q + 1))} aria-label="Increase quantity" style={{ width: 44, background: 'none', border: 'none', cursor: 'pointer', fontSize: 18 }}>+</button>
             </div>
-            <button onClick={() => onAdd(p, qty)} className="btn btn-orange btn-press-lg" style={{ flex: 1, minWidth: 200, padding: '14px 16px', fontSize: 15, boxShadow: '4px 4px 0 var(--ink)' }}>ADD TO STASH</button>
+            <button onClick={() => onAdd(p, qty)} disabled={p.price === null} className="btn btn-orange btn-press-lg" style={{ flex: 1, minWidth: 200, padding: '14px 16px', fontSize: 15, boxShadow: '4px 4px 0 var(--ink)', opacity: p.price === null ? 0.5 : 1, cursor: p.price === null ? 'not-allowed' : 'pointer' }}>{p.price === null ? 'PRICE SOON' : 'ADD TO STASH'}</button>
           </div>
 
           <div style={{ border: '2px dashed var(--ink)', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
             <div style={{ fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '.06em' }}>FIELD NOTE · CHAPTER {pad(cat.ch)}</div>
             <div style={{ fontSize: 15, lineHeight: 1.45 }}>Setup, maintenance and the mistakes people make with gear like this are covered in <em>Survival Base</em>, the guide.</div>
-            <button onClick={onAddBook} className="link-btn" style={{ alignSelf: 'flex-start', fontWeight: 600, color: 'var(--rust)', textDecoration: 'underline' }}>Add the guide · $49</button>
+            <button onClick={onAddBook} className="link-btn" style={{ alignSelf: 'flex-start', fontWeight: 600, color: 'var(--rust)', textDecoration: 'underline' }}>Add the guide · €49</button>
           </div>
         </div>
       </div>
