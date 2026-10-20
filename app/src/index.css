@@ -1,0 +1,72 @@
+:root {
+  --ink: #1f1b16;
+  --paper: #f2ede2;
+  --orange: #d9692b;
+  --rust: #b4531d;
+  --card: #f7f3ea;
+  --rule: #c9bfa8;
+  --muted: #4a4339;
+  --ph-ink: #5e564a;
+  --display: 'Big Shoulders Display', sans-serif;
+  --text: 'Archivo', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+* { border-radius: 0; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); -webkit-font-smoothing: antialiased; }
+a { color: var(--rust); }
+a:hover { color: var(--ink); }
+button { font-family: inherit; }
+
+@keyframes sbspin { to { transform: rotate(360deg); } }
+@keyframes sbflick { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(.9, 1.12); } }
+@keyframes sbblink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: .15; } }
+@keyframes sbtoast { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.mono { font-family: var(--mono); }
+.display { font-family: var(--display); font-weight: 900; }
+
+/* Text links / nav buttons */
+.link-btn { background: none; border: none; padding: 0; cursor: pointer; font-family: var(--mono); font-size: 13px; color: var(--ink); }
+.link-btn:hover { text-decoration: underline; }
+.nav-btn { padding: 8px 10px; }
+
+/* Solid buttons */
+.btn { border: 2px solid var(--ink); cursor: pointer; font-family: var(--mono); font-size: 13px; }
+.btn-ink { background: var(--ink); color: var(--paper); padding: 7px 12px; }
+.btn-orange { background: var(--orange); color: var(--ink); font-weight: 600; }
+.btn-shadow { box-shadow: 3px 3px 0 var(--ink); }
+.btn-press:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+.btn-press-lg:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+
+/* Scene zones */
+.zone { cursor: pointer; }
+.zone-room { background: #e4dccb; overflow: hidden; z-index: 7; }
+.zone-room:hover { box-shadow: inset 0 0 0 4px var(--orange); }
+.zone-surface:hover { filter: brightness(1.08); }
+.zone-label { background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 15px; padding: 3px 8px; white-space: nowrap; }
+.zone-label-lg { font-size: 16px; }
+
+/* Panels */
+.panel-row:hover { color: var(--rust); }
+.term-row:hover { background: #16301d; }
+
+/* Quick map chips */
+.chip { background: var(--paper); border: 2px solid var(--ink); padding: 7px 12px; cursor: pointer; font-family: var(--mono); font-size: 13px; color: var(--ink); }
+.chip:hover { background: var(--ink); color: var(--paper); }
+
+/* Product cards */
+.card { display: flex; flex-direction: column; border: 2px solid var(--ink); background: var(--card); transition: transform .15s, box-shadow .15s; }
+.card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 var(--ink); }
+.card-flat:hover { transform: none; }
+.card-add { background: var(--ink); color: var(--paper); border: none; padding: 8px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; }
+.card-add:hover { background: var(--orange); color: var(--ink); }
+
+/* Image placeholders until Seedream shots arrive */
+.ph {
+  background: repeating-linear-gradient(135deg, #e7e1d4 0 10px, #ddd5c4 10px 20px);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-family: var(--mono); color: var(--ph-ink);
+}
+.ph-lg { background: repeating-linear-gradient(135deg, #e7e1d4 0 12px, #ddd5c4 12px 24px); }
+.ph-sm { background: repeating-linear-gradient(135deg, #e7e1d4 0 8px, #ddd5c4 8px 16px); }
