@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&amp;family=Rubik+Mono+One&amp;family=VT323&amp;family=DotGothic16&amp;family=Press+Start+2P&amp;family=Marcellus&amp;family=Josefin+Sans:wght@300;400;600&amp;family=Work+Sans:wght@400;600&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#e9e6df;color:#1c1b19;font-family:'Work Sans',sans-serif}a{color:#1c1b19}a:hover{color:#7a3b1d}@keyframes gsblink{0%,60%{opacity:1}61%,100%{opacity:.15}}</style>
+</helmet>
+<section style="padding:48px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="font-family:'Courier Prime',monospace;font-size:13px;letter-spacing:.08em">SURVIVALBASE · GAME STYLE DIRECTIONS · ROUND 2</div>
+    <div style="font-family:'Rubik Mono One',sans-serif;font-size:36px;line-height:1.1">Four worlds for the same bunker</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+    <div id="2a" style="width:800px;background:#fbfaf7;border:1px solid #cfcac0;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #cfcac0">
+        <div style="background:#1c1b19;color:#fbfaf7;font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;padding:3px 8px">2a</div>
+        <div style="font-weight:600;font-size:18px">Voxel Blocks</div>
+      </div>
+      <div style="position:relative;width:800px;height:480px;overflow:hidden;background:#8ec5f7">
+        <div style="position:absolute;left:300px;top:40px;width:120px;height:24px;background:#fff"></div>
+        <div style="position:absolute;left:330px;top:24px;width:60px;height:16px;background:#fff"></div>
+        <div style="position:absolute;left:560px;top:70px;width:90px;height:20px;background:#fff"></div>
+        <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="0"><div style="{{ t }}"></div></sc-for>
+        <div style="position:absolute;left:600px;top:96px;width:4px;height:44px;background:#3b2f22"></div>
+        <div style="position:absolute;left:636px;top:96px;width:4px;height:44px;background:#3b2f22"></div>
+        <div style="position:absolute;left:562px;top:66px;background:rgba(0,0,0,.6);color:#fff;font-family:'Silkscreen',monospace;font-size:14px;padding:3px 8px">01 POWER</div>
+        <div style="position:absolute;left:376px;top:126px;background:rgba(0,0,0,.6);color:#fff;font-family:'Silkscreen',monospace;font-size:14px;padding:3px 8px">ENTER BASE</div>
+        <div style="position:absolute;left:206px;top:286px;background:rgba(0,0,0,.6);color:#fff;font-family:'Silkscreen',monospace;font-size:14px;padding:3px 8px">LIBRARY</div>
+        <div style="position:absolute;left:446px;top:286px;background:rgba(0,0,0,.6);color:#fff;font-family:'Silkscreen',monospace;font-size:14px;padding:3px 8px">FOOD STORAGE</div>
+        <div style="position:absolute;left:486px;top:90px;width:20px;height:70px">
+          <div style="position:absolute;left:2px;top:0;width:16px;height:16px;background:#d9a77a"></div>
+          <div style="position:absolute;left:2px;top:0;width:16px;height:5px;background:#4a3020"></div>
+          <div style="position:absolute;left:0;top:16px;width:20px;height:26px;background:#e06a22"></div>
+          <div style="position:absolute;left:2px;top:42px;width:16px;height:28px;background:#33508a"></div>
+        </div>
+        <div style="position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:4px;padding:4px;background:rgba(20,20,20,.75)">
+          <div style="width:36px;height:36px;background:#3a3a3a;border:2px solid #fff;display:flex;align-items:center;justify-content:center"><div style="width:20px;height:14px;background:#2c3e6b"></div></div>
+          <div style="width:36px;height:36px;background:#3a3a3a;border:2px solid #555;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:20px;background:#3f7fc0"></div></div>
+          <div style="width:36px;height:36px;background:#3a3a3a;border:2px solid #555;display:flex;align-items:center;justify-content:center"><div style="width:18px;height:18px;background:#5aa03a"></div></div>
+          <div style="width:36px;height:36px;background:#3a3a3a;border:2px solid #555;display:flex;align-items:center;justify-content:center"><div style="width:18px;height:18px;background:#b07a33"></div></div>
+          <div style="width:36px;height:36px;background:#3a3a3a;border:2px solid #555;display:flex;align-items:center;justify-content:center"><div style="width:16px;height:16px;background:#c0392b"></div></div>
+          <div style="width:36px;height:36px;background:#3a3a3a;border:2px solid #555"></div>
+          <div style="width:36px;height:36px;background:#3a3a3a;border:2px solid #555"></div>
+        </div>
+      </div>
+      <div style="padding:14px 18px;font-size:14px;line-height:1.5;color:#3d3a35">The whole world is made of textured blocks: grass, dirt, stone, planks. The bunker is dug out of the ground block by block. Products sit in a supply bar like items you've picked up. Pixel type, flat light, bright sky.</div>
+    </div>
+
+    <div id="2b" style="width:800px;background:#fbfaf7;border:1px solid #cfcac0;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #cfcac0">
+        <div style="background:#1c1b19;color:#fbfaf7;font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;padding:3px 8px">2b</div>
+        <div style="font-weight:600;font-size:18px">Retro Shooter, Grim</div>
+      </div>
+      <div style="position:relative;width:800px;height:480px;overflow:hidden;background:#140e0b">
+        <div style="position:absolute;left:0;top:0;width:800px;height:220px;background:linear-gradient(180deg,#240705 0,#4f160c 55%,#8a3814 100%)"></div>
+        <div style="position:absolute;left:80px;top:60px;width:180px;height:26px;background:#2a0c08;opacity:.8"></div>
+        <div style="position:absolute;left:470px;top:40px;width:220px;height:30px;background:#2a0c08;opacity:.8"></div>
+        <div style="position:absolute;left:0;top:214px;width:800px;height:26px;background:#3b2a20;background-image:linear-gradient(45deg,rgba(0,0,0,.3) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.3) 75%);background-size:8px 8px"></div>
+        <div style="position:absolute;left:60px;top:130px;width:10px;height:86px;background:#1a110c"></div>
+        <div style="position:absolute;left:40px;top:150px;width:30px;height:6px;background:#1a110c;transform:rotate(-30deg)"></div>
+        <div style="position:absolute;left:64px;top:140px;width:34px;height:6px;background:#1a110c;transform:rotate(25deg)"></div>
+        <div style="position:absolute;left:560px;top:170px;width:110px;height:40px;background:#1c2436;border:3px solid #0a0a0a;transform:skewX(-15deg)"></div>
+        <div style="position:absolute;left:600px;top:174px;width:3px;height:34px;background:#5a6a8a;transform:rotate(30deg)"></div>
+        <div style="position:absolute;left:730px;top:70px;width:6px;height:146px;background:#2a2a26"></div>
+        <div style="position:absolute;left:726px;top:60px;width:14px;height:14px;background:#ff2a1a;box-shadow:0 0 18px #ff2a1a;animation:gsblink 1.2s steps(1) infinite"></div>
+        <div style="position:absolute;left:330px;top:190px;width:30px;height:28px;background:#3a4a2a;border:2px solid #111"></div>
+        <div style="position:absolute;left:332px;top:186px;width:26px;height:6px;background:#7cff3a;box-shadow:0 0 14px #7cff3a"></div>
+        <div style="position:absolute;left:0;top:240px;width:800px;height:170px;background:#1d1612;background-image:linear-gradient(45deg,rgba(255,255,255,.03) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.03) 75%);background-size:12px 12px"></div>
+        <div style="position:absolute;left:160px;top:256px;width:500px;height:146px;background:#4a473a;background-image:repeating-linear-gradient(0deg,transparent 0 14px,#2c2a22 14px 16px),repeating-linear-gradient(90deg,transparent 0 30px,#2c2a22 30px 32px)"></div>
+        <div style="position:absolute;left:176px;top:270px;width:220px;height:118px;background:radial-gradient(circle at 50% 20%,#5a2412 0,#120c09 70%)"></div>
+        <div style="position:absolute;left:420px;top:270px;width:224px;height:118px;background:radial-gradient(circle at 50% 20%,#4a3a10 0,#120c09 70%)"></div>
+        <div style="position:absolute;left:200px;top:340px;width:40px;height:48px;background:#3a4a2a;border:2px solid #000"></div>
+        <div style="position:absolute;left:202px;top:336px;width:36px;height:6px;background:#7cff3a;box-shadow:0 0 14px #7cff3a"></div>
+        <div style="position:absolute;left:250px;top:350px;width:56px;height:38px;background:#6a4a22;border:2px solid #000"></div>
+        <div style="position:absolute;left:450px;top:300px;width:90px;height:88px;background:#2a2a24;border:2px solid #000;background-image:repeating-linear-gradient(180deg,transparent 0 20px,#5a4a2a 20px 24px)"></div>
+        <div style="position:absolute;left:560px;top:322px;width:22px;height:66px">
+          <div style="position:absolute;left:3px;top:0;width:16px;height:16px;background:#a87a56"></div>
+          <div style="position:absolute;left:0;top:16px;width:22px;height:26px;background:#5a6a3a"></div>
+          <div style="position:absolute;left:3px;top:42px;width:16px;height:24px;background:#2a2a24"></div>
+        </div>
+        <div style="position:absolute;left:24px;top:22px;font-family:'Rubik Mono One',sans-serif;font-size:26px;color:#e8c24a;text-shadow:3px 3px 0 #000">SECTOR 01 · POWER</div>
+        <div style="position:absolute;left:24px;top:60px;font-family:'VT323',monospace;font-size:22px;color:#e8d7c0">Solar, wind, batteries. The grid is not coming back.</div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.6) 100%);pointer-events:none"></div>
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 4px);pointer-events:none"></div>
+        <div style="position:absolute;left:0;bottom:0;width:800px;height:72px;background:linear-gradient(180deg,#6a6a60,#3a3a34);border-top:3px solid #8a8a7e;display:grid;grid-template-columns:1fr 1fr 80px 1fr 1fr;align-items:center">
+          <div style="display:flex;flex-direction:column;align-items:center;border-right:2px solid #2a2a26"><div style="font-family:'VT323',monospace;font-size:44px;line-height:.9;color:#d8281a;text-shadow:2px 2px 0 #000">$289</div><div style="font-family:'Silkscreen',monospace;font-size:11px;color:#e8e2d0">PRICE</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;border-right:2px solid #2a2a26"><div style="font-family:'VT323',monospace;font-size:44px;line-height:.9;color:#d8281a;text-shadow:2px 2px 0 #000">03</div><div style="font-family:'Silkscreen',monospace;font-size:11px;color:#e8e2d0">STASH</div></div>
+          <div style="width:58px;height:58px;justify-self:center;background:repeating-linear-gradient(135deg,#4a4a42 0 6px,#3a3a34 6px 12px);border:3px solid #1a1a16;display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:8px;color:#bbb;text-align:center">survivor face</div>
+          <div style="display:flex;flex-direction:column;align-items:center;border-left:2px solid #2a2a26"><div style="font-family:'VT323',monospace;font-size:44px;line-height:.9;color:#d8281a;text-shadow:2px 2px 0 #000">CH01</div><div style="font-family:'Silkscreen',monospace;font-size:11px;color:#e8e2d0">GUIDE</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;border-left:2px solid #2a2a26"><div style="font-family:'VT323',monospace;font-size:44px;line-height:.9;color:#d8281a;text-shadow:2px 2px 0 #000">72%</div><div style="font-family:'Silkscreen',monospace;font-size:11px;color:#e8e2d0">BATTERY</div></div>
+        </div>
+      </div>
+      <div style="padding:14px 18px;font-size:14px;line-height:1.5;color:#3d3a35">Dark and gritty. Blood-red sky, rusty metal, brick bunker lit by emergency lights and glowing barrels. A metal HUD along the bottom shows price, stash and guide chapter like an ammo counter. CRT scanlines.</div>
+    </div>
+
+    <div id="2c" style="width:800px;background:#fbfaf7;border:1px solid #cfcac0;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #cfcac0">
+        <div style="background:#1c1b19;color:#fbfaf7;font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;padding:3px 8px">2c</div>
+        <div style="font-weight:600;font-size:18px">16-bit RPG</div>
+      </div>
+      <div style="position:relative;width:800px;height:480px;overflow:hidden;background:linear-gradient(180deg,#4a90e8 0 22%,#68a8f4 22% 40%,#8cc0fa 40% 54%,#b4d8fc 54% 64%)">
+        <div style="position:absolute;left:90px;top:50px;width:110px;height:20px;background:#fff"></div><div style="position:absolute;left:110px;top:36px;width:60px;height:16px;background:#fff"></div>
+        <div style="position:absolute;left:540px;top:80px;width:130px;height:20px;background:#fff"></div><div style="position:absolute;left:570px;top:64px;width:70px;height:18px;background:#fff"></div>
+        <div style="position:absolute;left:0;top:150px;width:800px;height:120px;background:#7468c4;clip-path:polygon(0 100%,0 60%,8% 60%,8% 40%,16% 40%,16% 20%,22% 20%,22% 0,28% 0,28% 30%,36% 30%,36% 50%,44% 50%,44% 25%,52% 25%,52% 10%,58% 10%,58% 35%,66% 35%,66% 55%,74% 55%,74% 30%,82% 30%,82% 15%,88% 15%,88% 45%,96% 45%,96% 65%,100% 65%,100% 100%)"></div>
+        <div style="position:absolute;left:0;top:220px;width:800px;height:80px;background:#2f8a3e;clip-path:polygon(0 100%,0 50%,10% 50%,10% 30%,24% 30%,24% 50%,40% 50%,40% 20%,56% 20%,56% 45%,72% 45%,72% 25%,88% 25%,88% 50%,100% 50%,100% 100%)"></div>
+        <div style="position:absolute;left:0;top:296px;width:800px;height:16px;background:#5ad04a;border-top:4px solid #2a7a2a"></div>
+        <div style="position:absolute;left:0;top:312px;width:800px;height:168px;background:#a8683a;background-image:linear-gradient(45deg,rgba(0,0,0,.14) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.14) 75%),linear-gradient(45deg,rgba(0,0,0,.14) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.14) 75%);background-size:16px 16px;background-position:0 0,8px 8px"></div>
+        <div style="position:absolute;left:420px;top:222px;width:170px;height:22px;background:repeating-linear-gradient(90deg,#e83a2a 0 20px,#fff 20px 40px);border:3px solid #401010"></div>
+        <div style="position:absolute;left:428px;top:244px;width:6px;height:52px;background:#6a3a1a"></div>
+        <div style="position:absolute;left:576px;top:244px;width:6px;height:52px;background:#6a3a1a"></div>
+        <div style="position:absolute;left:440px;top:270px;width:130px;height:26px;background:#c88a4a;border:3px solid #401010;display:flex;gap:6px;align-items:center;padding-left:8px;box-sizing:border-box"><div style="width:12px;height:12px;background:#2c3e8b"></div><div style="width:12px;height:12px;background:#3fa0e0"></div><div style="width:12px;height:12px;background:#e8c22a"></div><div style="width:12px;height:12px;background:#e83a2a"></div></div>
+        <div style="position:absolute;left:494px;top:246px;width:18px;height:24px"><div style="position:absolute;left:2px;top:0;width:14px;height:12px;background:#f0c8a0"></div><div style="position:absolute;left:0;top:0;width:18px;height:4px;background:#7a4a1a"></div><div style="position:absolute;left:0;top:12px;width:18px;height:12px;background:#4a8a3a"></div></div>
+        <div style="position:absolute;left:300px;top:250px;width:22px;height:46px"><div style="position:absolute;left:3px;top:0;width:16px;height:16px;background:#f0c8a0"></div><div style="position:absolute;left:1px;top:0;width:20px;height:6px;background:#e8c22a"></div><div style="position:absolute;left:0;top:16px;width:22px;height:18px;background:#e86a22"></div><div style="position:absolute;left:3px;top:34px;width:16px;height:12px;background:#3a3a8a"></div></div>
+        <div style="position:absolute;left:340px;top:288px;width:44px;height:10px;background:#5a5a5a;border:2px solid #222"></div>
+        <div style="position:absolute;left:24px;top:20px;font-family:'Press Start 2P',monospace;font-size:14px;color:#fff;text-shadow:2px 2px 0 #18207a">SURVIVALBASE · OVERWORLD</div>
+        <div style="position:absolute;left:24px;right:24px;bottom:16px;height:172px;background:linear-gradient(180deg,#3450d0,#18207a);border:4px solid #fff;box-shadow:0 0 0 3px #101040;display:grid;grid-template-columns:1fr 200px;gap:16px;padding:14px 18px;box-sizing:border-box">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-family:'Press Start 2P',monospace;font-size:11px;color:#e8c22a">QUARTERMASTER</div>
+            <div style="font-family:'DotGothic16',sans-serif;font-size:19px;line-height:1.4;color:#fff">Welcome, wanderer. The grid is down but my stall is open. Solar panels, filters, rations. What'll it be?</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-family:'DotGothic16',sans-serif;font-size:18px;color:#fff;border-left:2px solid rgba(255,255,255,.4);padding-left:14px">
+            <div>▶ BUY GEAR</div><div style="padding-left:20px">READ THE GUIDE</div><div style="padding-left:20px">ENTER BUNKER</div><div style="padding-left:20px">LEAVE</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:14px 18px;font-size:14px;line-height:1.5;color:#3d3a35">A classic console adventure. Banded sky, pixel mountains, a merchant's stall. Shopping happens through RPG dialog boxes: the quartermaster talks, you pick from a menu with the ▶ cursor. Each zone is a "level" on an overworld map.</div>
+    </div>
+
+    <div id="2d" style="width:800px;background:#fbfaf7;border:1px solid #cfcac0;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #cfcac0">
+        <div style="background:#1c1b19;color:#fbfaf7;font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;padding:3px 8px">2d</div>
+        <div style="font-weight:600;font-size:18px">Quiet Isometry</div>
+      </div>
+      <div style="position:relative;width:800px;height:480px;overflow:hidden;background:linear-gradient(180deg,#f6dcd0 0,#ecc9d6 100%)">
+        <sc-for list="{{ iso }}" as="f" hint-placeholder-count="0"><div style="{{ f }}"></div></sc-for>
+        <div style="position:absolute;left:28px;top:28px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Josefin Sans',sans-serif;font-weight:300;font-size:13px;letter-spacing:.3em;color:#7a5a6a">CHAPTER I</div>
+          <div style="font-family:'Marcellus',serif;font-size:40px;color:#4a3a4a;line-height:1">Power</div>
+        </div>
+        <div style="position:absolute;left:560px;top:120px;width:60px;height:1px;background:#7a5a6a"></div>
+        <div style="position:absolute;left:626px;top:110px;font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:.2em;color:#4a3a4a">SOLAR · $289</div>
+        <div style="position:absolute;left:150px;top:380px;width:60px;height:1px;background:#7a5a6a"></div>
+        <div style="position:absolute;left:30px;top:370px;font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:.2em;color:#4a3a4a">THE STORE</div>
+        <div style="position:absolute;right:28px;bottom:28px;width:220px;background:rgba(255,255,255,.7);padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.25em;color:#7a5a6a">SUNCRATE 200W</div>
+          <div style="font-family:'Marcellus',serif;font-size:16px;line-height:1.4;color:#4a3a4a">Unfolds in thirty seconds. Charges in daylight.</div>
+          <div style="align-self:flex-start;margin-top:4px;border:1px solid #4a3a4a;padding:7px 14px;font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.2em;color:#4a3a4a">ADD · $289</div>
+        </div>
+      </div>
+      <div style="padding:14px 18px;font-size:14px;line-height:1.5;color:#3d3a35">A calm, minimal isometric world. The base is a floating island in pastel tones, cut away to show lit chambers inside. A tiny traveller moves between geometric structures. Elegant serif type and few words. The most premium and gentle option, a quiet counterpoint to the ironic copy.</div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ROWS=["..LLL...............",".LLLLL..............","..LLL...............","...T......C....PP...","GGGGGGGGGHGGGGGGGGGG","DDDDDDDDDlDDDDDDDDDD","DDDDDDDDDlDDDDDDDDDD","SSSSWWWWWlWWWWWSSSSS","SSSSWBBkklkkCCWSSSSS","SSSSWkkCClkFkkWSSSSS","SSSSWWWWWWWWWWWSSSSS","XXXXXXXXXXXXXXXXXXXX"];
+const ck=a=>`linear-gradient(45deg,rgba(0,0,0,${a}) 25%,transparent 25%,transparent 75%,rgba(0,0,0,${a}) 75%),linear-gradient(45deg,rgba(0,0,0,${a}) 25%,transparent 25%,transparent 75%,rgba(0,0,0,${a}) 75%)`;
+const T={
+ L:{background:'#3f8f2a',backgroundImage:ck(.18),backgroundSize:'10px 10px',backgroundPosition:'0 0,5px 5px'},
+ T:{background:'#6b4f2c',backgroundImage:'repeating-linear-gradient(90deg,transparent 0 8px,rgba(0,0,0,.25) 8px 10px)'},
+ G:{background:'#866043',backgroundImage:'linear-gradient(180deg,#6cbb3c 0 9px,#4f9a2a 9px 13px,transparent 13px),'+ck(.16),backgroundSize:'40px 40px,10px 10px,10px 10px',backgroundPosition:'0 0,0 0,5px 5px'},
+ H:{background:'#8a6436',backgroundImage:'repeating-linear-gradient(90deg,transparent 0 12px,#4a3418 12px 14px)',borderTop:'6px solid #5a3e1c',boxSizing:'border-box'},
+ D:{background:'#866043',backgroundImage:ck(.16),backgroundSize:'10px 10px',backgroundPosition:'0 0,5px 5px'},
+ S:{background:'#8a8a8a',backgroundImage:ck(.14),backgroundSize:'10px 10px',backgroundPosition:'0 0,5px 5px'},
+ X:{background:'#5e5e62',backgroundImage:ck(.2),backgroundSize:'10px 10px',backgroundPosition:'0 0,5px 5px'},
+ W:{background:'#7d7d78',backgroundImage:'repeating-linear-gradient(180deg,transparent 0 18px,#55554f 18px 20px),repeating-linear-gradient(90deg,transparent 0 18px,#55554f 18px 20px)'},
+ k:{background:'#a8814f',backgroundImage:'repeating-linear-gradient(180deg,transparent 0 9px,rgba(0,0,0,.25) 9px 10px)'},
+ l:{background:'#3b2f22',backgroundImage:'repeating-linear-gradient(180deg,transparent 0 8px,#a8814f 8px 12px)'},
+ B:{background:'#a8814f',backgroundImage:'linear-gradient(180deg,transparent 0 18px,#6b4f2c 18px 22px,transparent 22px),repeating-linear-gradient(90deg,#c0392b 0 6px,#2c5aa0 6px 12px,#e8c22a 12px 18px)',backgroundSize:'40px 40px'},
+ C:{background:'#b07a33',backgroundImage:'linear-gradient(180deg,transparent 0 14px,#4a3418 14px 17px,transparent 17px)',boxShadow:'inset 0 0 0 3px #5a3e1c'},
+ F:{background:'#707070',backgroundImage:'linear-gradient(#222,#222)',backgroundSize:'16px 12px',backgroundPosition:'12px 22px',backgroundRepeat:'no-repeat',boxShadow:'inset 0 0 0 3px #4a4a4a'},
+ P:{background:'#2c3e6b',backgroundImage:'linear-gradient(90deg,#5a72a8 2px,transparent 2px),linear-gradient(180deg,#5a72a8 2px,transparent 2px)',backgroundSize:'10px 10px',height:16,marginTop:24}
+};
+const U=36,OX=330,OY=150;
+const P=(x,y,z)=>[OX+(x-y)*0.866*U,OY+(x+y)*0.5*U-z*U];
+const poly=pts=>'polygon('+pts.map(p=>p[0].toFixed(1)+'px '+p[1].toFixed(1)+'px').join(',')+')';
+const face=(pts,c)=>({position:'absolute',inset:0,background:c,clipPath:poly(pts)});
+const block=(x,y,z,w,d,h,c)=>[
+ face([P(x,y,z+h),P(x+w,y,z+h),P(x+w,y+d,z+h),P(x,y+d,z+h)],c[0]),
+ face([P(x,y+d,z+h),P(x+w,y+d,z+h),P(x+w,y+d,z),P(x,y+d,z)],c[1]),
+ face([P(x+w,y,z+h),P(x+w,y+d,z+h),P(x+w,y+d,z),P(x+w,y,z)],c[2])];
+const onL=(x1,x2,z1,z2,c)=>face([P(x1,6,z1),P(x2,6,z1),P(x2,6,z2),P(x1,6,z2)],c);
+const onR=(y1,y2,z1,z2,c)=>face([P(6,y1,z1),P(6,y2,z1),P(6,y2,z2),P(6,y1,z2)],c);
+const dot=(x,y,z,w,h,c,extra)=>{const p=P(x,y,z);return Object.assign({position:'absolute',left:p[0]-w/2,top:p[1]-h,width:w,height:h,background:c},extra||{});};
+const ISO=[].concat(
+ block(0,0,-4,6,6,4,['#e9eedb','#e2a693','#c98a86']),
+ [onL(0.6,2.8,-1,-3.2,'#6e4f6c'),onL(1,2.4,-1.6,-3.2,'#f4d38a'),onL(3.4,5.4,-1,-3.2,'#6e4f6c'),onL(3.8,5,-1.8,-3.2,'#f4d38a'),onR(1,4.6,-1.2,-3,'#6e4f6c'),onR(1.6,4,-1.8,-3,'#f4d38a')],
+ block(3.5,3.5,0,1.8,1.6,0.06,['#9cc9db','#7aa9bf','#6894ab']),
+ block(1,1,0,1,1,3.2,['#fff6ea','#f0c9a8','#d9a48e']),
+ block(1.2,4.1,0,0.12,0.12,0.5,['#8a7080','#8a7080','#6e5a68']),
+ block(0.6,3.7,0.5,1.4,0.9,0.08,['#3d5a80','#2c4462','#243a54']),
+ block(3.6,0.6,0,1.4,1.2,0.9,['#fbe9da','#eab8a0','#d39c8c']),
+ block(4.8,4.6,0,0.15,0.15,0.7,['#8a6a5a','#7a5a4a','#6a4a3a']),
+ [dot(1.5,1.5,3.2,44,40,'#e07a6a',{clipPath:'polygon(50% 0,100% 100%,0 100%)'}),
+  dot(4.3,1.2,0.9,60,30,'#e07a6a',{clipPath:'polygon(50% 0,100% 100%,0 100%)'}),
+  dot(4.9,4.7,0.6,46,46,'#8fbf8a',{borderRadius:'50%'}),
+  dot(2.6,2.9,0,10,18,'#ffffff',{clipPath:'polygon(50% 0,100% 100%,0 100%)'}),
+  dot(2.6,2.9,0.5,8,8,'#ffffff',{borderRadius:'50%'})],
+ block(8,-1.5,1.5,0.8,0.8,0.8,['#e9eedb','#e2a693','#c98a86']),
+ block(-1.5,7.5,-1,0.6,0.6,0.6,['#e9eedb','#e2a693','#c98a86'])
+);
+class Component extends DCLogic {
+  renderVals(){
+    const tiles=[];
+    ROWS.forEach((r,y)=>[...r].forEach((ch,x)=>{ if(T[ch]) tiles.push(Object.assign({position:'absolute',left:x*40,top:y*40,width:40,height:40},T[ch])); }));
+    return {tiles,iso:ISO};
+  }
+}
+</script>
+</body>
+</html>

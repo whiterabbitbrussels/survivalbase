@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=Pixelify+Sans:wght@400;500;600;700&amp;family=Silkscreen:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;image-rendering:pixelated;background:#fcf4dc;color:#0c0c0c;font-family:'Pixelify Sans',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#c83c00}a:hover{color:#0c0c0c}
+button{font-family:inherit}
+@keyframes sbspin{to{transform:rotate(360deg)}}
+@keyframes sbflick{0%,100%{transform:scale(1,1)}50%{transform:scale(.9,1.12)}}
+@keyframes sbblink{0%,60%{opacity:1}61%,100%{opacity:.15}}
+@keyframes sbtoast{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+
+<header style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 24px;border-bottom:4px solid #0c0c0c;background:#fcf4dc;position:sticky;top:0;z-index:40">
+  <div onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;cursor:pointer">
+    <div style="width:22px;height:22px;background:#f87830;border:4px solid #0c0c0c"></div>
+    <div style="font-family:'Press Start 2P',monospace;font-weight:400;font-size:16px;letter-spacing:0;line-height:1.2">SURVIVALBASE</div>
+  </div>
+  <nav style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:'Silkscreen',monospace;font-size:13px;font-weight:500">
+    <button onClick="{{ goHome }}" style="background:none;border:none;padding:8px 10px;cursor:pointer;color:#0c0c0c;font-family:'Silkscreen',monospace;font-size:13px" style-hover="text-decoration:underline">BASE</button>
+    <button onClick="{{ openGuide }}" style="background:none;border:none;padding:8px 10px;cursor:pointer;color:#0c0c0c;font-family:'Silkscreen',monospace;font-size:13px" style-hover="text-decoration:underline">THE GUIDE · $49</button>
+    <button onClick="{{ toggleNight }}" style="background:#0c0c0c;color:#fcf4dc;border:4px solid #0c0c0c;padding:7px 12px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px">{{ modeLabel }}</button>
+    <button onClick="{{ openStash }}" style="background:#f87830;color:#0c0c0c;border:4px solid #0c0c0c;padding:7px 12px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;font-weight:600;box-shadow:3px 3px 0 #0c0c0c">STASH · {{ cartCount }}</button>
+  </nav>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main style="flex:1;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:22px 24px 16px;max-width:1600px;width:100%;box-sizing:border-box;margin:0 auto">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-family:'Silkscreen',monospace;font-size:12px;letter-spacing:.08em">{{ gridStatus }}</div>
+      <h1 style="margin:0;font-family:'Press Start 2P',monospace;font-weight:400;font-size:clamp(20px,2.6vw,34px);line-height:1.35;letter-spacing:0;text-wrap:balance">Gear for the end of the world. Or a long weekend without wifi.</h1>
+    </div>
+    <p style="margin:0;max-width:340px;font-size:15px;line-height:1.45;text-wrap:pretty">Tap any zone on the surface or in the bunker. Your survivor walks there and opens the shelf. Shopping, with cardio.</p>
+  </div>
+
+  <div ref="{{ sceneRef }}" style="{{ stageStyle }}">
+    <div style="{{ sceneStyle }}">
+      <div style="position:absolute;left:0;top:0;width:1600px;height:460px;background:#6888fc"></div>
+      <div style="position:absolute;left:1310px;top:60px;width:96px;height:96px;border-radius:0;background:#fcd848"></div>
+      <div style="position:absolute;left:0;top:300px;width:1600px;height:100px;display:flex;align-items:flex-end;gap:10px;padding-left:40px;opacity:.55">
+        <div style="width:60px;height:70px;background:#3858b8"></div><div style="width:40px;height:40px;background:#3858b8"></div><div style="width:80px;height:95px;background:#3858b8"></div><div style="width:30px;height:55px;background:#3858b8"></div><div style="width:70px;height:30px;background:#3858b8"></div><div style="width:50px;height:80px;background:#3858b8"></div>
+      </div>
+      <div style="position:absolute;left:920px;top:330px;width:420px;height:200px;border-radius:0;background:#58a838"></div>
+      <div style="position:absolute;left:0;top:392px;width:1600px;height:60px;background:#58c838;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)"></div>
+      <div style="position:absolute;left:0;top:450px;width:1600px;height:10px;background:#307818"></div>
+      <div style="position:absolute;left:0;top:460px;width:1600px;height:100px;background:#8b6b47;background-image:linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%),linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%);background-size:16px 16px;background-position:0 0,8px 8px"></div>
+      <div style="position:absolute;left:0;top:560px;width:1600px;height:150px;background:#7a5c3d;background-image:linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%),linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%);background-size:16px 16px;background-position:0 0,8px 8px"></div>
+      <div style="position:absolute;left:0;top:710px;width:1600px;height:150px;background:#684d34;background-image:linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%),linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%);background-size:16px 16px;background-position:0 0,8px 8px"></div>
+      <div style="position:absolute;left:0;top:860px;width:1600px;height:140px;background:#553e2a;background-image:linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%),linear-gradient(45deg,rgba(0,0,0,.12) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.12) 75%);background-size:16px 16px;background-position:0 0,8px 8px"></div>
+      <div style="position:absolute;left:120px;top:600px;width:26px;height:18px;border-radius:0;background:#94785a"></div>
+      <div style="position:absolute;left:210px;top:780px;width:40px;height:24px;border-radius:0;background:#7f6449"></div>
+      <div style="position:absolute;left:1390px;top:640px;width:34px;height:20px;border-radius:0;background:#94785a"></div>
+      <div style="position:absolute;left:1480px;top:900px;width:50px;height:28px;border-radius:0;background:#6d543c"></div>
+      <div style="position:absolute;left:60px;top:900px;width:30px;height:20px;border-radius:0;background:#6d543c"></div>
+
+      <div style="position:absolute;left:785px;top:420px;width:70px;height:525px;background:#2f2923;background-image:repeating-linear-gradient(180deg,transparent 0 26px,#8a8174 26px 30px);z-index:6"></div>
+      <div style="position:absolute;left:780px;top:410px;width:80px;height:14px;background:#4a4744;border:4px solid #0c0c0c;border-radius:0;z-index:7"></div>
+
+      <div style="position:absolute;left:340px;top:515px;width:960px;height:450px;background:#8f897e;border-radius:0;z-index:6"></div>
+
+      <div onClick="{{ go.storage }}" style="position:absolute;left:360px;top:535px;width:225px;height:195px;background:#f8d8a8;cursor:pointer;z-index:7;overflow:hidden" style-hover="box-shadow:inset 0 0 0 4px #f87830">
+        <div style="position:absolute;left:12px;top:10px;background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:15px;padding:3px 8px">08 FOOD STORAGE</div>
+        <div style="position:absolute;left:18px;top:52px;display:flex;gap:6px"><div style="width:20px;height:26px;background:#c0503a"></div><div style="width:20px;height:26px;background:#d6a24a"></div><div style="width:20px;height:26px;background:#c0503a"></div><div style="width:20px;height:26px;background:#6b7f4f"></div><div style="width:20px;height:26px;background:#d6a24a"></div><div style="width:20px;height:26px;background:#3f6b88"></div><div style="width:20px;height:26px;background:#c0503a"></div></div>
+        <div style="position:absolute;left:12px;top:78px;width:200px;height:6px;background:#7a5e40"></div>
+        <div style="position:absolute;left:18px;top:98px;display:flex;gap:6px"><div style="width:44px;height:30px;background:#b8a27a"></div><div style="width:44px;height:30px;background:#b8a27a"></div><div style="width:44px;height:30px;background:#9a8560"></div><div style="width:44px;height:30px;background:#b8a27a"></div></div>
+        <div style="position:absolute;left:12px;top:128px;width:200px;height:6px;background:#7a5e40"></div>
+        <div style="position:absolute;left:18px;top:146px;display:flex;gap:8px"><div style="width:36px;height:42px;background:#e9e4d8;border:2px solid #7a5e40"></div><div style="width:36px;height:42px;background:#e9e4d8;border:2px solid #7a5e40"></div><div style="width:36px;height:42px;background:#e9e4d8;border:2px solid #7a5e40"></div></div>
+      </div>
+
+      <div onClick="{{ go.medic }}" style="position:absolute;left:600px;top:535px;width:170px;height:195px;background:#f8d8a8;cursor:pointer;z-index:7;overflow:hidden" style-hover="box-shadow:inset 0 0 0 4px #f87830">
+        <div style="position:absolute;left:12px;top:10px;background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:15px;padding:3px 8px">09 FIRST AID</div>
+        <div style="position:absolute;left:18px;top:52px;width:70px;height:110px;background:#f6f3ec;border:2px solid #b9b2a4"></div>
+        <div style="position:absolute;left:46px;top:80px;width:14px;height:44px;background:#c0392b"></div>
+        <div style="position:absolute;left:31px;top:95px;width:44px;height:14px;background:#c0392b"></div>
+        <div style="position:absolute;left:96px;top:150px;width:64px;height:12px;background:#6b7f4f"></div>
+        <div style="position:absolute;left:100px;top:162px;width:4px;height:22px;background:#4a4744"></div>
+        <div style="position:absolute;left:152px;top:162px;width:4px;height:22px;background:#4a4744"></div>
+      </div>
+
+      <div onClick="{{ go.tools }}" style="position:absolute;left:870px;top:535px;width:205px;height:195px;background:#f8d8a8;cursor:pointer;z-index:7;overflow:hidden" style-hover="box-shadow:inset 0 0 0 4px #f87830">
+        <div style="position:absolute;left:12px;top:10px;background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:15px;padding:3px 8px">10 TOOLS</div>
+        <div style="position:absolute;left:14px;top:48px;width:177px;height:96px;background:#b8955f;background-image:radial-gradient(#8a6c40 2px,transparent 2.5px);background-size:14px 14px"></div>
+        <div style="position:absolute;left:34px;top:58px;width:6px;height:70px;background:#6b4a2c"></div>
+        <div style="position:absolute;left:24px;top:58px;width:26px;height:16px;background:#5c5c58"></div>
+        <div style="position:absolute;left:70px;top:62px;width:12px;height:64px;background:#5c5c58"></div>
+        <div style="position:absolute;left:104px;top:62px;width:56px;height:14px;background:#c0503a"></div>
+        <div style="position:absolute;left:104px;top:92px;width:70px;height:10px;background:#5c5c58"></div>
+        <div style="position:absolute;left:10px;top:156px;width:185px;height:12px;background:#6b4a2c"></div>
+      </div>
+
+      <div onClick="{{ go.security }}" style="position:absolute;left:1090px;top:535px;width:190px;height:195px;background:#f8d8a8;cursor:pointer;z-index:7;overflow:hidden" style-hover="box-shadow:inset 0 0 0 4px #f87830">
+        <div style="position:absolute;left:12px;top:10px;background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:15px;padding:3px 8px">11 SECURITY</div>
+        <div style="position:absolute;left:20px;top:50px;width:110px;height:110px;border-radius:0;background:#8a867d;border:7px solid #5e5b55;box-sizing:border-box"></div>
+        <div style="position:absolute;left:60px;top:90px;width:30px;height:30px;border-radius:0;background:#4a4744"></div>
+        <div style="position:absolute;left:73px;top:66px;width:4px;height:78px;background:#4a4744"></div>
+        <div style="position:absolute;left:36px;top:103px;width:78px;height:4px;background:#4a4744"></div>
+        <div style="position:absolute;left:140px;top:60px;width:40px;height:30px;background:#0e1a10;border:3px solid #4a4744"></div>
+      </div>
+
+      <div onClick="{{ go.library }}" style="position:absolute;left:360px;top:750px;width:410px;height:195px;background:#f8d8a8;cursor:pointer;z-index:7;overflow:hidden" style-hover="box-shadow:inset 0 0 0 4px #f87830">
+        <div style="position:absolute;left:12px;top:10px;background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:15px;padding:3px 8px">LIBRARY · THE GUIDE</div>
+        <div style="position:absolute;left:16px;top:46px;width:160px;height:128px;background:#6b4a2c"></div>
+        <div style="position:absolute;left:24px;top:54px;width:144px;height:34px;background-image:repeating-linear-gradient(90deg,#c0503a 0 9px,#d6a24a 9px 17px,#3f6b88 17px 26px,#e9e4d8 26px 32px)"></div>
+        <div style="position:absolute;left:24px;top:96px;width:144px;height:34px;background-image:repeating-linear-gradient(90deg,#6b7f4f 0 11px,#e9e4d8 11px 18px,#c0503a 18px 26px)"></div>
+        <div style="position:absolute;left:24px;top:138px;width:144px;height:30px;background-image:repeating-linear-gradient(90deg,#d6a24a 0 8px,#3f6b88 8px 18px,#e9e4d8 18px 24px)"></div>
+        <div style="position:absolute;left:220px;top:40px;width:170px;height:120px;border-radius:0;background:#f4d39a;opacity:.7"></div>
+        <div style="position:absolute;left:276px;top:122px;width:56px;height:62px;background:#5a4030"></div>
+        <div style="position:absolute;left:236px;top:64px;width:136px;height:60px;background:#f87830;border:4px solid #0c0c0c;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-4deg)">
+          <div style="font-family:'Press Start 2P',monospace;font-weight:400;font-size:12px;line-height:1.3;color:#0c0c0c;text-align:center">SURVIVAL BASE</div>
+          <div style="font-family:'Silkscreen',monospace;font-size:11px;color:#0c0c0c">THE GUIDE · $49</div>
+        </div>
+      </div>
+
+      <div onClick="{{ go.stash }}" style="position:absolute;left:870px;top:750px;width:410px;height:195px;background:#f8d8a8;cursor:pointer;z-index:7;overflow:hidden" style-hover="box-shadow:inset 0 0 0 4px #f87830">
+        <div style="position:absolute;left:12px;top:10px;background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:15px;padding:3px 8px">YOUR STASH · {{ cartCount }} ITEMS</div>
+        <div style="position:absolute;left:220px;top:110px;width:78px;height:68px;background:#a5844f;border:3px solid #6b4a2c;box-sizing:border-box"></div>
+        <div style="position:absolute;left:304px;top:110px;width:78px;height:68px;background:#a5844f;border:3px solid #6b4a2c;box-sizing:border-box"></div>
+        <div style="position:absolute;left:262px;top:46px;width:78px;height:64px;background:#b8955f;border:3px solid #6b4a2c;box-sizing:border-box"></div>
+        <div style="position:absolute;left:30px;top:132px;width:120px;height:46px;background:#6b7f4f;border:3px solid #4a5a37;box-sizing:border-box"></div>
+      </div>
+
+      <div onClick="{{ go.nav }}" style="position:absolute;left:20px;top:180px;width:160px;height:300px;cursor:pointer" style-hover="filter:brightness(1.08)">
+        <div style="position:absolute;left:76px;top:150px;width:8px;height:95px;background:#5a4632"></div>
+        <div style="position:absolute;left:84px;top:156px;width:62px;height:20px;background:#f87830;border:4px solid #0c0c0c;box-sizing:border-box"></div>
+        <div style="position:absolute;left:16px;top:186px;width:60px;height:20px;background:#e9e4d8;border:4px solid #0c0c0c;box-sizing:border-box"></div>
+        <div style="position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;z-index:6"><div style="background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:16px;padding:3px 8px;white-space:nowrap">07 NAVIGATION</div></div>
+      </div>
+
+      <div onClick="{{ go.shelter }}" style="position:absolute;left:200px;top:180px;width:180px;height:300px;cursor:pointer" style-hover="filter:brightness(1.08)">
+        <div style="position:absolute;left:15px;top:138px;width:150px;height:107px;background:#6b7f4f;clip-path:polygon(40% 0,60% 0,60% 20%,70% 20%,70% 40%,80% 40%,80% 60%,90% 60%,90% 80%,100% 80%,100% 100%,0 100%,0 80%,10% 80%,10% 60%,20% 60%,20% 40%,30% 40%,30% 20%,40% 20%)"></div>
+        <div style="position:absolute;left:68px;top:190px;width:44px;height:55px;background:#3b4630;clip-path:polygon(40% 0,60% 0,60% 20%,70% 20%,70% 40%,80% 40%,80% 60%,90% 60%,90% 80%,100% 80%,100% 100%,0 100%,0 80%,10% 80%,10% 60%,20% 60%,20% 40%,30% 40%,30% 20%,40% 20%)"></div>
+        <div style="position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;z-index:6"><div style="background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:16px;padding:3px 8px;white-space:nowrap">05 SHELTER</div></div>
+      </div>
+
+      <div onClick="{{ go.fire }}" style="position:absolute;left:400px;top:180px;width:160px;height:300px;cursor:pointer" style-hover="filter:brightness(1.08)">
+        <div style="position:absolute;left:44px;top:228px;width:72px;height:11px;background:#6b4a2c;transform:rotate(12deg)"></div>
+        <div style="position:absolute;left:44px;top:228px;width:72px;height:11px;background:#7a5636;transform:rotate(-12deg)"></div>
+        {{ flame }}
+        <div style="position:absolute;left:30px;top:236px;width:16px;height:12px;border-radius:0;background:#8a867d"></div>
+        <div style="position:absolute;left:114px;top:236px;width:16px;height:12px;border-radius:0;background:#8a867d"></div>
+        <div style="position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;z-index:6"><div style="background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:16px;padding:3px 8px;white-space:nowrap">06 FIRE &amp; HEAT</div></div>
+      </div>
+
+      <div onClick="{{ go.food }}" style="position:absolute;left:570px;top:180px;width:190px;height:300px;cursor:pointer" style-hover="filter:brightness(1.08)">
+        <div style="position:absolute;left:20px;top:206px;display:flex;gap:6px"><div style="width:20px;height:20px;border-radius:0;background:#5f8f3e"></div><div style="width:20px;height:20px;border-radius:0;background:#6f9a45"></div><div style="width:20px;height:20px;border-radius:0;background:#5f8f3e"></div><div style="width:20px;height:20px;border-radius:0;background:#c0503a"></div><div style="width:20px;height:20px;border-radius:0;background:#6f9a45"></div><div style="width:20px;height:20px;border-radius:0;background:#5f8f3e"></div></div>
+        <div style="position:absolute;left:12px;top:224px;width:160px;height:20px;background:#6e4e31;border-top:3px solid #4f3722"></div>
+        <div style="position:absolute;left:150px;top:150px;width:5px;height:76px;background:#7a8a44"></div>
+        <div style="position:absolute;left:162px;top:164px;width:5px;height:62px;background:#7a8a44"></div>
+        <div style="position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;z-index:6"><div style="background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:16px;padding:3px 8px;white-space:nowrap">03 GROW &amp; FORAGE</div></div>
+      </div>
+
+      <div onClick="{{ go.water }}" style="position:absolute;left:890px;top:180px;width:200px;height:300px;cursor:pointer" style-hover="filter:brightness(1.08)">
+        <div style="position:absolute;left:24px;top:175px;width:54px;height:70px;border-radius:0;background:#3f6b88"></div>
+        <div style="position:absolute;left:24px;top:192px;width:54px;height:5px;background:#2e5068"></div>
+        <div style="position:absolute;left:24px;top:222px;width:54px;height:5px;background:#2e5068"></div>
+        <div style="position:absolute;left:108px;top:185px;width:6px;height:60px;background:#5a4632"></div>
+        <div style="position:absolute;left:168px;top:185px;width:6px;height:60px;background:#5a4632"></div>
+        <div style="position:absolute;left:100px;top:118px;width:82px;height:67px;border-radius:0;background:#5d8aa6;border:2px solid #2e5068;box-sizing:border-box"></div>
+        <div style="position:absolute;left:138px;top:185px;width:6px;height:34px;background:#2e5068"></div>
+        <div style="position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;z-index:6"><div style="background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:16px;padding:3px 8px;white-space:nowrap">02 WATER</div></div>
+      </div>
+
+      <div onClick="{{ go.energy }}" style="position:absolute;left:1105px;top:180px;width:235px;height:300px;cursor:pointer" style-hover="filter:brightness(1.08)">
+        <div style="position:absolute;left:44px;top:214px;width:6px;height:31px;background:#4a4744"></div>
+        <div style="position:absolute;left:118px;top:206px;width:6px;height:39px;background:#4a4744"></div>
+        <div style="position:absolute;left:14px;top:156px;width:140px;height:60px;background:#2b3b58;background-image:linear-gradient(90deg,#4f6a94 2px,transparent 2px),linear-gradient(180deg,#4f6a94 2px,transparent 2px);background-size:28px 20px;border:3px solid #0c0c0c;box-sizing:border-box;transform:none"></div>
+        <div style="position:absolute;left:190px;top:40px;width:8px;height:205px;background:#d8d1c1;border:1px solid #9a9384"></div>
+        <div style="position:absolute;left:182px;top:30px;width:26px;height:16px;background:#bdb5a3;border-radius:0"></div>
+        {{ turbine }}
+        <div style="position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;z-index:6"><div style="background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:16px;padding:3px 8px;white-space:nowrap">01 POWER</div></div>
+      </div>
+
+      <div onClick="{{ go.comms }}" style="position:absolute;left:1370px;top:180px;width:210px;height:300px;cursor:pointer" style-hover="filter:brightness(1.08)">
+        <div style="position:absolute;left:20px;top:190px;width:76px;height:55px;background:#8f8a7d;border:2px solid #5e5b55;box-sizing:border-box"></div>
+        <div style="position:absolute;left:14px;top:180px;width:88px;height:12px;background:#5e5b55"></div>
+        <div style="position:absolute;left:44px;top:208px;width:26px;height:18px;background:#0e1a10"></div>
+        <div style="position:absolute;left:136px;top:-10px;width:8px;height:255px;background:#6b6b66"></div>
+        <div style="position:absolute;left:120px;top:30px;width:40px;height:4px;background:#6b6b66"></div>
+        <div style="position:absolute;left:124px;top:80px;width:32px;height:4px;background:#6b6b66"></div>
+        <div style="position:absolute;left:146px;top:96px;width:44px;height:44px;border-radius:0;background:#d8d1c1;border:4px solid #6b6b66;box-sizing:border-box"></div>
+        {{ beacon }}
+        <div style="position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;z-index:6"><div style="background:#0c0c0c;color:#fcf4dc;font-family:'Silkscreen',monospace;font-size:16px;padding:3px 8px;white-space:nowrap">04 COMMS</div></div>
+      </div>
+
+      <sc-if value="{{ night }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:0;top:0;width:1600px;height:460px;background:rgba(14,18,36,.74);z-index:5;pointer-events:none"></div>
+        <div style="position:absolute;left:0;top:460px;width:1600px;height:540px;background:rgba(10,10,20,.45);z-index:5;pointer-events:none"></div>
+        <div style="position:absolute;left:1330px;top:70px;width:70px;height:70px;border-radius:0;background:#e9e4d8;z-index:5;pointer-events:none"></div>
+        <div style="position:absolute;left:200px;top:60px;width:4px;height:4px;background:#e9e4d8;z-index:5"></div>
+        <div style="position:absolute;left:520px;top:120px;width:3px;height:3px;background:#e9e4d8;z-index:5"></div>
+        <div style="position:absolute;left:760px;top:50px;width:4px;height:4px;background:#e9e4d8;z-index:5"></div>
+        <div style="position:absolute;left:1040px;top:140px;width:3px;height:3px;background:#e9e4d8;z-index:5"></div>
+        <div style="position:absolute;left:380px;top:200px;width:3px;height:3px;background:#e9e4d8;z-index:5"></div>
+        <div style="position:absolute;left:400px;top:300px;width:160px;height:160px;border-radius:0;background:radial-gradient(rgba(240,160,70,.45),transparent 70%);z-index:5;pointer-events:none"></div>
+      </sc-if>
+
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.07) 0 2px,transparent 2px 4px);pointer-events:none;z-index:15"></div>
+      <div style="{{ charStyle }}">
+        <div style="{{ flipStyle }}">
+          <div style="position:absolute;left:9px;top:0;width:24px;height:24px;border-radius:0;background:#e2b48c;border:4px solid #0c0c0c;box-sizing:border-box"></div>
+          <div style="position:absolute;left:21px;top:8px;width:12px;height:8px;background:#0c0c0c;border-radius:0"></div>
+          <div style="position:absolute;left:2px;top:26px;width:14px;height:30px;background:#4a5a37;border:4px solid #0c0c0c;box-sizing:border-box;border-radius:0"></div>
+          <div style="position:absolute;left:8px;top:24px;width:26px;height:34px;background:#f87830;border:4px solid #0c0c0c;box-sizing:border-box;border-radius:0"></div>
+          <div style="position:absolute;left:11px;top:56px;width:8px;height:24px;background:#3a332b"></div>
+          <div style="position:absolute;left:23px;top:56px;width:8px;height:24px;background:#3a332b"></div>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ panelDay }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:16px;right:16px;width:360px;max-width:calc(100% - 32px);max-height:calc(100% - 32px);overflow:auto;box-sizing:border-box;background:#fcf4dc;border:4px solid #0c0c0c;box-shadow:8px 8px 0 #0c0c0c;padding:18px;display:flex;flex-direction:column;gap:12px;z-index:20">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <div style="font-family:'Silkscreen',monospace;font-size:12px;letter-spacing:.06em">{{ panel.kicker }}</div>
+          <button onClick="{{ closePanel }}" style="background:none;border:4px solid #0c0c0c;width:28px;height:28px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:14px;line-height:1;padding:0">×</button>
+        </div>
+        <div style="font-family:'Press Start 2P',monospace;font-weight:400;font-size:22px;line-height:1.3">{{ panel.title }}</div>
+        <p style="margin:0;font-size:15px;line-height:1.45;text-wrap:pretty">{{ panel.blurb }}</p>
+        <div style="display:flex;flex-direction:column;border-top:4px solid #0c0c0c">
+          <sc-for list="{{ panel.items }}" as="it" hint-placeholder-count="3">
+            <div onClick="{{ it.open }}" style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #c9bfa8;cursor:pointer;font-size:14px" style-hover="color:#c83c00">
+              <span style="font-weight:600">{{ it.name }}</span>
+              <span style="font-family:'Silkscreen',monospace;white-space:nowrap">{{ it.price }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <button onClick="{{ panel.onCta }}" style="background:#f87830;color:#0c0c0c;border:4px solid #0c0c0c;padding:12px 14px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:14px;font-weight:600;text-align:left;box-shadow:3px 3px 0 #0c0c0c" style-active="transform:translate(2px,2px);box-shadow:1px 1px 0 #0c0c0c">{{ panel.cta }} →</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ panelNight }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:16px;bottom:16px;width:420px;max-width:calc(100% - 32px);max-height:calc(100% - 32px);overflow:auto;box-sizing:border-box;background:#0b100c;border:1px solid #7fe39a;padding:16px 18px;display:flex;flex-direction:column;gap:10px;z-index:20;font-family:'Silkscreen',monospace;color:#9ff0b2;font-size:13px">
+        <div style="display:flex;justify-content:space-between;gap:8px"><span>// {{ panel.kicker }}</span><button onClick="{{ closePanel }}" style="background:none;border:none;color:#9ff0b2;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;padding:0">[esc]</button></div>
+        <div style="font-size:22px;font-weight:600;color:#c8ffd5">&gt; {{ panel.title }}_</div>
+        <div style="line-height:1.5;color:#7fcf93">{{ panel.blurb }}</div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ panel.items }}" as="it" hint-placeholder-count="3">
+            <div onClick="{{ it.open }}" style="display:flex;justify-content:space-between;gap:12px;padding:5px 0;cursor:pointer" style-hover="background:#16301d">
+              <span>[{{ it.n }}] {{ it.name }}</span><span style="white-space:nowrap">{{ it.price }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <button onClick="{{ panel.onCta }}" style="background:#7fe39a;color:#0b100c;border:none;padding:10px 12px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;font-weight:600;text-align:left">&gt; {{ panel.cta }}</button>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="max-width:1600px;width:100%;box-sizing:border-box;margin:0 auto;padding:18px 24px 40px;display:flex;flex-direction:column;gap:10px">
+    <div style="font-family:'Silkscreen',monospace;font-size:12px;letter-spacing:.08em">QUICK MAP</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ zones }}" as="z" hint-placeholder-count="13">
+        <button onClick="{{ z.go }}" style="background:#fcf4dc;border:4px solid #0c0c0c;padding:7px 12px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;color:#0c0c0c" style-hover="background:#0c0c0c;color:#fcf4dc">{{ z.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isCat }}" hint-placeholder-val="{{ false }}">
+<main style="flex:1;max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 24px 64px;display:flex;flex-direction:column;gap:32px">
+  <button onClick="{{ goHome }}" style="align-self:flex-start;background:none;border:none;padding:0;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;color:#0c0c0c" style-hover="text-decoration:underline">← BACK TO BASE</button>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:28px;align-items:end">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-family:'Silkscreen',monospace;font-size:13px;letter-spacing:.06em">{{ cat.kicker }}</div>
+      <h1 style="margin:0;font-family:'Press Start 2P',monospace;font-weight:400;font-size:clamp(32px,5vw,60px);line-height:1.15">{{ cat.name }}</h1>
+      <p style="margin:0;font-size:18px;line-height:1.45;max-width:480px;text-wrap:pretty">{{ cat.blurb }}</p>
+    </div>
+    <div style="aspect-ratio:16/10;border:4px solid #0c0c0c;background:repeating-linear-gradient(135deg,#fcf4dc 0 8px,#ecdcb4 8px 16px);display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:12px;color:#5e564a;text-align:center;padding:12px">section illustration · {{ cat.name }} (Seedream)</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#0c0c0c;color:#fcf4dc;padding:16px 20px">
+    <div style="font-size:15px;line-height:1.4">This zone is <strong>Chapter {{ cat.chLabel }}</strong> of <em>Survival Base</em>, the guide. How to choose it, set it up and fix it with what's left.</div>
+    <button onClick="{{ addBook }}" style="background:#f87830;color:#0c0c0c;border:2px solid #fcf4dc;padding:10px 14px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;font-weight:600;white-space:nowrap">ADD THE GUIDE · $49</button>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:4px solid #0c0c0c;padding-bottom:8px">
+    <div style="font-family:'Press Start 2P',monospace;font-weight:400;font-size:18px">On the shelf</div>
+    <div style="font-family:'Silkscreen',monospace;font-size:13px">{{ cat.count }} ITEMS</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px">
+    <sc-for list="{{ catItems }}" as="p" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;border:4px solid #0c0c0c;background:#f7f3ea;transition:transform .15s,box-shadow .15s" style-hover="transform:translate(-3px,-3px);box-shadow:5px 5px 0 #0c0c0c">
+        <div onClick="{{ p.open }}" style="aspect-ratio:4/3;cursor:pointer;background:repeating-linear-gradient(135deg,#fcf4dc 0 8px,#ecdcb4 8px 16px);border-bottom:4px solid #0c0c0c;display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:11px;color:#5e564a">product shot</div>
+        <div style="padding:14px;display:flex;flex-direction:column;gap:6px;flex:1">
+          <div onClick="{{ p.open }}" style="font-weight:700;font-size:16px;line-height:1.25;cursor:pointer">{{ p.name }}</div>
+          <div style="font-size:14px;line-height:1.4;color:#4a4339;flex:1">{{ p.tagline }}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+            <div style="font-family:'Silkscreen',monospace;font-size:16px;font-weight:600">{{ p.price }}</div>
+            <button onClick="{{ p.add }}" style="background:#0c0c0c;color:#fcf4dc;border:none;padding:8px 12px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:12px" style-hover="background:#f87830;color:#0c0c0c">+ STASH</button>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+<main style="flex:1;max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 24px 64px;display:flex;flex-direction:column;gap:36px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;font-family:'Silkscreen',monospace;font-size:13px">
+    <button onClick="{{ goHome }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;color:#0c0c0c" style-hover="text-decoration:underline">BASE</button><span>/</span>
+    <button onClick="{{ prod.openCat }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;color:#0c0c0c" style-hover="text-decoration:underline">{{ prod.catName }}</button>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="aspect-ratio:1/1;border:4px solid #0c0c0c;background:repeating-linear-gradient(135deg,#fcf4dc 0 8px,#ecdcb4 8px 16px);display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:12px;color:#5e564a">hero product shot</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="aspect-ratio:1/1;border:4px solid #0c0c0c;background:repeating-linear-gradient(135deg,#fcf4dc 0 8px,#ecdcb4 8px 16px);display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:10px;color:#5e564a">in use</div>
+        <div style="aspect-ratio:1/1;border:4px solid #0c0c0c;background:repeating-linear-gradient(135deg,#fcf4dc 0 8px,#ecdcb4 8px 16px);display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:10px;color:#5e564a">detail</div>
+        <div style="aspect-ratio:1/1;border:4px solid #0c0c0c;background:repeating-linear-gradient(135deg,#fcf4dc 0 8px,#ecdcb4 8px 16px);display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:10px;color:#5e564a">packed</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="font-family:'Silkscreen',monospace;font-size:13px;letter-spacing:.06em">{{ prod.kicker }}</div>
+      <h1 style="margin:0;font-family:'Press Start 2P',monospace;font-weight:400;font-size:clamp(22px,2.8vw,34px);line-height:1.35;text-wrap:balance">{{ prod.name }}</h1>
+      <p style="margin:0;font-size:18px;line-height:1.45;text-wrap:pretty">{{ prod.tagline }}</p>
+      <div style="font-family:'Silkscreen',monospace;font-size:32px;font-weight:600">{{ prod.price }}</div>
+      <div style="display:flex;flex-direction:column;border-top:4px solid #0c0c0c">
+        <sc-for list="{{ prod.specs }}" as="sp" hint-placeholder-count="3">
+          <div style="padding:9px 0;border-bottom:1px solid #c9bfa8;font-family:'Silkscreen',monospace;font-size:14px">{{ sp }}</div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:stretch">
+        <div style="display:flex;border:4px solid #0c0c0c">
+          <button onClick="{{ dec }}" style="width:44px;background:none;border:none;cursor:pointer;font-size:18px">−</button>
+          <div style="width:40px;display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:16px">{{ qty }}</div>
+          <button onClick="{{ inc }}" style="width:44px;background:none;border:none;cursor:pointer;font-size:18px">+</button>
+        </div>
+        <button onClick="{{ prod.add }}" style="flex:1;min-width:200px;background:#f87830;color:#0c0c0c;border:4px solid #0c0c0c;padding:14px 16px;cursor:pointer;font-family:'Silkscreen',monospace;font-size:15px;font-weight:600;box-shadow:4px 4px 0 #0c0c0c" style-active="transform:translate(2px,2px);box-shadow:2px 2px 0 #0c0c0c">ADD TO STASH</button>
+      </div>
+      <div style="border:2px dashed #0c0c0c;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Silkscreen',monospace;font-size:12px;letter-spacing:.06em">FIELD NOTE · CHAPTER {{ prod.chLabel }}</div>
+        <div style="font-size:15px;line-height:1.45">Setup, maintenance and the mistakes people make with gear like this are covered in <em>Survival Base</em>, the guide.</div>
+        <button onClick="{{ addBook }}" style="align-self:flex-start;background:none;border:none;padding:0;cursor:pointer;font-family:'Silkscreen',monospace;font-size:13px;font-weight:600;color:#c83c00;text-decoration:underline">Add the guide · $49</button>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-family:'Press Start 2P',monospace;font-weight:400;font-size:18px;border-bottom:4px solid #0c0c0c;padding-bottom:8px">Same shelf</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px">
+      <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
+        <div onClick="{{ p.open }}" style="display:flex;flex-direction:column;border:4px solid #0c0c0c;background:#f7f3ea;cursor:pointer" style-hover="box-shadow:5px 5px 0 #0c0c0c">
+          <div style="aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#fcf4dc 0 8px,#ecdcb4 8px 16px);border-bottom:4px solid #0c0c0c;display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:11px;color:#5e564a">product shot</div>
+          <div style="padding:12px;display:flex;justify-content:space-between;gap:10px">
+            <div style="font-weight:700;font-size:15px;line-height:1.25">{{ p.name }}</div>
+            <div style="font-family:'Silkscreen',monospace;font-size:14px;white-space:nowrap">{{ p.price }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<footer style="border-top:4px solid #0c0c0c;padding:16px 24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'Silkscreen',monospace;font-size:12px">
+  <span>SURVIVALBASE.NET</span><span>Ships while roads still exist.</span>
+</footer>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60">
+    <div style="background:#0c0c0c;color:#fcf4dc;padding:12px 18px;font-family:'Silkscreen',monospace;font-size:13px;border:2px solid #f87830;animation:sbtoast .2s ease-out">{{ toast }}</div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;A · Daylight drawer&quot;,&quot;B · Blackout terminal&quot;],&quot;default&quot;:&quot;A · Daylight drawer&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;walkSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:200,&quot;max&quot;:1200,&quot;step&quot;:50,&quot;unit&quot;:&quot;px/s&quot;,&quot;default&quot;:450,&quot;tsType&quot;:&quot;number&quot;}}">
+const RAW=[
+['energy','Power','Surface',1220,0,'The grid had a good run. Solar, wind and batteries for when it stops returning your calls.',[
+['SunCrate 200W Foldable Solar Panel',289,'Unfolds in 30 seconds. Charges in daylight. Sulks in clouds.','200 W peak · 7.4 kg · IP67 · USB-C + Anderson out'],
+['Breeze-400 Micro Wind Turbine',349,'For when the sun clocks out early.','400 W · 12/24 V · 3-blade · Start-up wind 2.5 m/s'],
+['Bunker Cell 1kWh Power Station',899,'LiFePO4, 3,000 cycles. Outlives most governments.','1,024 Wh · 2,000 W AC · 12.5 kg · Solar input 800 W'],
+['Crank & Charge Dynamo',39,'Cardio and USB-C in one handle.','5 V 2 A · 380 g · LED torch']]],
+['water','Water','Surface',990,0,'Rivers are free. So is dysentery. Filters, purifiers and storage that keep the two apart.',[
+['Gravity Pro 10L Filter System',129,'Hang it, fill it, walk away. Puddle in, drinkable out.','0.1 micron hollow fibre · 10 L · 1.7 L/min'],
+['StrawGuard Personal Filter',24,'Drink directly from questionable sources.','4,000 L lifetime · 45 g · No chemicals'],
+['Rain Harvest 200L Collapsible Barrel',89,'Clouds, but make it plumbing.','200 L · PVC tarpaulin · Brass tap · Folds to 8 cm'],
+['UV Purifier Pen',69,'Zaps what you can\'t see in 90 seconds.','UV-C · 0.5 L per cycle · USB rechargeable']]],
+['food','Grow & Forage','Surface',665,0,'Seeds, beds and traps for the post-supermarket diet.',[
+['Heirloom Seed Vault, 32 varieties',59,'Open-pollinated. Plant once, save seeds, repeat forever.','32 varieties · Sealed mylar · 5-year viability'],
+['Raised Bed Kit 120×60',79,'Your first farm. Fits on a balcony.','Galvanised steel · 120×60×30 cm · No tools'],
+['Forager\'s Field Guide & Pouch',34,'Know which mushroom is dinner and which is a sequel.','220 species · Waterproof pages · Waxed pouch'],
+['Snare & Fishing Survival Kit',45,'Protein, eventually.','Line, hooks, wire snares · 260 g · Tin case']]],
+['comms','Comms','Surface',1510,0,'Radios that work while the cell towers take a long nap.',[
+['BaseBand 5W Dual-Band Radio',79,'Talk across the valley. Licence recommended.','VHF/UHF · 5 W · 2,200 mAh · IP54'],
+['Crank/Solar Weather Radio',59,'News, when there is news.','AM/FM/NOAA · Hand crank · Solar · SOS beacon'],
+['Mesh Messenger, pair',149,'Text without towers, up to 10 km line of sight.','LoRa · Bluetooth to phone · 3-day battery'],
+['Telescopic 7m Antenna Mast',119,'Altitude is range.','Aluminium · 7 m · Guy kit included']]],
+['shelter','Shelter','Surface',290,0,'Tents, tarps and bivvies. Property prices have never been lower.',[
+['Nomad 4-Season Tent, 2P',329,'Wind, snow, the neighbours. Keeps it all out.','2 person · 2.9 kg · 5,000 mm hydrostatic'],
+['Ripstop Tarp 3×3m',49,'A roof in four knots.','Ripstop nylon · 3×3 m · 16 tie-outs'],
+['Reflective Emergency Bivvy',19,'Keeps 90% of your body heat. And dignity.','Mylar-laminate · 110 g · Reusable'],
+['Paracord 30m, 550 lb',15,'The string that holds the apocalypse together.','7-strand core · 30 m · 250 kg break']]],
+['fire','Fire & Heat','Surface',480,0,'Fire: humanity\'s first app. Still no subscription.',[
+['Ferro Rod XL',22,'12,000 strikes. Zero matches.','Ferrocerium · 12 cm · Steel striker'],
+['Wood Gasifier Camp Stove',99,'Twigs in, dinner out, barely any smoke.','Stainless · 900 g · Burns biomass'],
+['Stormproof Matches, 2×25',12,'Burns underwater. Mostly for the drama.','15 s burn · Waterproof case'],
+['Army-Grade Wool Blanket',69,'Warm when wet. Ugly by design.','80% wool · 210×150 cm · 1.8 kg']]],
+['nav','Navigation','Surface',100,0,'GPS is someone else\'s satellite. A map and a compass are yours.',[
+['Baseplate Compass with Mirror',39,'Points north. Doesn\'t need charging.','Liquid-damped · Sighting mirror · Declination adjust'],
+['Waterproof Regional Map Set',29,'Paper never loses signal.','1:50,000 · Tear-proof · 6 sheets'],
+['Solar GPS Locator',189,'For as long as the satellites stay up.','GPS/Galileo · Solar · Breadcrumb track'],
+['Signal Mirror & Whistle Kit',14,'Be found on purpose.','Glass mirror · 120 dB whistle · Lanyard']]],
+['storage','Food Storage','Bunker',472,1,'Freeze-dried, vacuum-sealed, built to last. Best before: the next civilisation.',[
+['72-Hour Freeze-Dried Ration Pack',89,'25-year shelf life. Tastes like "fine".','9 meals · 6,000 kcal · Just add water'],
+['Vacuum Sealer + 100 Bags',119,'Removes air. Adds years.','Double seal · Pulse mode · 100 bags'],
+['Mylar Bags & Oxygen Absorbers, 50',29,'Long-term storage for rice, beans and optimism.','5-mil mylar · 300 cc absorbers'],
+['Stackable 20L Grain Bucket',24,'Gamma lid. Rodents not invited.','Food-grade HDPE · Screw lid · Stackable']]],
+['medic','First Aid','Bunker',685,1,'The nearest emergency room is now you.',[
+['Field Trauma Kit, 180 pcs',129,'Organised for shaking hands.','180 pieces · Colour-coded pouches · MOLLE'],
+['Windlass Tourniquet',32,'One-hand application. Practise before you need it.','Windlass · 3.8 cm strap · Time tag'],
+['Water-Free Hygiene Set',27,'Clean-ish, without the plumbing.','Rinse-free wash · Wipes · Toothpowder'],
+['Pocket Medical Handbook',19,'No wifi required.','280 pages · Waterproof · Illustrated']]],
+['tools','Tools','Bunker',972,1,'Multi-tools, axes and repair kits. Duct tape is a lifestyle.',[
+['Forged Camp Axe',74,'Splits wood and arguments.','Carbon steel · Hickory handle · 1.1 kg'],
+['16-in-1 Multi-tool',59,'Sixteen tools, one pocket.','Stainless · Pliers, saw, drivers · 240 g'],
+['Folding Saw, 25cm',29,'Faster than the axe. Quieter too.','SK5 blade · Lock-back · 25 cm'],
+['Repair Kit: Tape, Wire, Epoxy',34,'Fix anything at least once.','Duct tape · Steel wire · 2-part epoxy']]],
+['security','Security','Bunker',1185,1,'Locks, alarms and night vision. Strictly defensive, mostly against raccoons.',[
+['Perimeter Motion Alarm, 4 sensors',99,'Hear them before they hear you.','PIR · 400 m range · Battery 1 yr'],
+['Night Vision Monocular',249,'See the raccoon. Judge the raccoon.','Digital IR · 200 m · Records video'],
+['Steel Hatch Lock Kit',139,'Because the hatch is the front door.','Hardened steel · Internal bolt · 2 keys'],
+['Faraday Bag Set, 3',45,'Keeps electronics safe from EMPs and curiosity.','Triple-layer · 3 sizes · Roll-top']]]
+];
+const BOOK={id:'book',name:'Survival Base · The Guide',price:49};
+const FEET=[425,722,937];
+const pad=n=>String(n).padStart(2,'0');
+const CATS=RAW.map((r,i)=>({id:r[0],name:r[1],where:r[2],x:r[3],lvl:r[4],blurb:r[5],ch:i+1,items:r[6].map((p,j)=>({id:r[0]+'-'+j,cat:r[0],name:p[0],price:p[1],tagline:p[2],spec:p[3]}))}));
+const BYID={};CATS.forEach(c=>c.items.forEach(p=>BYID[p.id]=p));
+const PLACES={library:{x:565,lvl:2},stash:{x:1075,lvl:2}};
+
+class Component extends DCLogic {
+  state={view:'home',cat:null,pid:null,qty:1,cx:820,lvl:0,face:1,dur:0,walking:false,panel:null,cart:[],night:this.props.variant==='B · Blackout terminal',scale:0.6,toast:null};
+  sceneRef=el=>{ if(this.ro) this.ro.disconnect(); if(el){ this.ro=new ResizeObserver(e=>{const w=e[0].contentRect.width; if(w) this.setState({scale:w/1600});}); this.ro.observe(el);} };
+  componentDidUpdate(pp){ if(pp.variant!==this.props.variant) this.setState({night:this.props.variant==='B · Blackout terminal'}); }
+  componentWillUnmount(){ clearTimeout(this.tm); clearTimeout(this.tt); if(this.ro) this.ro.disconnect(); }
+  target(id){ const c=CATS.find(c=>c.id===id); return c?{x:c.x,lvl:c.lvl}:PLACES[id]; }
+  walkTo(id){
+    const t=this.target(id); clearTimeout(this.tm);
+    const s=this.state, sp=this.props.walkSpeed??450;
+    const path=s.lvl===t.lvl?[[t.x,t.lvl]]:[[820,s.lvl],[820,t.lvl],[t.x,t.lvl]];
+    let cx=s.cx,lvl=s.lvl;
+    this.setState({panel:null,walking:true});
+    const step=i=>{
+      if(i>=path.length){ this.setState({walking:false,panel:id}); return; }
+      const [x,l]=path[i]; const d=Math.abs(x-cx)+Math.abs(FEET[l]-FEET[lvl]);
+      if(d<2) return step(i+1);
+      const dur=Math.max(.2,d/sp); const face=x<cx?-1:x>cx?1:this.state.face;
+      cx=x;lvl=l; this.setState({cx:x,lvl:l,dur,face});
+      this.tm=setTimeout(()=>step(i+1),dur*1000+40);
+    };
+    step(0);
+  }
+  flash(msg){ clearTimeout(this.tt); this.setState({toast:msg}); this.tt=setTimeout(()=>this.setState({toast:null}),2200); }
+  add(p,n=1){ const items=Array.from({length:n},()=>({id:p.id,name:p.name,price:p.price})); this.setState(s=>({cart:s.cart.concat(items)})); this.flash('Added to stash: '+p.name+(n>1?' ×'+n:'')); }
+  top(){ try{window.scrollTo(0,0);}catch(e){} }
+  openCat(id){ this.setState({view:'cat',cat:id,panel:null}); this.top(); }
+  openProduct(pid){ this.setState({view:'product',pid,qty:1,panel:null,cat:BYID[pid].cat}); this.top(); }
+  goHomeThen(id){ this.setState({view:'home'}); this.top(); setTimeout(()=>this.walkTo(id),60); }
+  panelFor(id){
+    if(id==='library') return {kicker:'BUNKER · LIBRARY',title:'Survival Base',blurb:'The guide behind the shop. Eleven chapters, one for every zone of this base. Printed on paper, which still works in a blackout.',items:[{n:'01',name:'Print + PDF edition',price:'$49',open:()=>this.add(BOOK)}],cta:'Add the guide · $49',onCta:()=>this.add(BOOK)};
+    if(id==='stash'){
+      const g={}; this.state.cart.forEach(c=>{g[c.id]=g[c.id]||{...c,q:0};g[c.id].q++;});
+      const lines=Object.values(g); const total=this.state.cart.reduce((a,c)=>a+c.price,0);
+      return {kicker:'BUNKER · YOUR STASH',title:lines.length?'$'+total:'Empty',blurb:lines.length?this.state.cart.length+' items packed and waiting.':'Like the shelves after the first rumour. Go shopping.',items:lines.map((l,i)=>({n:pad(i+1),name:l.name+(l.q>1?' ×'+l.q:''),price:'$'+l.price*l.q,open:()=>l.id==='book'?this.walkTo('library'):this.openProduct(l.id)})),cta:lines.length?'Checkout':'Back to the surface',onCta:()=>lines.length?this.flash('Checkout opens with the shop launch.'):this.walkTo('energy')};
+    }
+    const c=CATS.find(c=>c.id===id);
+    return {kicker:c.where.toUpperCase()+' · CHAPTER '+pad(c.ch),title:c.name,blurb:c.blurb,items:c.items.slice(0,3).map((p,i)=>({n:pad(i+1),name:p.name,price:'$'+p.price,open:()=>this.openProduct(p.id)})),cta:'Enter '+c.name+' · '+c.items.length+' items',onCta:()=>this.openCat(c.id)};
+  }
+  renderVals(){
+    const s=this.state, night=s.night, sc=s.scale;
+    const go={}; CATS.forEach(c=>go[c.id]=()=>this.walkTo(c.id)); go.library=()=>this.walkTo('library'); go.stash=()=>this.walkTo('stash');
+    const zones=CATS.map(c=>({label:pad(c.ch)+' '+c.name,go:go[c.id]})).concat([{label:'The Guide',go:go.library},{label:'Stash',go:go.stash}]);
+    const panel=s.panel?this.panelFor(s.panel):null;
+    const blade=r=>React.createElement('div',{key:r,style:{position:'absolute',left:-3,top:-64,width:7,height:64,background:'#ece7db',border:'1px solid #9a9384',borderRadius:0,transformOrigin:'50% 100%',transform:'rotate('+r+'deg)'}});
+    const turbine=React.createElement('div',{style:{position:'absolute',left:195,top:38,width:0,height:0,zIndex:2,animation:'sbspin 1.2s steps(6) infinite'}},[0,120,240].map(blade));
+    const flame=React.createElement('div',{style:{position:'absolute',left:60,top:190,width:40,height:46,transformOrigin:'50% 100%',animation:'sbflick .5s steps(2) infinite',zIndex:night?6:1}},[
+      React.createElement('div',{key:1,style:{position:'absolute',inset:0,background:'#e2812f',borderRadius:0}}),
+      React.createElement('div',{key:2,style:{position:'absolute',left:11,top:16,width:18,height:26,background:'#f5c45a',borderRadius:0}})]);
+    const beacon=React.createElement('div',{style:{position:'absolute',left:132,top:-22,width:16,height:16,borderRadius:0,background:'#e0442f',zIndex:6,animation:'sbblink 1.4s steps(1) infinite'}});
+    const c=s.cat?CATS.find(x=>x.id===s.cat):null;
+    const p=s.pid?BYID[s.pid]:null;
+    const card=x=>({name:x.name,tagline:x.tagline,price:'$'+x.price,open:()=>this.openProduct(x.id),add:()=>this.add(x)});
+    return {
+      isHome:s.view==='home',isCat:s.view==='cat',isProduct:s.view==='product',night,
+      modeLabel:night?'◑ BLACKOUT':'◐ DAYLIGHT',
+      gridStatus:night?'GRID STATUS: OFFLINE · DAY 1,284 · RUNNING ON SOLAR AND SPITE':'GRID STATUS: ONLINE · FOR NOW',
+      toggleNight:()=>this.setState(x=>({night:!x.night})),
+      goHome:()=>{this.setState({view:'home'});this.top();},
+      openGuide:()=>this.goHomeThen('library'), openStash:()=>this.goHomeThen('stash'),
+      addBook:()=>this.add(BOOK),
+      cartCount:s.cart.length, sceneRef:this.sceneRef,
+      stageStyle:{position:'relative',width:'100%',height:Math.round(1000*sc),overflow:'hidden',borderTop:'4px solid #0c0c0c',borderBottom:'4px solid #0c0c0c'},
+      sceneStyle:{position:'absolute',left:0,top:0,width:1600,height:1000,transformOrigin:'0 0',transform:'scale('+sc+')'},
+      charStyle:{position:'absolute',left:s.cx-21,top:FEET[s.lvl]-80,width:42,height:80,zIndex:10,pointerEvents:'none',transition:'left '+s.dur+'s steps('+Math.max(2,Math.round(s.dur*10))+'), top '+s.dur+'s steps('+Math.max(2,Math.round(s.dur*10))+')'},
+      flipStyle:{position:'absolute',inset:0,transform:'scaleX('+s.face+')'},
+      go,zones,turbine,flame,beacon,
+      panel:panel||{items:[]},panelDay:!!panel&&!night,panelNight:!!panel&&night,closePanel:()=>this.setState({panel:null}),
+      cat:c?{name:c.name,blurb:c.blurb,kicker:c.where.toUpperCase()+' ZONE · CHAPTER '+pad(c.ch),chLabel:pad(c.ch),count:c.items.length}:{},
+      catItems:c?c.items.map(card):[],
+      prod:p?(()=>{const pc=CATS.find(x=>x.id===p.cat);return {name:p.name,tagline:p.tagline,price:'$'+p.price,specs:p.spec.split(' · '),catName:pc.name.toUpperCase(),kicker:pc.where.toUpperCase()+' · '+pc.name.toUpperCase(),chLabel:pad(pc.ch),openCat:()=>this.openCat(pc.id),add:()=>this.add(p,s.qty)};})():{specs:[]},
+      related:p?CATS.find(x=>x.id===p.cat).items.filter(x=>x.id!==p.id).map(card):[],
+      qty:s.qty,inc:()=>this.setState(x=>({qty:Math.min(99,x.qty+1)})),dec:()=>this.setState(x=>({qty:Math.max(1,x.qty-1)})),
+      hasToast:!!s.toast,toast:s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&amp;family=Libre+Franklin:wght@400;600&amp;family=Courier+Prime:wght@400;700&amp;family=Alfa+Slab+One&amp;family=Work+Sans:wght@400;600&amp;family=Bangers&amp;family=Nunito+Sans:wght@400;700&amp;family=Space+Mono:wght@400;700&amp;family=Anton&amp;family=Archivo+Narrow:wght@400;600&amp;family=JetBrains+Mono:wght@400;700&amp;family=Oswald:wght@600;700&amp;family=Karla:wght@400;600&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#e9e6df;color:#1c1b19;font-family:'Work Sans',sans-serif}a{color:#1c1b19}a:hover{color:#7a3b1d}</style>
+</helmet>
+<section style="padding:48px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="font-family:'Courier Prime',monospace;font-size:13px;letter-spacing:.08em">SURVIVALBASE · STYLE DIRECTIONS</div>
+    <div style="font-family:'Anton',sans-serif;font-size:44px;line-height:1">Five moodboards</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+    <sc-for list="{{ styles }}" as="s" hint-placeholder-count="5">
+      <div id="{{ s.id }}" style="width:620px;max-width:100%;background:#fbfaf7;border:1px solid #cfcac0;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #cfcac0">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="background:#1c1b19;color:#fbfaf7;font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;padding:3px 8px">{{ s.id }}</div>
+            <div style="font-weight:600;font-size:18px">{{ s.name }}</div>
+          </div>
+          <a href="{{ s.file }}" style="font-family:'Courier Prime',monospace;font-size:13px">open full →</a>
+        </div>
+        <div style="{{ s.hero }}">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="{{ s.kicker }}">SURFACE ZONE · CHAPTER 01</div>
+            <div style="{{ s.title }}">Power</div>
+            <div style="{{ s.body }}">The grid had a good run. Solar, wind and batteries for when it stops returning your calls.</div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <div style="{{ s.btn }}">ADD TO STASH</div>
+            <div style="{{ s.tag }}">01 POWER</div>
+            <div style="{{ s.price }}">$289</div>
+          </div>
+        </div>
+        <div style="display:flex;height:56px">
+          <sc-for list="{{ s.swatches }}" as="c" hint-placeholder-count="6">
+            <div style="{{ c.style }}"><span>{{ c.hex }}</span></div>
+          </sc-for>
+        </div>
+        <div style="padding:16px 20px;display:flex;flex-direction:column;gap:8px;border-top:1px solid #cfcac0">
+          <div style="font-size:14px;line-height:1.45;color:#3d3a35">{{ s.mood }}</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:12px;color:#5d5850">{{ s.fonts }}</div>
+        </div>
+        <div style="height:340px;overflow:hidden;position:relative;border-top:1px solid #cfcac0;background:#fff">
+          <iframe src="{{ s.file }}" style="position:absolute;left:0;top:0;width:1600px;height:878px;border:0;transform:scale(.3875);transform-origin:0 0;pointer-events:none" title="{{ s.name }}"></iframe>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const S=[
+{id:'1a',name:'Field Manual',file:'SurvivalBase - Field Manual.dc.html',H:"'Black Ops One',sans-serif",B:"'Libre Franklin',sans-serif",M:"'Courier Prime',monospace",ink:'#23251c',paper:'#e6e0c8',acc:'#c9a227',sw:['#23251c','#e6e0c8','#c9a227','#6f7a3e','#8a3b22','#6d6f5c'],ts:44,mood:'Army surplus field manual. Khaki paper, olive drab, stencilled headings and typewriter labels. It reads as serious and drilled, with the irony kept to the copy.',fonts:'Black Ops One · Libre Franklin · Courier Prime'},
+{id:'1b',name:'Civil Defense 1955',file:'SurvivalBase - Civil Defense 1955.dc.html',H:"'Alfa Slab One',serif",B:"'Work Sans',sans-serif",M:"'Courier Prime',monospace",ink:'#1d2b33',paper:'#f4ead2',acc:'#e5483a',sw:['#1d2b33','#f4ead2','#e5483a','#a9d4cf','#f3c34b','#7fae5c'],ts:46,mood:'Atomic-age public information posters. Teal sky, signal red, cheerful slab type. The optimism is part of the joke.',fonts:'Alfa Slab One · Work Sans · Courier Prime'},
+{id:'1c',name:'Pulp Comic',file:'SurvivalBase - Pulp Comic.dc.html',H:"'Bangers',sans-serif",B:"'Nunito Sans',sans-serif",M:"'Space Mono',monospace",ink:'#111111',paper:'#fff6d6',acc:'#ffcc00',sw:['#111111','#fff6d6','#ffcc00','#7fc8f8','#d4202a','#52b044'],ts:60,mood:'Pulp adventure comic. Thick black outlines, halftone sky, punchy yellow. The most playful option, and it suits the game scene.',fonts:'Bangers · Nunito Sans · Space Mono'},
+{id:'1d',name:'Hazard Brutalist',file:'SurvivalBase - Hazard Brutalist.dc.html',H:"'Anton',sans-serif",B:"'Archivo Narrow',sans-serif",M:"'JetBrains Mono',monospace",ink:'#000000',paper:'#efefea',acc:'#ffd400',sw:['#000000','#efefea','#ffd400','#d6d6d0','#8e957c','#3a3a3a'],ts:56,mood:'Industrial safety signage. Black, grey and hazard yellow, condensed type, striped tape. Cold and graphic, like a bunker equipment store.',fonts:'Anton · Archivo Narrow · JetBrains Mono'},
+{id:'1e',name:'Desert Dusk',file:'SurvivalBase - Desert Dusk.dc.html',H:"'Oswald',sans-serif",B:"'Karla',sans-serif",M:"'DM Mono',monospace",ink:'#2a1a14',paper:'#f5e6d3',acc:'#e2583e',sw:['#2a1a14','#f5e6d3','#e2583e','#f0a868','#fce38a','#a0623d'],ts:52,mood:'Wasteland sunset. Rust, sand and red earth, warm and cinematic. The closest to a road-movie post-apocalypse.',fonts:'Oswald · Karla · DM Mono'}
+];
+class Component extends DCLogic {
+  renderVals(){
+    return {styles:S.map(s=>({id:s.id,name:s.name,file:s.file,mood:s.mood,fonts:s.fonts,
+      hero:{background:s.paper,color:s.ink,padding:'28px 24px',display:'flex',flexDirection:'column',gap:22,backgroundImage:s.id==='1c'?'radial-gradient(rgba(0,0,0,.06) 2px,transparent 2.5px)':'none',backgroundSize:'12px 12px',borderTop:s.id==='1d'?'12px solid transparent':'none',borderImage:s.id==='1d'?'repeating-linear-gradient(-45deg,#ffd400 0 14px,#000 14px 28px) 12':'none'},
+      kicker:{fontFamily:s.M,fontSize:13,letterSpacing:'.06em'},
+      title:{fontFamily:s.H,fontSize:s.ts,lineHeight:1},
+      body:{fontFamily:s.B,fontSize:16,lineHeight:1.45,maxWidth:440},
+      btn:{fontFamily:s.M,fontSize:13,fontWeight:700,background:s.acc,color:s.ink,border:'2px solid '+s.ink,padding:'10px 14px',boxShadow:'3px 3px 0 '+s.ink},
+      tag:{fontFamily:s.M,fontSize:13,background:s.ink,color:s.paper,padding:'4px 8px'},
+      price:{fontFamily:s.M,fontSize:20,fontWeight:700},
+      swatches:s.sw.map((c,i)=>({hex:c,style:{flex:1,background:c,display:'flex',alignItems:'flex-end',padding:6,fontFamily:"'Courier Prime',monospace",fontSize:11,color:i===0||c==='#3a3a3a'||c==='#8a3b22'||c==='#1d2b33'?'#fff':'#111'}}))}))};
+  }
+}
+</script>
+</body>
+</html>

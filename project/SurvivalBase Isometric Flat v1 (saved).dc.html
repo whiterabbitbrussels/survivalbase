@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Jost:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f1e8d4;color:#2a2420;font-family:'Libre Caslon Text',serif;-webkit-font-smoothing:antialiased}
+a{color:#c4562e}a:hover{color:#2a2420}
+button{font-family:inherit}
+@keyframes ecspin{to{transform:rotate(360deg)}}
+@keyframes ecflick{0%,100%{transform:scale(1,1)}50%{transform:scale(.88,1.12)}}
+@keyframes ecblink{0%,60%{opacity:1}61%,100%{opacity:.2}}
+@keyframes ecfade{from{opacity:0}to{opacity:1}}
+@keyframes ectoast{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+
+<header style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 28px 12px;border-bottom:4px double #2a2420;background:#f1e8d4;position:sticky;top:0;z-index:40">
+  <div onClick="{{ goHome }}" style="display:flex;flex-direction:column;gap:2px;cursor:pointer">
+    <div style="font-family:'Libre Caslon Text',serif;font-style:italic;font-size:28px;line-height:1">SurvivalBase</div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em">THE ILLUSTRATED ENCYCLOPEDIA OF STAYING ALIVE · VOL. I</div>
+  </div>
+  <nav style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+    <button onClick="{{ goHome }}" style="background:none;border:none;padding:8px 10px;cursor:pointer;color:#2a2420;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.14em" style-hover="color:#c4562e">PLATE I</button>
+    <button onClick="{{ openGuide }}" style="background:none;border:none;padding:8px 10px;cursor:pointer;color:#2a2420;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.14em" style-hover="color:#c4562e">THE GUIDE · $49</button>
+    <button onClick="{{ openStash }}" style="background:#2a2420;color:#f1e8d4;border:none;padding:9px 14px;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.14em" style-hover="background:#c4562e">STASH · {{ cartCount }}</button>
+  </nav>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main style="flex:1;display:flex;flex-direction:column">
+  <sc-if value="{{ showScene }}" hint-placeholder-val="{{ true }}">
+  <div ref="{{ sceneRef }}" style="{{ stageStyle }}">
+    <div style="{{ sceneStyle }}">
+      <div style="position:absolute;left:28px;top:26px;display:flex;flex-direction:column;gap:8px;width:330px">
+        <div style="font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.3em">PLATE I</div>
+        <div style="font-family:'Libre Caslon Text',serif;font-style:italic;font-size:44px;line-height:1.05">The Family Base, in Section</div>
+        <div style="font-size:16px;line-height:1.5">A typical survival homestead, drawn with the front of the earth cut away to show the shelter below. Touch any part of the drawing and the survivor will walk you to its shelf.</div>
+      </div>
+      <sc-for list="{{ faces }}" as="f" hint-placeholder-count="0"><div style="{{ f }}"></div></sc-for>
+      {{ flame }}
+      {{ rotor }}
+      {{ beacon }}
+      <div style="{{ stashTagStyle }}">STASH · {{ cartCount }}</div>
+      <sc-for list="{{ hits }}" as="h" hint-placeholder-count="0"><div onClick="{{ h.go }}" style="{{ h.style }}"></div></sc-for>
+      <sc-if value="{{ showCallouts }}" hint-placeholder-val="{{ true }}">
+        <sc-for list="{{ callouts }}" as="c" hint-placeholder-count="0">
+          <div onClick="{{ c.go }}" style="{{ c.style }}">{{ c.n }}</div>
+        </sc-for>
+      </sc-if>
+      <div style="{{ charStyle }}">
+        <div style="{{ flipStyle }}">
+          <sc-for list="{{ voxel }}" as="v" hint-placeholder-count="0"><div style="{{ v }}"></div></sc-for>
+        </div>
+      </div>
+      <div style="position:absolute;left:28px;top:676px;width:300px;border-top:2px solid #2a2420;border-bottom:1px solid #2a2420;padding:10px 0;display:flex;flex-direction:column;gap:4px">
+        <div style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.24em;margin-bottom:4px">KEY TO PLATE I</div>
+        <sc-for list="{{ zones }}" as="z" hint-placeholder-count="13">
+          <div onClick="{{ z.go }}" style="display:flex;gap:10px;align-items:baseline;cursor:pointer;font-size:14px;line-height:1.2" style-hover="color:#c4562e">
+            <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:13px;width:22px">{{ z.n }}</span><span>{{ z.label }}</span><span style="margin-left:auto;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.08em">{{ z.where }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="position:absolute;right:28px;top:40px;width:200px;text-align:right;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;line-height:1.6">SCALE 1 : 120<br>DEPTH OF SHELTER 4 M<br>DRAWN FOR THE END OF THE WORLD</div>
+    </div>
+
+    <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:18px;right:18px;width:360px;max-width:calc(100% - 36px);max-height:calc(100% - 36px);overflow:auto;box-sizing:border-box;background:#f8f2e4;border:1px solid #2a2420;outline:4px double #2a2420;outline-offset:-9px;padding:24px 24px 22px;display:flex;flex-direction:column;gap:12px;z-index:20;box-shadow:0 10px 30px rgba(42,36,32,.18)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.22em">{{ panel.kicker }}</div>
+          <button onClick="{{ closePanel }}" style="background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:18px;line-height:1;padding:0;color:#2a2420">×</button>
+        </div>
+        <div style="font-family:'Libre Caslon Text',serif;font-style:italic;font-size:38px;line-height:1.05">{{ panel.title }}</div>
+        <p style="margin:0;font-size:15px;line-height:1.55;text-wrap:pretty">{{ panel.blurb }}</p>
+        <div style="display:flex;flex-direction:column;border-top:1px solid #2a2420">
+          <sc-for list="{{ panel.items }}" as="it" hint-placeholder-count="3">
+            <div onClick="{{ it.open }}" style="display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dotted #2a2420;cursor:pointer;font-size:14px" style-hover="color:#c4562e">
+              <span><span style="font-family:'Jost',sans-serif;font-size:12px;margin-right:8px">{{ it.n }}</span>{{ it.name }}</span>
+              <span style="font-family:'Jost',sans-serif;white-space:nowrap">{{ it.price }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <button onClick="{{ panel.onCta }}" style="background:#c4562e;color:#f8f2e4;border:none;padding:12px 14px;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;text-align:left" style-hover="background:#2a2420">{{ panel.cta }} →</button>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+  <sc-if value="{{ showInterior }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-wrap:wrap;align-items:stretch;border-bottom:1px solid #2a2420">
+    <div ref="{{ sceneRef }}" style="{{ istageStyle }}">
+      <div style="{{ isceneStyle }}">
+        <sc-for list="{{ ifaces }}" as="f" hint-placeholder-count="0"><div style="{{ f }}"></div></sc-for>
+        <sc-for list="{{ ilabels }}" as="l" hint-placeholder-count="0"><div style="{{ l.style }}">{{ l.text }}</div></sc-for>
+        <div style="{{ icharStyle }}">
+          <div style="{{ iflipStyle }}">
+            <div style="position:absolute;left:4px;top:0;width:10px;height:10px;border-radius:50%;background:#e2b48c;border:1px solid #2a2420;box-sizing:border-box"></div>
+            <div style="position:absolute;left:1px;top:10px;width:5px;height:11px;background:#7d8a3a;border:1px solid #2a2420;box-sizing:border-box"></div>
+            <div style="position:absolute;left:4px;top:10px;width:11px;height:13px;background:#c4562e;border:1px solid #2a2420;box-sizing:border-box"></div>
+            <div style="position:absolute;left:5px;top:23px;width:3px;height:9px;background:#2a2420"></div>
+            <div style="position:absolute;left:10px;top:23px;width:3px;height:9px;background:#2a2420"></div>
+          </div>
+        </div>
+        <sc-for list="{{ ihits }}" as="hh" hint-placeholder-count="0"><div onClick="{{ hh.go }}" style="{{ hh.style }}"></div></sc-for>
+        <div style="position:absolute;left:28px;top:610px;display:flex;flex-direction:column;gap:6px;width:300px;pointer-events:none">
+          <div style="font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.3em">{{ iv.plate }}</div>
+          <div style="font-family:'Libre Caslon Text',serif;font-style:italic;font-size:42px;line-height:1.05">{{ iv.room }}</div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:1 1 300px;max-width:440px;box-sizing:border-box;padding:28px 28px 32px;border-left:1px solid #2a2420;display:flex;flex-direction:column;gap:14px;animation:ecfade .6s ease-out">
+      <button onClick="{{ backToPlate }}" style="align-self:flex-start;background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;color:#2a2420" style-hover="color:#c4562e">← BACK TO PLATE I</button>
+      <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.22em;margin-top:8px">{{ iv.kicker }}</div>
+      <div style="font-family:'Libre Caslon Text',serif;font-style:italic;font-size:36px;line-height:1.05">{{ iv.title }}</div>
+      <p style="margin:0;font-size:15px;line-height:1.55;text-wrap:pretty">{{ iv.blurb }}</p>
+      <div style="display:flex;flex-direction:column;border-top:4px double #2a2420">
+        <sc-for list="{{ iv.subs }}" as="b" hint-placeholder-count="3">
+          <div onClick="{{ b.go }}" style="{{ b.style }}"><span style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.14em">{{ b.furn }}</span><span>{{ b.name }}</span></div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ iv.hasSub }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:2px;background:#f8f2e4;border:1px solid #2a2420;padding:6px 14px">
+          <sc-for list="{{ iv.items }}" as="it" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dotted #2a2420">
+              <span style="font-family:'Jost',sans-serif;font-size:11px;width:30px">{{ it.fig }}</span>
+              <span onClick="{{ it.open }}" style="flex:1;font-size:14px;line-height:1.3;cursor:pointer" style-hover="color:#c4562e">{{ it.name }}</span>
+              <span style="font-family:'Jost',sans-serif;font-size:14px">{{ it.price }}</span>
+              <button onClick="{{ it.add }}" style="background:#2a2420;color:#f1e8d4;border:none;width:28px;height:28px;cursor:pointer;font-size:16px;line-height:1" style-hover="background:#c4562e">+</button>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <button onClick="{{ iv.allGo }}" style="background:#c4562e;color:#f8f2e4;border:none;padding:12px 14px;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.14em;text-align:left;margin-top:4px" style-hover="background:#2a2420">{{ iv.allLabel }} →</button>
+    </div>
+  </div>
+  </sc-if>
+</main>
+</sc-if>
+
+<sc-if value="{{ isCat }}" hint-placeholder-val="{{ false }}">
+<main style="flex:1;max-width:1180px;width:100%;box-sizing:border-box;margin:0 auto;padding:28px 28px 72px;display:flex;flex-direction:column;gap:36px">
+  <button onClick="{{ goHome }}" style="align-self:flex-start;background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;color:#2a2420" style-hover="color:#c4562e">← BACK TO PLATE I</button>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.24em">{{ cat.kicker }}</div>
+      <h1 style="margin:0;font-family:'Libre Caslon Text',serif;font-style:italic;font-weight:400;font-size:clamp(52px,7vw,92px);line-height:1">{{ cat.name }}</h1>
+      <div style="width:80px;height:3px;background:#c4562e"></div>
+      <p style="margin:0;font-size:19px;line-height:1.55;max-width:480px;text-wrap:pretty">{{ cat.blurb }}</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px solid #2a2420;border-bottom:1px solid #2a2420;padding:12px 0;margin-top:8px">
+        <div style="font-size:15px;line-height:1.45">See also: <em>Survival Base</em>, Chapter {{ cat.chLabel }}.</div>
+        <button onClick="{{ addBook }}" style="background:none;border:1px solid #2a2420;padding:8px 12px;cursor:pointer;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.14em;color:#2a2420" style-hover="background:#2a2420;color:#f1e8d4">ADD THE GUIDE · $49</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#ece2cb 0 10px,#e3d7bc 10px 20px);border:1px solid #2a2420;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;color:#6a5d4e;text-align:center;padding:12px">isometric illustration · {{ cat.name }}</div>
+      <div style="font-size:14px;font-style:italic">Fig. {{ cat.chNum }}. {{ cat.name }}: a typical installation.</div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:4px double #2a2420;padding-bottom:8px">
+    <div style="font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.24em">EQUIPMENT</div>
+    <div style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.12em">{{ cat.count }} ITEMS</div>
+  </div>
+  <sc-if value="{{ cat.hasSubs }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:-16px">
+      <sc-for list="{{ subChips }}" as="sc" hint-placeholder-count="4"><button onClick="{{ sc.go }}" style="{{ sc.style }}">{{ sc.label }}</button></sc-for>
+    </div>
+  </sc-if>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px">
+    <sc-for list="{{ catItems }}" as="p" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div onClick="{{ p.open }}" style="aspect-ratio:1/1;cursor:pointer;background:repeating-linear-gradient(135deg,#ece2cb 0 10px,#e3d7bc 10px 20px);border:1px solid #2a2420;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;color:#6a5d4e" style-hover="outline:3px solid #c4562e">product drawing</div>
+        <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.14em">FIG. {{ p.fig }}</div>
+        <div onClick="{{ p.open }}" style="font-size:18px;line-height:1.25;cursor:pointer" style-hover="color:#c4562e">{{ p.name }}</div>
+        <div style="font-size:14px;line-height:1.45;font-style:italic;color:#5a4e42">{{ p.tagline }}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px dotted #2a2420;padding-top:10px">
+          <div style="font-family:'Jost',sans-serif;font-size:17px;font-weight:500">{{ p.price }}</div>
+          <button onClick="{{ p.add }}" style="background:#2a2420;color:#f1e8d4;border:none;padding:8px 12px;cursor:pointer;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.14em" style-hover="background:#c4562e">ADD TO STASH</button>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+<main style="flex:1;max-width:1180px;width:100%;box-sizing:border-box;margin:0 auto;padding:28px 28px 72px;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.14em">
+    <button onClick="{{ goHome }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.14em;color:#2a2420" style-hover="color:#c4562e">PLATE I</button><span>/</span>
+    <button onClick="{{ prod.openCat }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.14em;color:#2a2420" style-hover="color:#c4562e">{{ prod.catName }}</button>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="aspect-ratio:1/1;border:1px solid #2a2420;background:repeating-linear-gradient(135deg,#ece2cb 0 12px,#e3d7bc 12px 24px);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;color:#6a5d4e">product drawing, isometric</div>
+      <div style="font-size:14px;font-style:italic">Fig. {{ prod.fig }}. {{ prod.name }}.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.24em">{{ prod.kicker }}</div>
+      <h1 style="margin:0;font-family:'Libre Caslon Text',serif;font-style:italic;font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.08;text-wrap:balance">{{ prod.name }}</h1>
+      <p style="margin:0;font-size:19px;line-height:1.5;text-wrap:pretty">{{ prod.tagline }}</p>
+      <div style="font-family:'Jost',sans-serif;font-size:32px;font-weight:500">{{ prod.price }}</div>
+      <div style="display:flex;flex-direction:column;border-top:4px double #2a2420">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.22em;padding:10px 0 4px">SPECIFICATIONS</div>
+        <sc-for list="{{ prod.specs }}" as="sp" hint-placeholder-count="3">
+          <div style="padding:8px 0;border-bottom:1px dotted #2a2420;font-size:15px">{{ sp }}</div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:stretch">
+        <div style="display:flex;border:1px solid #2a2420">
+          <button onClick="{{ dec }}" style="width:44px;background:none;border:none;cursor:pointer;font-size:18px;color:#2a2420">−</button>
+          <div style="width:40px;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:16px">{{ qty }}</div>
+          <button onClick="{{ inc }}" style="width:44px;background:none;border:none;cursor:pointer;font-size:18px;color:#2a2420">+</button>
+        </div>
+        <button onClick="{{ prod.add }}" style="flex:1;min-width:200px;background:#c4562e;color:#f8f2e4;border:none;padding:15px 16px;cursor:pointer;font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.18em" style-hover="background:#2a2420">ADD TO STASH</button>
+      </div>
+      <div style="background:#e9dec4;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.22em">FROM THE GUIDE · CHAPTER {{ prod.chLabel }}</div>
+        <div style="font-size:15px;line-height:1.5">How to choose, set up and repair equipment of this kind is described in <em>Survival Base</em>.</div>
+        <button onClick="{{ addBook }}" style="align-self:flex-start;background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.12em;color:#c4562e;text-decoration:underline">Add the guide · $49</button>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.24em;border-bottom:4px double #2a2420;padding-bottom:8px">ON THE SAME SHELF</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px">
+      <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
+        <div onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:8px;cursor:pointer" style-hover="color:#c4562e">
+          <div style="aspect-ratio:1/1;background:repeating-linear-gradient(135deg,#ece2cb 0 10px,#e3d7bc 10px 20px);border:1px solid #2a2420;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;color:#6a5d4e">product drawing</div>
+          <div style="display:flex;justify-content:space-between;gap:10px"><div style="font-size:16px;line-height:1.25">{{ p.name }}</div><div style="font-family:'Jost',sans-serif;font-size:15px;white-space:nowrap">{{ p.price }}</div></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<footer style="border-top:4px double #2a2420;padding:16px 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em">
+  <span>SURVIVALBASE.NET</span><span>PRINTED WHILE THE PRESSES STILL RUN</span>
+</footer>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60">
+    <div style="background:#2a2420;color:#f1e8d4;padding:12px 18px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.06em;animation:ectoast .2s ease-out">{{ toast }}</div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;walkSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:1,&quot;max&quot;:12,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;units/s&quot;,&quot;default&quot;:4,&quot;tsType&quot;:&quot;number&quot;},&quot;zoomLevel&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:1.5,&quot;max&quot;:4,&quot;step&quot;:0.1,&quot;unit&quot;:&quot;×&quot;,&quot;default&quot;:2.6,&quot;tsType&quot;:&quot;number&quot;},&quot;showCallouts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const RAW=[
+['energy','Power','Surface',1220,0,'The grid had a good run. Solar, wind and batteries for when it stops returning your calls.',[
+['SunCrate 200W Foldable Solar Panel',289,'Unfolds in 30 seconds. Charges in daylight. Sulks in clouds.','200 W peak · 7.4 kg · IP67 · USB-C + Anderson out'],
+['Breeze-400 Micro Wind Turbine',349,'For when the sun clocks out early.','400 W · 12/24 V · 3-blade · Start-up wind 2.5 m/s'],
+['Bunker Cell 1kWh Power Station',899,'LiFePO4, 3,000 cycles. Outlives most governments.','1,024 Wh · 2,000 W AC · 12.5 kg · Solar input 800 W'],
+['Crank & Charge Dynamo',39,'Cardio and USB-C in one handle.','5 V 2 A · 380 g · LED torch']]],
+['water','Water','Surface',990,0,'Rivers are free. So is dysentery. Filters, purifiers and storage that keep the two apart.',[
+['Gravity Pro 10L Filter System',129,'Hang it, fill it, walk away. Puddle in, drinkable out.','0.1 micron hollow fibre · 10 L · 1.7 L/min'],
+['StrawGuard Personal Filter',24,'Drink directly from questionable sources.','4,000 L lifetime · 45 g · No chemicals'],
+['Rain Harvest 200L Collapsible Barrel',89,'Clouds, but make it plumbing.','200 L · PVC tarpaulin · Brass tap · Folds to 8 cm'],
+['UV Purifier Pen',69,'Zaps what you can\'t see in 90 seconds.','UV-C · 0.5 L per cycle · USB rechargeable']]],
+['food','Grow & Forage','Surface',665,0,'Seeds, beds and traps for the post-supermarket diet.',[
+['Heirloom Seed Vault, 32 varieties',59,'Open-pollinated. Plant once, save seeds, repeat forever.','32 varieties · Sealed mylar · 5-year viability'],
+['Raised Bed Kit 120×60',79,'Your first farm. Fits on a balcony.','Galvanised steel · 120×60×30 cm · No tools'],
+['Forager\'s Field Guide & Pouch',34,'Know which mushroom is dinner and which is a sequel.','220 species · Waterproof pages · Waxed pouch'],
+['Snare & Fishing Survival Kit',45,'Protein, eventually.','Line, hooks, wire snares · 260 g · Tin case']]],
+['comms','Comms','Surface',1510,0,'Radios that work while the cell towers take a long nap.',[
+['BaseBand 5W Dual-Band Radio',79,'Talk across the valley. Licence recommended.','VHF/UHF · 5 W · 2,200 mAh · IP54'],
+['Crank/Solar Weather Radio',59,'News, when there is news.','AM/FM/NOAA · Hand crank · Solar · SOS beacon'],
+['Mesh Messenger, pair',149,'Text without towers, up to 10 km line of sight.','LoRa · Bluetooth to phone · 3-day battery'],
+['Telescopic 7m Antenna Mast',119,'Altitude is range.','Aluminium · 7 m · Guy kit included']]],
+['shelter','Shelter','Surface',290,0,'Tents, tarps and bivvies. Property prices have never been lower.',[
+['Nomad 4-Season Tent, 2P',329,'Wind, snow, the neighbours. Keeps it all out.','2 person · 2.9 kg · 5,000 mm hydrostatic'],
+['Ripstop Tarp 3×3m',49,'A roof in four knots.','Ripstop nylon · 3×3 m · 16 tie-outs'],
+['Reflective Emergency Bivvy',19,'Keeps 90% of your body heat. And dignity.','Mylar-laminate · 110 g · Reusable'],
+['Paracord 30m, 550 lb',15,'The string that holds the apocalypse together.','7-strand core · 30 m · 250 kg break']]],
+['fire','Fire & Heat','Surface',480,0,'Fire: humanity\'s first app. Still no subscription.',[
+['Ferro Rod XL',22,'12,000 strikes. Zero matches.','Ferrocerium · 12 cm · Steel striker'],
+['Wood Gasifier Camp Stove',99,'Twigs in, dinner out, barely any smoke.','Stainless · 900 g · Burns biomass'],
+['Stormproof Matches, 2×25',12,'Burns underwater. Mostly for the drama.','15 s burn · Waterproof case'],
+['Army-Grade Wool Blanket',69,'Warm when wet. Ugly by design.','80% wool · 210×150 cm · 1.8 kg']]],
+['nav','Navigation','Surface',100,0,'GPS is someone else\'s satellite. A map and a compass are yours.',[
+['Baseplate Compass with Mirror',39,'Points north. Doesn\'t need charging.','Liquid-damped · Sighting mirror · Declination adjust'],
+['Waterproof Regional Map Set',29,'Paper never loses signal.','1:50,000 · Tear-proof · 6 sheets'],
+['Solar GPS Locator',189,'For as long as the satellites stay up.','GPS/Galileo · Solar · Breadcrumb track'],
+['Signal Mirror & Whistle Kit',14,'Be found on purpose.','Glass mirror · 120 dB whistle · Lanyard']]],
+['storage','Food Storage','Bunker',472,1,'Freeze-dried, vacuum-sealed, built to last. Best before: the next civilisation.',[
+['72-Hour Freeze-Dried Ration Pack',89,'25-year shelf life. Tastes like "fine".','9 meals · 6,000 kcal · Just add water'],
+['Vacuum Sealer + 100 Bags',119,'Removes air. Adds years.','Double seal · Pulse mode · 100 bags'],
+['Mylar Bags & Oxygen Absorbers, 50',29,'Long-term storage for rice, beans and optimism.','5-mil mylar · 300 cc absorbers'],
+['Stackable 20L Grain Bucket',24,'Gamma lid. Rodents not invited.','Food-grade HDPE · Screw lid · Stackable']]],
+['medic','First Aid','Bunker',685,1,'The nearest emergency room is now you.',[
+['Field Trauma Kit, 180 pcs',129,'Organised for shaking hands.','180 pieces · Colour-coded pouches · MOLLE'],
+['Windlass Tourniquet',32,'One-hand application. Practise before you need it.','Windlass · 3.8 cm strap · Time tag'],
+['Water-Free Hygiene Set',27,'Clean-ish, without the plumbing.','Rinse-free wash · Wipes · Toothpowder'],
+['Pocket Medical Handbook',19,'No wifi required.','280 pages · Waterproof · Illustrated']]],
+['tools','Tools','Bunker',972,1,'Multi-tools, axes and repair kits. Duct tape is a lifestyle.',[
+['Forged Camp Axe',74,'Splits wood and arguments.','Carbon steel · Hickory handle · 1.1 kg'],
+['16-in-1 Multi-tool',59,'Sixteen tools, one pocket.','Stainless · Pliers, saw, drivers · 240 g'],
+['Folding Saw, 25cm',29,'Faster than the axe. Quieter too.','SK5 blade · Lock-back · 25 cm'],
+['Repair Kit: Tape, Wire, Epoxy',34,'Fix anything at least once.','Duct tape · Steel wire · 2-part epoxy']]],
+['security','Security','Bunker',1185,1,'Locks, alarms and night vision. Strictly defensive, mostly against raccoons.',[
+['Perimeter Motion Alarm, 4 sensors',99,'Hear them before they hear you.','PIR · 400 m range · Battery 1 yr'],
+['Night Vision Monocular',249,'See the raccoon. Judge the raccoon.','Digital IR · 200 m · Records video'],
+['Steel Hatch Lock Kit',139,'Because the hatch is the front door.','Hardened steel · Internal bolt · 2 keys'],
+['Faraday Bag Set, 3',45,'Keeps electronics safe from EMPs and curiosity.','Triple-layer · 3 sizes · Roll-top']]]
+];
+
+const BOOK={id:'book',name:'Survival Base · The Guide',price:49};
+const pad=n=>String(n).padStart(2,'0');
+const CATS=RAW.map((r,i)=>({id:r[0],name:r[1],where:r[2],blurb:r[5],ch:i+1,items:r[6].map((p,j)=>({id:r[0]+'-'+j,cat:r[0],name:p[0],price:p[1],tagline:p[2],spec:p[3],fig:(i+1)+'.'+(j+1)}))}));
+const SUBS={
+ storage:[
+  {f:'The fridge',t:'tall',c:'white',n:'Cold Storage',items:[['SolarChill 50L 12V Fridge',549,'Runs on a 100 W panel. Keeps the beer, and the insulin, cold.','50 L · 12/24 V · 45 W · Down to −20 °C'],['Rotomoulded Cooler 45L',189,'Five days of ice. Bear-resistant, allegedly.','45 L · 5-day ice retention · 9 kg'],['Thermal Food Jar Set',39,'Cooks while you walk.','3 × 0.7 L · Vacuum steel']]},
+  {f:'The pantry',t:'shelf',c:'wood',n:'Ready Meals',items:[['72-Hour Freeze-Dried Ration Pack',89,'25-year shelf life. Tastes like "fine".','9 meals · 6,000 kcal · Just add water'],['30-Day Meal Bucket',349,'A month of dinners in one bucket. Same three flavours.','120 servings · 25-year shelf life · 11 kg'],['Emergency Ration Bars, 12',29,'3,600 kcal. Lemon-flavoured cardboard.','5-year shelf life · Sealed foil']]},
+  {f:'The bulk drawer',t:'drawers',c:'ochre',n:'Bulk & Sealing',items:[['Vacuum Sealer + 100 Bags',119,'Removes air. Adds years.','Double seal · Pulse mode · 100 bags'],['Mylar Bags & Oxygen Absorbers, 50',29,'Long-term storage for rice, beans and optimism.','5-mil mylar · 300 cc absorbers'],['Stackable 20L Grain Bucket',24,'Gamma lid. Rodents not invited.','Food-grade HDPE · Screw lid']]}],
+ medic:[
+  {f:'The cabinet',t:'tall',c:'white',n:'Trauma & Bleeding',items:[['Field Trauma Kit, 180 pcs',129,'Organised for shaking hands.','180 pieces · Colour-coded pouches · MOLLE'],['Windlass Tourniquet',32,'One-hand application. Practise before you need it.','Windlass · 3.8 cm strap · Time tag'],['Pressure Bandage, 4-pack',36,'Fast to apply, hard to forget.','10 cm · Sterile · Vacuum packed']]},
+  {f:'The drawers',t:'drawers',c:'teal',n:'Everyday Medicine',items:[['Family First-Aid Refill Kit',45,'Plasters, gauze, tape and the tweezers you never find.','120 pieces · Labelled pouches'],['Water-Free Hygiene Set',27,'Clean-ish, without the plumbing.','Rinse-free wash · Wipes · Tooth powder'],['Thermometer & Pulse Oximeter',34,'Two numbers that tell you a lot.','Infrared · SpO2 · AAA batteries']]},
+  {f:'The bookcase',t:'shelf',c:'wood',n:'Manuals & Training',items:[['Pocket Medical Handbook',19,'No wifi required.','280 pages · Waterproof · Illustrated'],['CPR Training Mask',12,'For practising before it matters.','One-way valve · Keyring case'],['Wilderness First Aid Course',79,'Eight hours of video and a certificate.','8 h · Online · Certificate']]}],
+ tools:[
+  {f:'The tool chest',t:'drawers',c:'red',n:'Hand Tools',items:[['16-in-1 Multi-tool',59,'Sixteen tools, one pocket.','Stainless · Pliers, saw, drivers · 240 g'],['Socket & Bit Set, 46 pcs',49,'For things with bolts.','CrV steel · 1/4" drive · Case'],['Fibreglass Claw Hammer',22,'Ancient technology, still undefeated.','450 g · Anti-vibration grip']]},
+  {f:'The locker',t:'tall',c:'metal',n:'Cutting & Chopping',items:[['Forged Camp Axe',74,'Splits wood and arguments.','Carbon steel · Hickory handle · 1.1 kg'],['Folding Saw, 25cm',29,'Faster than the axe. Quieter too.','SK5 blade · Lock-back · 25 cm'],['Full-Tang Bushcraft Knife',89,'One blade to do most things.','Carbon steel · 11 cm · Leather sheath']]},
+  {f:'The shelves',t:'shelf',c:'wood',n:'Repair & Fix',items:[['Repair Kit: Tape, Wire, Epoxy',34,'Fix anything at least once.','Duct tape · Steel wire · 2-part epoxy'],['Sewing & Patch Kit',18,'Fix the tent, the trousers and the tarp.','Heavy-duty thread · Awl · Patches'],['Zip Ties & Clamps, 300',16,'Holds the world together, temporarily.','300 pieces · UV resistant']]}],
+ security:[
+  {f:'The locker',t:'tall',c:'olive',n:'Locks & Doors',items:[['Steel Hatch Lock Kit',139,'Because the hatch is the front door.','Hardened steel · Internal bolt · 2 keys'],['Door Brace Bar',59,'Turns any door into a wall.','Adjustable · Steel · No drilling'],['Shrouded Combination Padlock',29,'No key to lose.','4-dial · Hardened shackle']]},
+  {f:'The desk',t:'drawers',c:'metal',n:'Alarms & Sensors',items:[['Perimeter Motion Alarm, 4 sensors',99,'Hear them before they hear you.','PIR · 400 m range · 1-year battery'],['Solar Trail Camera',129,'Watches the gate while you sleep.','4K · IR night · Solar panel'],['Door & Window Alarms, 6',24,'110 dB of "no".','Magnetic · Battery']]},
+  {f:'The rack',t:'shelf',c:'navy',n:'Optics & EMP',items:[['Night Vision Monocular',249,'See the raccoon. Judge the raccoon.','Digital IR · 200 m · Records video'],['Faraday Bag Set, 3',45,'Keeps electronics safe from EMPs and curiosity.','Triple-layer · 3 sizes · Roll-top'],['Binoculars 10×42',119,'See trouble early.','10× · 42 mm · Waterproof']]}]
+};
+Object.keys(SUBS).forEach(cid=>{const c=CATS.find(x=>x.id===cid); let k=0; c.items=[]; SUBS[cid].forEach((s,si)=>{s.items=s.items.map((p,j)=>{const o={id:cid+'-'+si+'-'+j,cat:cid,sub:s.n,name:p[0],price:p[1],tagline:p[2],spec:p[3],fig:c.ch+'.'+(++k)}; c.items.push(o); return o;});});});
+const BYID={};CATS.forEach(c=>c.items.forEach(p=>BYID[p.id]=p));
+const W=1240,H=1000,U=40,OX=600,OY=240;
+const P=(x,y,z)=>[OX+(x-y)*0.866*U,OY+(x+y)*0.5*U-z*U];
+const poly=pts=>'polygon('+pts.map(p=>p[0].toFixed(1)+'px '+p[1].toFixed(1)+'px').join(',')+')';
+const F=(pts,c)=>({position:'absolute',left:0,top:0,width:W,height:H,background:c,clipPath:poly(pts.map(p=>p.length===3?P(...p):p))});
+const block=(x,y,z,w,d,h,c)=>[
+ F([[x,y,z+h],[x+w,y,z+h],[x+w,y+d,z+h],[x,y+d,z+h]],c[0]),
+ F([[x,y+d,z+h],[x+w,y+d,z+h],[x+w,y+d,z],[x,y+d,z]],c[1]),
+ F([[x+w,y,z+h],[x+w,y+d,z+h],[x+w,y+d,z],[x+w,y,z]],c[2])];
+const qY=(y,x1,x2,z1,z2,c)=>F([[x1,y,z2],[x2,y,z2],[x2,y,z1],[x1,y,z1]],c);
+const hex=(x1,y1,z1,x2,y2,z2)=>[P(x1,y1,z2),P(x2,y1,z2),P(x2,y1,z1),P(x2,y2,z1),P(x1,y2,z1),P(x1,y2,z2)];
+const M={grass:['#a9b25c','#8a9447','#737c3a'],top:['#a9b25c','#a0703f','#86592f'],soil2:['#b4804e','#9b6b43','#835a38'],clay:['#c99560','#b07f4e','#966b42'],rock:['#9a8a76','#857563','#6f6254'],bed:['#7a6655','#665446','#54453a'],
+ conc:['#ddd6c6','#c4bcab','#ab a393'.replace(' ','')],ochre:['#e6b452','#d9a441','#bd8c34'],orange:['#de6b3c','#c4562e','#a84826'],teal:['#4b9ca2','#2f7f86','#266a70'],olive:['#97a449','#7d8a3a','#68742f'],
+ white:['#f8f3e8','#e5dece','#cec6b3'],wood:['#bb8a57','#a07348','#86603c'],metal:['#9aa0a1','#7e8486','#676d6f'],navy:['#44588a','#33456f','#29385a'],red:['#d44c3b','#b83c2e','#9c3226'],tree:['#6f8a3a','#5c7430','#4c6128']};
+const BANDS=[[-6,-4.6,'bed'],[-4.6,-3,'rock'],[-3,-1.5,'clay'],[-1.5,-0.35,'soil2'],[-0.35,0,'top']];
+const earth=(x,y,w,d,z0,z1)=>{let o=[];BANDS.forEach(([a,b,m])=>{const lo=Math.max(a,z0),hi=Math.min(b,z1);if(hi>lo)o=o.concat(block(x,y,lo,w,d,hi-lo,M[m]));});return o;};
+const prism=(x,y,w,d,h,c)=>{const xm=x+w/2;return [F([[x,y,0],[xm,y,h],[xm,y+d,h],[x,y+d,0]],c[0]),F([[xm,y,h],[x+w,y,0],[x+w,y+d,0],[xm,y+d,h]],c[2]),F([[x,y+d,0],[xm,y+d,h],[x+w,y+d,0]],c[1])];};
+const XS=[3,5.17,7.33,9.5,11.67,13.83,16];
+const ROOMS=['storage','medic','library','tools','security','stash'];
+const SPOT={nav:[1.1,7.7,0],shelter:[1.3,5.3,0],fire:[2.4,2.1,0],food:[5,3.2,0],water:[9.6,3.2,0],comms:[11.9,3.2,0],energy:[14.4,3.5,0]};
+ROOMS.forEach((r,i)=>SPOT[r]=[(XS[i]+XS[i+1])/2,7.4,-4]);
+const HATCH=[8.3,3.6,0],LADB=[8.3,4.6,-4],LADF=[8.3,7.4,-4];
+const tree=(x,y,h)=>block(x,y,0,0.16,0.16,h,M.wood);
+function buildFaces(){
+ let f=[];
+ f=f.concat(earth(0,0,3,8,-6,0),earth(3,0,10,4,-6,0),earth(13,0,3,4,-6,0),earth(3,4,13,4,-6,-4.2),block(3,4,-4.2,13,4,0.2,M.conc));
+ f=f.concat(block(3,4,-4,13,0.15,2.2,M.conc),block(3,4.15,-4,0.12,3.85,2.2,M.conc));
+ f=f.concat(tree(0.5,0.5,1.4),block(1.3,1.1,0,0.7,0.14,0.12,M.wood),block(1.55,0.9,0,0.14,0.7,0.12,M.wood));
+ f=f.concat(block(3.6,0.6,0,2.5,0.7,0.3,M.wood),block(3.6,1.7,0,2.5,0.7,0.3,M.wood));
+ [3.8,4.3,4.8,5.3,5.8].forEach(x=>{f=f.concat(block(x,0.8,0.3,0.26,0.26,0.26,M.olive),block(x,1.9,0.3,0.26,0.26,0.26,x===4.8?M.red:M.olive));});
+ f=f.concat(tree(7.1,0.6,1.6));
+ [[9.1,0.9],[9.8,0.9],[9.1,1.6],[9.8,1.6]].forEach(([x,y])=>f=f.concat(block(x,y,0,0.08,0.08,1.2,M.metal)));
+ f=f.concat(block(9,0.8,1.2,1,1,0.8,M.teal),block(9.9,1.7,0,0.08,0.08,1.2,M.metal),block(10.4,1.8,0,0.5,0.5,0.8,M.navy));
+ f=f.concat(block(11.2,1,0,1,1.2,1,M.white),block(11.15,0.95,1,1.1,1.3,0.1,M.metal),block(12.4,0.6,0,0.1,0.1,3.6,M.metal),block(12.2,0.6,2.8,0.5,0.1,0.06,M.metal),block(12.25,0.6,3.3,0.4,0.1,0.06,M.metal));
+ [[13.5,0.7,1.3],[15.5,0.7,1.3],[13.5,1.9,0.4],[15.5,1.9,0.4]].forEach(([x,y,h])=>f=f.concat(block(x,y,0,0.08,0.08,h,M.metal)));
+ const pn=F([[13.3,0.6,1.3],[15.7,0.6,1.3],[15.7,2.0,0.4],[13.3,2.0,0.4]],'#33456f');pn.backgroundImage='linear-gradient(90deg,#6c80b0 1.5px,transparent 1.5px),linear-gradient(0deg,#6c80b0 1.5px,transparent 1.5px)';pn.backgroundSize='18px 14px';f.push(pn);
+ f=f.concat(block(15.3,3,0,0.12,0.12,4.4,M.white),block(15.2,2.95,4.4,0.3,0.25,0.2,M.white));
+ f=f.concat(prism(0.4,2.6,1.8,2,1.3,M.olive),block(8,3.35,0,0.6,0.65,0.06,M.metal));
+ f=f.concat(block(0.6,6.9,0,0.1,0.1,1.6,M.wood),block(0.7,6.9,1.2,0.9,0.08,0.25,M.orange),block(0.6,7.0,0.85,0.08,0.8,0.25,M.white));
+ const R=[
+  [].concat(block(3.4,4.15,-4,1.3,0.55,1.8,M.wood),block(3.45,4.3,-2.2,0.25,0.25,0.3,M.red),block(3.8,4.3,-2.2,0.25,0.25,0.3,M.ochre),block(4.15,4.3,-2.2,0.25,0.25,0.3,M.teal),block(3.5,5.5,-4,0.7,0.7,0.6,M.wood),block(4.3,5.6,-4,0.6,0.6,0.5,M.ochre),block(3.6,5.6,-3.4,0.5,0.5,0.4,M.wood)),
+  [].concat(block(5.35,4.15,-4,0.75,0.5,1.4,M.white),[qY(4.65,5.67,5.79,-3.45,-2.95,'#b83c2e'),qY(4.65,5.52,5.94,-3.26,-3.14,'#b83c2e')],block(5.4,5.6,-4,1.5,0.8,0.4,M.white),block(6.1,5.6,-3.6,0.8,0.8,0.04,M.teal)),
+  (()=>{let o=block(7.45,4.15,-4,0.55,0.45,1.7,M.wood);const bk=qY(4.6,7.5,7.95,-3.9,-2.5,'#c4562e');bk.backgroundImage='repeating-linear-gradient(90deg,#c4562e 0 5px,#d9a441 5px 9px,#2f7f86 9px 14px,#f1e8d4 14px 16px)';o.push(bk);
+   o=o.concat(block(8.1,4.15,-4,0.06,0.1,4.3,M.metal),block(8.44,4.15,-4,0.06,0.1,4.3,M.metal));for(let z=-3.7;z<0.2;z+=0.42)o=o.concat(block(8.1,4.15,z,0.4,0.1,0.05,M.metal));
+   return o.concat(block(8.7,5.4,-4,0.65,0.8,0.5,M.wood),block(8.85,5.6,-3.5,0.35,0.4,0.08,M.orange));})(),
+  (()=>{const pg=qY(4.15,9.75,11.15,-3.2,-2.0,'#d9a441');pg.backgroundImage='radial-gradient(#9c7a34 1.2px,transparent 1.6px)';pg.backgroundSize='8px 8px';
+   return [pg,qY(4.16,9.9,10.0,-3.0,-2.3,'#676d6f'),qY(4.16,10.2,10.6,-2.55,-2.4,'#b83c2e'),qY(4.16,10.8,10.9,-2.9,-2.2,'#676d6f')].concat(block(9.7,4.15,-4,1.5,0.7,0.6,M.wood),block(10.0,4.3,-3.4,0.4,0.3,0.15,M.red));})(),
+  [].concat(block(11.85,4.15,-4,0.8,0.6,0.85,M.metal),[qY(4.75,11.95,12.55,-3.75,-3.35,'#4b9ca2')],block(12.9,4.3,-4,0.75,0.8,0.7,M.olive)),
+  [].concat(block(14.0,4.3,-4,0.7,0.7,0.7,M.wood),block(14.8,4.3,-4,0.7,0.7,0.7,M.ochre),block(14.4,4.3,-3.3,0.7,0.7,0.6,M.wood),block(14.3,5.6,-4,0.6,0.6,0.5,M.teal))
+ ];
+ R.forEach((r,i)=>{ if(i>0) f=f.concat(block(XS[i],4.15,-4,0.12,1.9,0.9,M.conc)); f=f.concat(r); });
+ f=f.concat(block(15.88,4.15,-4,0.12,1.9,0.9,M.conc));
+ return f;
+}
+const FACES=buildFaces();
+const HITS=[['nav',0.2,6.6,0,1.7,7.9,1.8],['shelter',0.3,2.6,0,2.3,4.8,1.4],['fire',0.9,0.6,0,2.4,2.0,0.9],['food',3.5,0.5,0,6.3,2.6,0.7],['water',8.9,0.6,0,11,2.6,2.1],['comms',11.1,0.4,0,12.8,2.3,3.7],['energy',13.2,0.4,0,16,3.4,4.7]]
+ .concat(ROOMS.map((r,i)=>[r,XS[i]+0.12,4.15,-4,XS[i+1],8,-2.3]));
+const CALL=[['1','energy',[14.5,1.3,1.6]],['2','water',[9.5,1.3,2.3]],['3','food',[4.8,1.5,0.9]],['4','comms',[12.45,0.65,4.0]],['5','shelter',[1.3,3.6,1.7]],['6','fire',[1.6,1.2,1.1]],['7','nav',[0.65,6.95,2.0]],['8','storage',[4.1,6.2,-2.4]],['9','medic',[6.2,6.2,-2.4]],['A','library',[8.9,6.2,-2.4]],['10','tools',[10.6,6.2,-2.4]],['11','security',[12.7,6.2,-2.4]],['B','stash',[14.9,6.2,-2.4]]];
+const ORDER=['energy','water','food','comms','shelter','fire','nav','storage','medic','tools','security'];
+
+const IW=880,IH=740,IU=80,IOX=390,IOY=280;
+const IP=(x,y,z)=>[IOX+(x-y)*0.866*IU,IOY+(x+y)*0.5*IU-z*IU];
+const IF=(pts,c)=>({position:'absolute',left:0,top:0,width:IW,height:IH,background:c,clipPath:poly(pts.map(p=>IP(...p)))});
+const iblock=(x,y,z,w,d,h,c)=>[IF([[x,y,z+h],[x+w,y,z+h],[x+w,y+d,z+h],[x,y+d,z+h]],c[0]),IF([[x,y+d,z+h],[x+w,y+d,z+h],[x+w,y+d,z],[x,y+d,z]],c[1]),IF([[x+w,y,z+h],[x+w,y+d,z+h],[x+w,y+d,z],[x+w,y,z]],c[2])];
+const ihex=(x1,y1,z1,x2,y2,z2)=>[IP(x1,y1,z2),IP(x2,y1,z2),IP(x2,y1,z1),IP(x2,y2,z1),IP(x1,y2,z1),IP(x1,y2,z2)];
+const IT=[M.orange,M.ochre,M.teal,M.olive,M.navy,M.white,M.red];
+const SLOTS=[[0.35,1.5],[2.25,1.6],[4.25,1.45]];
+const DECOR={storage:{wall:['#f4ead6','#efe4cc','#ddd0b3'],rug:'#d9a441'},medic:{wall:['#eef2ec','#e3ebe3','#cfdcd1'],rug:'#2f7f86'},tools:{wall:['#f2e7d0','#eadcc0','#d6c6a4'],rug:'#c4562e'},security:{wall:['#e8eae8','#dcdfdd','#c6cbc9'],rug:'#33456f'}};
+const iq=(y,x1,x2,z1,z2,c)=>IF([[x1,y,z2],[x2,y,z2],[x2,y,z1],[x1,y,z1]],c);
+function furn(s,x,w,open){
+ const d=0.9,col=M[s.c],dark='#43382f'; let f=[]; const items=s.items;
+ if(s.t==='tall'){ const h=2.6; f=f.concat(iblock(x,0,0,w,d,h,col));
+  if(!open){ f.push(iq(d,x+w/2-0.012,x+w/2+0.012,0.05,h-0.05,col[2]),iq(d,x+w/2-0.16,x+w/2-0.09,1.1,1.6,'#2a2420'),iq(d,x+w/2+0.09,x+w/2+0.16,1.1,1.6,'#2a2420')); }
+  else { f.push(iq(d,x+0.07,x+w-0.07,0.07,h-0.07,dark));
+   [0.08,0.9,1.7].forEach((z,li)=>{ f=f.concat(iblock(x+0.07,0.1,z,w-0.14,d-0.12,0.04,M.white)); if(items[li]) for(let k=0;k<2;k++) f=f.concat(iblock(x+0.18+k*((w-0.36)/2),0.32,z+0.04,(w-0.5)/2,0.4,0.42,IT[(li*2+k)%IT.length])); });
+   f.push(IF([[x,d,h],[x,d+w*0.85,h],[x,d+w*0.85,0],[x,d,0]],col[2]),IF([[x+0.01,d+0.12,h-0.15],[x+0.01,d+w*0.78,h-0.15],[x+0.01,d+w*0.78,0.15],[x+0.01,d+0.12,0.15]],col[1])); }
+  return {faces:f,h,hit:ihex(x,0,0,x+w,d+(open?w*0.85:0),h)}; }
+ if(s.t==='drawers'){ const h=1.3; f=f.concat(iblock(x,0,0,w,d,h,col));
+  [0.43,0.86].forEach(z=>f.push(iq(d,x+0.03,x+w-0.03,z-0.015,z+0.015,col[2])));
+  [0.21,0.64,1.07].forEach((z,k)=>{ if(!(open&&k===2)) f.push(iq(d,x+w/2-0.15,x+w/2+0.15,z-0.03,z+0.03,'#2a2420')); });
+  f=f.concat(iblock(x+0.25,0.2,h,0.4,0.35,0.3,M.metal));
+  if(open){ f.push(iq(d,x+0.04,x+w-0.04,0.88,h-0.04,dark));
+   f=f.concat(iblock(x+0.06,0.25,0.9,0.04,1.3,0.3,col),iblock(x+0.06,0.25,0.9,w-0.12,1.3,0.04,['#5a4d41','#5a4d41','#4a3f36']));
+   items.forEach((it,k)=>{ f=f.concat(iblock(x+0.16+k*((w-0.3)/items.length),0.55,0.94,(w-0.45)/items.length,0.6,0.2,IT[(k+2)%IT.length])); });
+   f=f.concat(iblock(x+w-0.1,0.25,0.9,0.04,1.3,0.3,col),iblock(x+0.06,1.51,0.9,w-0.12,0.04,0.34,col));
+   f.push(iq(1.55,x+w/2-0.15,x+w/2+0.15,1.04,1.1,'#2a2420')); }
+  return {faces:f,h:h+0.3,hit:ihex(x,0,0,x+w,open?1.55:d,h+0.3)}; }
+ const h=2.4; f=f.concat(iblock(x,0,0,0.07,d,h,col)); f.push(iq(0.01,x+0.07,x+w-0.07,0,h,col[2]));
+ [0,0.8,1.6].forEach((z,li)=>{ f=f.concat(iblock(x,0,z,w,d,0.07,col)); if(items[li]) for(let k=0;k<2;k++) f=f.concat(iblock(x+0.2+k*((w-0.4)/2),0.2,z+0.07,(w-0.55)/2,0.5,0.45,IT[(li*2+k+3)%IT.length])); });
+ f=f.concat(iblock(x,0,h-0.07,w,d,0.07,col),iblock(x+w-0.07,0,0,0.07,d,h,col));
+ return {faces:f,h,hit:ihex(x,0,0,x+w,d,h)};
+}
+function buildInterior(id,sub){
+ const dc=DECOR[id]; let f=[].concat(iblock(-0.2,0,0,0.2,4.5,3.2,dc.wall),iblock(-0.2,-0.2,0,6.2,0.2,3.2,dc.wall),iblock(0,0,-0.15,6,4.5,0.15,['#cfc7b6','#b5ad9c','#a39b8a']));
+ const fl=IF([[0,0,0],[6,0,0],[6,4.5,0],[0,4.5,0]],'transparent'); fl.backgroundImage='linear-gradient(rgba(42,36,32,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(42,36,32,.08) 1px,transparent 1px)'; fl.backgroundSize='34px 20px'; f.push(fl);
+ f.push(IF([[1.6,2.3,0.005],[4.6,2.3,0.005],[4.6,4.1,0.005],[1.6,4.1,0.005]],dc.rug));
+ f.push(IF([[0,1.3,2.7],[0,3.0,2.7],[0,3.0,1.5],[0,1.3,1.5]],'#f8f2e4'),IF([[0,1.45,2.55],[0,2.85,2.55],[0,2.85,2.25],[0,1.45,2.25]],'#c4562e'),IF([[0,1.45,2.1],[0,2.4,2.1],[0,2.4,2.0],[0,1.45,2.0]],'#2a2420'),IF([[0,1.45,1.9],[0,2.6,1.9],[0,2.6,1.8],[0,1.45,1.8]],'#2a2420'));
+ const hits=[],labels=[];
+ SUBS[id].forEach((s,i)=>{ const [x,w]=SLOTS[i]; const r=furn(s,x,w,sub===i); f=f.concat(r.faces); hits.push({i,pts:r.hit}); const lp=IP(x+w/2,0.45,r.h+0.3); labels.push({text:s.f.toUpperCase(),x:lp[0],y:lp[1],sel:sub===i}); });
+ return {f,hits,labels};
+}
+const LP=(x,y,z)=>[40+(x-y)*0.866*40,64+(x+y)*0.5*40-z*40];
+const LF=(pts,c)=>({position:'absolute',left:0,top:0,width:80,height:80,background:c,clipPath:poly(pts.map(p=>LP(...p)))});
+const lb=(x1,y1,z1,x2,y2,z2,c)=>[LF([[x1,y1,z2],[x2,y1,z2],[x2,y2,z2],[x1,y2,z2]],c[0]),LF([[x1,y2,z2],[x2,y2,z2],[x2,y2,z1],[x1,y2,z1]],c[1]),LF([[x2,y1,z2],[x2,y2,z2],[x2,y2,z1],[x2,y1,z1]],c[2])];
+const SKIN=['#eec59a','#dba97c','#c28d63'],HAIR=['#6a4a30','#55391f','#432c18'],JEANS=['#4f6596','#3c4f7a','#2f3f63'];
+const VOXEL=[].concat(
+ lb(-0.14,-0.06,0,-0.02,0.06,0.32,JEANS),lb(0.02,-0.06,0,0.14,0.06,0.32,JEANS),
+ lb(-0.12,-0.2,0.36,0.12,-0.09,0.62,M.olive),
+ lb(-0.25,-0.06,0.36,-0.16,0.06,0.64,M.orange),lb(-0.25,-0.06,0.28,-0.16,0.06,0.36,SKIN),
+ lb(-0.16,-0.09,0.32,0.16,0.09,0.66,M.orange),
+ lb(0.16,-0.06,0.36,0.25,0.06,0.64,M.orange),lb(0.16,-0.06,0.28,0.25,0.06,0.36,SKIN),
+ lb(-0.14,-0.14,0.66,0.14,0.14,0.94,SKIN),lb(-0.15,-0.15,0.88,0.15,0.15,0.98,HAIR),
+ [LF([[-0.09,0.141,0.82],[-0.04,0.141,0.82],[-0.04,0.141,0.77],[-0.09,0.141,0.77]],'#2a2420'),LF([[0.04,0.141,0.82],[0.09,0.141,0.82],[0.09,0.141,0.77],[0.04,0.141,0.77]],'#2a2420')]
+);
+class Component extends DCLogic {
+  state={view:'home',cat:null,pid:null,qty:1,pos:[8.6,3.3,0],dur:0,face:1,panel:null,catSub:null,zoom:null,anim:false,visH:0,cart:[],sw:0,toast:null,interior:null,sub:null,ipos:[3,3.4,0],idur:0,iface:1};
+  sceneRef=el=>{ if(this.ro) this.ro.disconnect(); if(el){ this.stageEl=el; this.ro=new ResizeObserver(e=>{const w=e[0].contentRect.width; if(w) this.setState({sw:w});}); this.ro.observe(el);} };
+  componentWillUnmount(){ clearTimeout(this.tm); clearTimeout(this.tt); if(this.ro) this.ro.disconnect(); }
+  walkTo(id){
+    clearTimeout(this.tm);
+    if(this.state.zoom){ this.animate(); this.setState({zoom:null,panel:null}); this.tm=setTimeout(()=>this.walkTo(id),750); return; }
+    const t=SPOT[id], cur=this.state.pos, sp=this.props.walkSpeed??4;
+    const under=p=>p[2]<-1;
+    let path;
+    if(under(cur)===under(t)) path=[t];
+    else if(under(t)) path=[HATCH,LADB,LADF,t];
+    else path=[LADF,LADB,HATCH,t];
+    let c=cur; this.setState({panel:null});
+    const step=i=>{
+      if(i>=path.length){ if(CATS.some(x=>x.id===id)) this.tm=setTimeout(()=>this.openCat(id),250); else this.setState({panel:id}); return; }
+      const n=path[i]; const d=Math.hypot(n[0]-c[0],n[1]-c[1],n[2]-c[2]);
+      if(d<0.05){ return step(i+1); }
+      const dur=Math.max(0.15,d/sp); const dx=P(...n)[0]-P(...c)[0];
+      c=n; this.setState({pos:n,dur,face:dx<-1?-1:dx>1?1:this.state.face});
+      this.tm=setTimeout(()=>step(i+1),dur*1000+40);
+    };
+    step(0);
+  }
+  animate(){ clearTimeout(this.ta); this.setState({anim:true}); this.ta=setTimeout(()=>this.setState({anim:false}),950); }
+  measure(){ try{ const r=this.stageEl.getBoundingClientRect(); this.setState({visH:Math.max(200,Math.min(r.height,window.innerHeight-Math.max(0,r.top)))}); }catch(e){} }
+  backToPlate(){ clearTimeout(this.ti); this.setState({interior:null,sub:null}); setTimeout(()=>{ this.animate(); this.setState({zoom:null}); },120); }
+  selectSub(i){ clearTimeout(this.ti); const sl=SLOTS[i], t=[sl[0]+sl[1]/2,1.8,0], c=this.state.ipos; const d=Math.hypot(t[0]-c[0],t[1]-c[1]); const dur=d<0.05?0:Math.max(0.25,d/((this.props.walkSpeed??4)*0.6)); const dx=IP(...t)[0]-IP(...c)[0]; this.setState({sub:null,ipos:t,idur:dur,iface:dx<-1?-1:dx>1?1:this.state.iface}); this.ti=setTimeout(()=>this.setState({sub:i}),dur*1000+60); }
+  flash(msg){ clearTimeout(this.tt); this.setState({toast:msg}); this.tt=setTimeout(()=>this.setState({toast:null}),2200); }
+  add(p,n=1){ const items=Array.from({length:n},()=>({id:p.id,name:p.name,price:p.price})); this.setState(s=>({cart:s.cart.concat(items)})); this.flash('Added to stash: '+p.name+(n>1?' ×'+n:'')); }
+  top(){ try{window.scrollTo(0,0);}catch(e){} }
+  openCat(id){ this.setState({view:'cat',cat:id,catSub:null,panel:null,zoom:null}); this.top(); }
+  openProduct(pid){ this.setState({view:'product',pid,qty:1,panel:null,cat:BYID[pid].cat}); this.top(); }
+  goHomeThen(id){ this.setState({view:'home'}); this.top(); setTimeout(()=>this.walkTo(id),60); }
+  panelFor(id){
+    if(id==='library') return {kicker:'A · THE LIBRARY',title:'Survival Base',blurb:'The guide behind the shop. Eleven chapters, one for every numbered part of this plate. Printed on paper, which still works in a blackout.',items:[{n:'A.1',name:'Print + PDF edition',price:'$49',open:()=>this.add(BOOK)}],cta:'Add the guide · $49',onCta:()=>this.add(BOOK)};
+    if(id==='stash'){
+      const g={}; this.state.cart.forEach(c=>{g[c.id]=g[c.id]||{...c,q:0};g[c.id].q++;});
+      const lines=Object.values(g); const total=this.state.cart.reduce((a,c)=>a+c.price,0);
+      return {kicker:'B · THE STASH',title:lines.length?'$'+total:'Empty',blurb:lines.length?this.state.cart.length+' items packed and waiting.':'Like the shelves after the first rumour. Choose something from the plate.',items:lines.map((l,i)=>({n:'B.'+(i+1),name:l.name+(l.q>1?' ×'+l.q:''),price:'$'+l.price*l.q,open:()=>l.id==='book'?this.walkTo('library'):this.openProduct(l.id)})),cta:lines.length?'Checkout':'Back to the surface',onCta:()=>lines.length?this.flash('Checkout opens with the shop launch.'):this.walkTo('energy')};
+    }
+    const c=CATS.find(c=>c.id===id);
+    return {kicker:'ENTRY '+pad(c.ch)+' · '+c.where.toUpperCase(),title:c.name,blurb:c.blurb,items:c.items.slice(0,3).map(p=>({n:p.fig,name:p.name,price:'$'+p.price,open:()=>this.openProduct(p.id)})),cta:'Read the entry · '+c.items.length+' items',onCta:()=>this.openCat(c.id)};
+  }
+  renderVals(){
+    const s=this.state, sc=(s.sw||992)/W, isc=(s.sw||700)/IW;
+    const go={}; CATS.forEach(c=>go[c.id]=()=>this.walkTo(c.id)); go.library=()=>this.walkTo('library'); go.stash=()=>this.walkTo('stash');
+    const zones=ORDER.map(id=>{const c=CATS.find(x=>x.id===id);return {n:String(c.ch),label:c.name,where:c.where==='Bunker'?'BELOW':'ABOVE',go:go[id]};}).concat([{n:'A',label:'The Library · the guide',where:'BELOW',go:go.library},{n:'B',label:'Your Stash',where:'BELOW',go:go.stash}]);
+    const panel=s.panel?this.panelFor(s.panel):null;
+    const hits=HITS.map(([id,...b])=>({go:go[id],style:{position:'absolute',left:0,top:0,width:W,height:H,clipPath:poly(hex(...b)),cursor:'pointer',background:s.panel===id?'rgba(217,164,65,.22)':'transparent'}}));
+    const callouts=CALL.map(([n,id,p])=>{const q=P(...p);return {n,go:go[id],style:{position:'absolute',left:q[0]-12,top:q[1]-26,width:24,height:24,borderRadius:'50%',background:'#f8f2e4',border:'1.5px solid #2a2420',boxSizing:'border-box',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'Jost',sans-serif",fontWeight:600,fontSize:12,cursor:'pointer',zIndex:5}};});
+    const fp=P(1.62,1.0,0.12), rp=P(15.36,3.2,4.5), bp=P(12.45,0.65,3.65);
+    const flame=React.createElement('div',{style:{position:'absolute',left:fp[0]-9,top:fp[1]-24,width:18,height:24,transformOrigin:'50% 100%',animation:'ecflick .6s ease-in-out infinite',pointerEvents:'none'}},[
+      React.createElement('div',{key:1,style:{position:'absolute',inset:0,background:'#de6b3c',borderRadius:'50% 50% 45% 45% / 65% 65% 35% 35%'}}),
+      React.createElement('div',{key:2,style:{position:'absolute',left:5,top:9,width:8,height:14,background:'#e6b452',borderRadius:'50% 50% 45% 45% / 65% 65% 35% 35%'}})]);
+    const blade=r=>React.createElement('div',{key:r,style:{position:'absolute',left:-3,top:-46,width:6,height:46,background:'#f8f3e8',border:'1px solid #8a8070',borderRadius:3,transformOrigin:'50% 100%',transform:'rotate('+r+'deg)'}});
+    const rotor=React.createElement('div',{style:{position:'absolute',left:rp[0],top:rp[1],width:0,height:0,animation:'ecspin 3s linear infinite',pointerEvents:'none'}},[0,120,240].map(blade));
+    const beacon=React.createElement('div',{style:{position:'absolute',left:bp[0]-4,top:bp[1]-8,width:8,height:8,borderRadius:'50%',background:'#d44c3b',animation:'ecblink 1.4s steps(1) infinite',pointerEvents:'none'}});
+    const sp=P(14.9,4.15,-1.95);
+    let tf='scale('+sc+')';
+    if(s.zoom){ const i=ROOMS.indexOf(s.zoom); const q=P((XS[i]+XS[i+1])/2,7,-3.5); const k=sc*(this.props.zoomLevel??2.6); const vh=s.visH||H*sc; tf='translate('+(W*sc*0.3-q[0]*k)+'px,'+(vh*0.55-q[1]*k)+'px) scale('+k+')'; }
+    const cp=P(...s.pos);
+    const c=s.cat?CATS.find(x=>x.id===s.cat):null;
+    const p=s.pid?BYID[s.pid]:null;
+    const card=x=>({name:x.name,tagline:x.tagline,fig:x.fig,price:'$'+x.price,open:()=>this.openProduct(x.id),add:()=>this.add(x)});
+    return {
+      isHome:s.view==='home',isCat:s.view==='cat',isProduct:s.view==='product',
+      showCallouts:(this.props.showCallouts??true)&&!s.zoom,
+      goHome:()=>{clearTimeout(this.tm);this.setState({view:'home',interior:null,zoom:null,panel:null,sub:null});this.top();},
+      openGuide:()=>this.goHomeThen('library'),openStash:()=>this.goHomeThen('stash'),
+      addBook:()=>this.add(BOOK),cartCount:s.cart.length,sceneRef:this.sceneRef,
+      stageStyle:{position:'relative',width:'100%',maxWidth:1600,margin:'0 auto',height:Math.round(H*sc),overflow:'hidden'},
+      sceneStyle:{position:'absolute',left:0,top:0,width:W,height:H,transformOrigin:'0 0',transform:tf,transition:s.anim?'transform .9s cubic-bezier(.65,0,.25,1)':'none'},
+      faces:FACES,hits,callouts,flame,rotor,beacon,zones,
+      stashTagStyle:{position:'absolute',left:sp[0]-30,top:sp[1]-6,fontFamily:"'Jost',sans-serif",fontSize:11,letterSpacing:'.12em',color:'#2a2420',pointerEvents:'none'},
+      voxel:VOXEL,charStyle:{position:'absolute',left:cp[0]-40,top:cp[1]-64,width:80,height:80,zIndex:8,pointerEvents:'none',transition:'left '+s.dur+'s linear, top '+s.dur+'s linear'},
+      flipStyle:{position:'absolute',inset:0,transform:'scaleX('+(-s.face)+')'},
+      panel:panel||{items:[]},panelOpen:!!panel,closePanel:()=>{ if(s.zoom) this.animate(); this.setState({panel:null,zoom:null}); },
+      cat:c?{name:c.name,blurb:c.blurb,kicker:'ENTRY '+pad(c.ch)+' · '+(c.where==='Bunker'?'BELOW GROUND':'ABOVE GROUND'),chLabel:pad(c.ch),chNum:c.ch,count:c.items.filter(x=>!s.catSub||x.sub===s.catSub).length,hasSubs:!!SUBS[c.id]}:{},
+      catItems:c?c.items.filter(x=>!s.catSub||x.sub===s.catSub).map(card):[],
+      subChips:c&&SUBS[c.id]?[{label:'All',v:null}].concat(SUBS[c.id].map(x=>({label:x.f.replace('The ','')+' · '+x.n,v:x.n}))).map(o=>({label:o.label,go:()=>this.setState({catSub:o.v}),style:{background:s.catSub===o.v?'#2a2420':'transparent',color:s.catSub===o.v?'#f1e8d4':'#2a2420',border:'1px solid #2a2420',padding:'8px 14px',cursor:'pointer',fontFamily:"'Jost',sans-serif",fontSize:13,letterSpacing:'.08em'}})):[],
+      prod:p?(()=>{const pc=CATS.find(x=>x.id===p.cat);return {name:p.name,tagline:p.tagline,fig:p.fig,price:'$'+p.price,specs:p.spec.split(' · '),catName:pc.name.toUpperCase(),kicker:'ENTRY '+pad(pc.ch)+' · '+pc.name.toUpperCase(),chLabel:pad(pc.ch),openCat:()=>this.openCat(pc.id),add:()=>this.add(p,s.qty)};})():{specs:[]},
+      related:p?CATS.find(x=>x.id===p.cat).items.filter(x=>x.id!==p.id).map(card):[],
+      qty:s.qty,inc:()=>this.setState(x=>({qty:Math.min(99,x.qty+1)})),dec:()=>this.setState(x=>({qty:Math.max(1,x.qty-1)})),
+      hasToast:!!s.toast,toast:s.toast,
+      ...(()=>{ const o={showScene:s.view==='home'&&!s.interior,showInterior:s.view==='home'&&!!s.interior,backToPlate:()=>this.backToPlate(),ifaces:[],ihits:[],ilabels:[],iv:{subs:[],items:[]},
+        istageStyle:{position:'relative',flex:'1 1 560px',minWidth:0,height:Math.round(IH*isc),overflow:'hidden',animation:'ecfade .6s ease-out'},
+        isceneStyle:{position:'absolute',left:0,top:0,width:IW,height:IH,transformOrigin:'0 0',transform:'scale('+isc+')'}};
+        if(!s.interior) return o;
+        const B=buildInterior(s.interior,s.sub);
+        o.ifaces=B.f;
+        o.ihits=B.hits.map(x=>({go:()=>this.selectSub(x.i),style:{position:'absolute',left:0,top:0,width:IW,height:IH,clipPath:poly(x.pts),cursor:'pointer',background:s.sub===x.i?'rgba(217,164,65,.16)':'transparent'}}));
+        o.ilabels=B.labels.map(l=>({text:l.text,style:{position:'absolute',left:l.x-90,top:l.y-20,width:180,textAlign:'center',fontFamily:"'Jost',sans-serif",fontSize:13,fontWeight:l.sel?600:500,letterSpacing:'.16em',color:l.sel?'#c4562e':'#2a2420',pointerEvents:'none'}}));
+        const ip=IP(...s.ipos);
+        o.icharStyle={position:'absolute',left:ip[0]-9,top:ip[1]-32,width:18,height:32,transform:'scale(2.6)',transformOrigin:'50% 100%',pointerEvents:'none',transition:'left '+s.idur+'s linear, top '+s.idur+'s linear'};
+        o.iflipStyle={position:'absolute',inset:0,transform:'scaleX('+s.iface+')'};
+        const c=CATS.find(x=>x.id===s.interior), subs=SUBS[s.interior], cur=s.sub!=null?subs[s.sub]:null;
+        o.iv={plate:'ROOM '+pad(c.ch),room:c.name,kicker:cur?cur.f.toUpperCase():'ROOM '+pad(c.ch)+' · BELOW GROUND',title:cur?cur.n:c.name,
+          blurb:cur?cur.items.length+' items inside. Touch a name for the full entry, or + to add it to your stash.':'Everything here is stored where you would look for it. Open the '+subs.map(x=>x.f.replace('The ','')).join(', the ').replace(/, the ([^,]*)$/,' or the $1')+'.',
+          subs:subs.map((x,i)=>({furn:x.f.toUpperCase(),name:x.n,go:()=>this.selectSub(i),style:{display:'flex',justifyContent:'space-between',alignItems:'baseline',gap:12,padding:'11px 0',borderBottom:'1px dotted #2a2420',cursor:'pointer',fontSize:16,color:s.sub===i?'#c4562e':'#2a2420'}})),
+          hasSub:!!cur,items:cur?cur.items.map(p=>({name:p.name,price:'$'+p.price,fig:p.fig,open:()=>this.openProduct(p.id),add:()=>this.add(p)})):[],
+          allLabel:'All '+c.items.length+' items in '+c.name,allGo:()=>this.openCat(c.id)};
+        return o; })()
+    };
+  }
+}
+</script>
+</body>
+</html>

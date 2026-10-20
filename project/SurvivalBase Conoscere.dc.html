@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e6dcc6;color:#2b2622;font-family:'Libre Caslon Text',serif;-webkit-font-smoothing:antialiased}
+a{color:#c4323b}a:hover{color:#2b2622}
+button{font-family:inherit}
+@keyframes cntoast{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+</style>
+</helmet>
+<div style="min-height:100vh;padding:28px 16px 48px;box-sizing:border-box">
+<div style="max-width:1120px;margin:0 auto;background:#f6efdd;border-left:14px solid #b3262f;box-shadow:0 18px 40px rgba(60,40,20,.18);display:flex;flex-direction:column">
+
+<header style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 36px 14px">
+  <div onClick="{{ goHome }}" style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;cursor:pointer">
+    <div style="font-family:'Jost',sans-serif;font-weight:600;font-size:20px;letter-spacing:.14em;color:#c4323b">SURVIVALBASE</div>
+    <div style="font-family:'Jost',sans-serif;font-size:14px">the illustrated book of being prepared · volume one</div>
+  </div>
+  <nav style="display:flex;gap:18px;flex-wrap:wrap;font-family:'Jost',sans-serif;font-size:15px">
+    <button onClick="{{ goHome }}" style="background:none;border:none;padding:0;cursor:pointer;color:#2b2622;font-family:'Jost',sans-serif;font-size:15px" style-hover="color:#c4323b">the plate</button>
+    <button onClick="{{ addBook }}" style="background:none;border:none;padding:0;cursor:pointer;color:#2b2622;font-family:'Jost',sans-serif;font-size:15px" style-hover="color:#c4323b">the guide · $49</button>
+    <button onClick="{{ toggleStash }}" style="background:none;border:none;padding:0;cursor:pointer;color:#c4323b;font-family:'Jost',sans-serif;font-size:15px;font-weight:600">stash ({{ cartCount }})</button>
+  </nav>
+</header>
+
+<sc-if value="{{ stashOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="margin:0 36px 10px;padding:14px 18px;border:1px solid #2b2622;display:flex;flex-direction:column;gap:6px;font-family:'Jost',sans-serif;font-size:14px">
+    <div style="color:#c4323b;letter-spacing:.12em;font-weight:500">YOUR STASH · {{ cartTotal }}</div>
+    <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="0"><div style="display:flex;justify-content:space-between;gap:12px"><span>{{ l.name }}</span><span>{{ l.price }}</span></div></sc-for>
+    <div>{{ stashNote }}</div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main style="padding:6px 36px 44px;display:flex;flex-direction:column;gap:26px">
+  <div style="font-family:'Jost',sans-serif;font-weight:500;font-size:17px;letter-spacing:.08em;color:#c4323b">HOW A MODERN FAMILY PREPARES FOR THE END OF THE WORLD</div>
+  <div ref="{{ plateRef }}" style="{{ stageStyle }}">
+    <div style="{{ plateStyle }}">
+      <div style="position:absolute;left:0;top:0;width:1000px;height:620px">
+        <image-slot id="plate-main" shape="rect" fit="cover" placeholder="gouache cross-section of the base: surface above, bunker below (see seedream-prompts.md)"></image-slot>
+      </div>
+      <sc-for list="{{ lines }}" as="ln" hint-placeholder-count="0"><div style="{{ ln }}"></div></sc-for>
+      <sc-for list="{{ labels }}" as="lb" hint-placeholder-count="0">
+        <div onClick="{{ lb.go }}" style="{{ lb.style }}">{{ lb.text }}</div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="font-size:15px;line-height:1.6;max-width:640px;text-wrap:pretty">Above ground the family makes power, collects water and grows food. Below it, four metres under the lawn, they keep everything needed to wait. Touch a name on the plate to see the equipment.</div>
+
+  <div style="font-family:'Jost',sans-serif;font-weight:500;font-size:17px;letter-spacing:.08em;color:#c4323b;margin-top:10px">WHAT A SURVIVOR NEEDS, ZONE BY ZONE</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:26px 22px">
+    <sc-for list="{{ zones }}" as="z" hint-placeholder-count="12">
+      <div onClick="{{ z.go }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer" style-hover="color:#c4323b">
+        <div style="width:100%;aspect-ratio:3/4"><image-slot id="{{ z.slot }}" shape="rect" fit="contain" placeholder="{{ z.ph }}"></image-slot></div>
+        <div style="font-family:'Jost',sans-serif;font-size:15px;text-align:center;line-height:1.2">{{ z.label }}</div>
+      </div>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isCat }}" hint-placeholder-val="{{ false }}">
+<main style="padding:6px 36px 48px;display:flex;flex-direction:column;gap:22px">
+  <button onClick="{{ goHome }}" style="align-self:flex-start;background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:14px;color:#2b2622" style-hover="color:#c4323b">← back to the plate</button>
+  <div style="font-family:'Jost',sans-serif;font-weight:500;font-size:clamp(20px,2.6vw,30px);letter-spacing:.06em;color:#c4323b;line-height:1.2;text-wrap:balance">{{ cat.headline }}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px;align-items:start">
+    <p style="margin:0;font-size:17px;line-height:1.6;text-wrap:pretty">{{ cat.blurb }} Every item on this page is described in chapter {{ cat.ch }} of <em>Survival Base</em>.</p>
+    <sc-if value="{{ cat.hasSubs }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-wrap:wrap;gap:8px 18px;font-family:'Jost',sans-serif;font-size:15px">
+        <sc-for list="{{ subChips }}" as="sc" hint-placeholder-count="4"><button onClick="{{ sc.go }}" style="{{ sc.style }}">{{ sc.label }}</button></sc-for>
+      </div>
+    </sc-if>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:34px 26px;margin-top:8px">
+    <sc-for list="{{ catItems }}" as="p" hint-placeholder-count="6">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center">
+        <div onClick="{{ p.open }}" style="width:100%;aspect-ratio:1/1;cursor:pointer"><image-slot id="{{ p.slot }}" shape="rect" fit="contain" placeholder="{{ p.ph }}"></image-slot></div>
+        <div onClick="{{ p.open }}" style="font-family:'Jost',sans-serif;font-size:15px;line-height:1.25;cursor:pointer" style-hover="color:#c4323b">{{ p.label }}</div>
+        <div style="display:flex;gap:12px;align-items:baseline;font-family:'Jost',sans-serif;font-size:14px">
+          <span>{{ p.price }}</span>
+          <button onClick="{{ p.add }}" style="background:none;border:none;padding:0;cursor:pointer;color:#c4323b;font-family:'Jost',sans-serif;font-size:14px;text-decoration:underline">add to stash</button>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+<main style="padding:6px 36px 48px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;font-family:'Jost',sans-serif;font-size:14px">
+    <button onClick="{{ goHome }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:14px;color:#2b2622" style-hover="color:#c4323b">the plate</button><span>/</span>
+    <button onClick="{{ prod.openCat }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Jost',sans-serif;font-size:14px;color:#2b2622" style-hover="color:#c4323b">{{ prod.catLabel }}</button>
+  </div>
+  <div style="font-family:'Jost',sans-serif;font-weight:500;font-size:clamp(20px,2.6vw,30px);letter-spacing:.06em;color:#c4323b;line-height:1.2;text-wrap:balance">{{ prod.headline }}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:36px;align-items:start">
+    <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:0;align-items:stretch">
+      <div style="display:flex;flex-direction:column;justify-content:space-around;gap:12px;padding:10px 0">
+        <sc-for list="{{ prod.parts }}" as="pt" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:6px;font-family:'Jost',sans-serif;font-size:13px;line-height:1.2"><span style="flex:1;text-align:right">{{ pt }}</span><span style="width:34px;height:1px;background:#2b2622"></span><span style="width:4px;height:4px;border-radius:50%;background:#2b2622"></span></div>
+        </sc-for>
+      </div>
+      <div style="aspect-ratio:1/1"><image-slot id="{{ prod.slot }}" shape="rect" fit="contain" placeholder="{{ prod.ph }}"></image-slot></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:'Jost',sans-serif;font-size:26px;line-height:1.2">{{ prod.label }}</div>
+      <p style="margin:0;font-size:17px;line-height:1.6;font-style:italic">{{ prod.tagline }}</p>
+      <div style="font-family:'Jost',sans-serif;font-size:28px;font-weight:500">{{ prod.price }}</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:stretch">
+        <div style="display:flex;border:1px solid #2b2622">
+          <button onClick="{{ dec }}" style="width:42px;background:none;border:none;cursor:pointer;font-size:18px;color:#2b2622">−</button>
+          <div style="width:36px;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:16px">{{ qty }}</div>
+          <button onClick="{{ inc }}" style="width:42px;background:none;border:none;cursor:pointer;font-size:18px;color:#2b2622">+</button>
+        </div>
+        <button onClick="{{ prod.add }}" style="flex:1;min-width:180px;background:#c4323b;color:#f6efdd;border:none;padding:14px 16px;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;letter-spacing:.06em" style-hover="background:#2b2622">add to stash</button>
+      </div>
+      <div style="font-size:15px;line-height:1.6;border-top:1px solid #2b2622;padding-top:12px">How to choose, set up and repair it is explained in chapter {{ prod.ch }} of <em>Survival Base</em>. <a onClick="{{ addBook }}" style="cursor:pointer;font-family:'Jost',sans-serif;font-size:14px">add the guide · $49</a></div>
+    </div>
+  </div>
+  <div style="font-family:'Jost',sans-serif;font-weight:500;font-size:16px;letter-spacing:.08em;color:#c4323b;margin-top:16px">ON THE SAME SHELF</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:26px">
+    <sc-for list="{{ related }}" as="p" hint-placeholder-count="4">
+      <div onClick="{{ p.open }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;text-align:center" style-hover="color:#c4323b">
+        <div style="width:100%;aspect-ratio:1/1"><image-slot id="{{ p.slot }}" shape="rect" fit="contain" placeholder="{{ p.ph }}"></image-slot></div>
+        <div style="font-family:'Jost',sans-serif;font-size:14px;line-height:1.25">{{ p.label }}</div>
+      </div>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<footer style="padding:14px 36px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'Jost',sans-serif;font-size:13px;border-top:1px solid #d8ccb0">
+  <span>survivalbase.net</span><span>page {{ pageNo }}</span>
+</footer>
+</div>
+</div>
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60">
+    <div style="background:#2b2622;color:#f6efdd;padding:12px 18px;font-family:'Jost',sans-serif;font-size:14px;animation:cntoast .2s ease-out">{{ toast }}</div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const RAW=[
+['energy','Power','Surface',1220,0,'The grid had a good run. Solar, wind and batteries for when it stops returning your calls.',[
+['SunCrate 200W Foldable Solar Panel',289,'Unfolds in 30 seconds. Charges in daylight. Sulks in clouds.','200 W peak · 7.4 kg · IP67 · USB-C + Anderson out'],
+['Breeze-400 Micro Wind Turbine',349,'For when the sun clocks out early.','400 W · 12/24 V · 3-blade · Start-up wind 2.5 m/s'],
+['Bunker Cell 1kWh Power Station',899,'LiFePO4, 3,000 cycles. Outlives most governments.','1,024 Wh · 2,000 W AC · 12.5 kg · Solar input 800 W'],
+['Crank & Charge Dynamo',39,'Cardio and USB-C in one handle.','5 V 2 A · 380 g · LED torch']]],
+['water','Water','Surface',990,0,'Rivers are free. So is dysentery. Filters, purifiers and storage that keep the two apart.',[
+['Gravity Pro 10L Filter System',129,'Hang it, fill it, walk away. Puddle in, drinkable out.','0.1 micron hollow fibre · 10 L · 1.7 L/min'],
+['StrawGuard Personal Filter',24,'Drink directly from questionable sources.','4,000 L lifetime · 45 g · No chemicals'],
+['Rain Harvest 200L Collapsible Barrel',89,'Clouds, but make it plumbing.','200 L · PVC tarpaulin · Brass tap · Folds to 8 cm'],
+['UV Purifier Pen',69,'Zaps what you can\'t see in 90 seconds.','UV-C · 0.5 L per cycle · USB rechargeable']]],
+['food','Grow & Forage','Surface',665,0,'Seeds, beds and traps for the post-supermarket diet.',[
+['Heirloom Seed Vault, 32 varieties',59,'Open-pollinated. Plant once, save seeds, repeat forever.','32 varieties · Sealed mylar · 5-year viability'],
+['Raised Bed Kit 120×60',79,'Your first farm. Fits on a balcony.','Galvanised steel · 120×60×30 cm · No tools'],
+['Forager\'s Field Guide & Pouch',34,'Know which mushroom is dinner and which is a sequel.','220 species · Waterproof pages · Waxed pouch'],
+['Snare & Fishing Survival Kit',45,'Protein, eventually.','Line, hooks, wire snares · 260 g · Tin case']]],
+['comms','Comms','Surface',1510,0,'Radios that work while the cell towers take a long nap.',[
+['BaseBand 5W Dual-Band Radio',79,'Talk across the valley. Licence recommended.','VHF/UHF · 5 W · 2,200 mAh · IP54'],
+['Crank/Solar Weather Radio',59,'News, when there is news.','AM/FM/NOAA · Hand crank · Solar · SOS beacon'],
+['Mesh Messenger, pair',149,'Text without towers, up to 10 km line of sight.','LoRa · Bluetooth to phone · 3-day battery'],
+['Telescopic 7m Antenna Mast',119,'Altitude is range.','Aluminium · 7 m · Guy kit included']]],
+['shelter','Shelter','Surface',290,0,'Tents, tarps and bivvies. Property prices have never been lower.',[
+['Nomad 4-Season Tent, 2P',329,'Wind, snow, the neighbours. Keeps it all out.','2 person · 2.9 kg · 5,000 mm hydrostatic'],
+['Ripstop Tarp 3×3m',49,'A roof in four knots.','Ripstop nylon · 3×3 m · 16 tie-outs'],
+['Reflective Emergency Bivvy',19,'Keeps 90% of your body heat. And dignity.','Mylar-laminate · 110 g · Reusable'],
+['Paracord 30m, 550 lb',15,'The string that holds the apocalypse together.','7-strand core · 30 m · 250 kg break']]],
+['fire','Fire & Heat','Surface',480,0,'Fire: humanity\'s first app. Still no subscription.',[
+['Ferro Rod XL',22,'12,000 strikes. Zero matches.','Ferrocerium · 12 cm · Steel striker'],
+['Wood Gasifier Camp Stove',99,'Twigs in, dinner out, barely any smoke.','Stainless · 900 g · Burns biomass'],
+['Stormproof Matches, 2×25',12,'Burns underwater. Mostly for the drama.','15 s burn · Waterproof case'],
+['Army-Grade Wool Blanket',69,'Warm when wet. Ugly by design.','80% wool · 210×150 cm · 1.8 kg']]],
+['nav','Navigation','Surface',100,0,'GPS is someone else\'s satellite. A map and a compass are yours.',[
+['Baseplate Compass with Mirror',39,'Points north. Doesn\'t need charging.','Liquid-damped · Sighting mirror · Declination adjust'],
+['Waterproof Regional Map Set',29,'Paper never loses signal.','1:50,000 · Tear-proof · 6 sheets'],
+['Solar GPS Locator',189,'For as long as the satellites stay up.','GPS/Galileo · Solar · Breadcrumb track'],
+['Signal Mirror & Whistle Kit',14,'Be found on purpose.','Glass mirror · 120 dB whistle · Lanyard']]],
+['storage','Food Storage','Bunker',472,1,'Freeze-dried, vacuum-sealed, built to last. Best before: the next civilisation.',[
+['72-Hour Freeze-Dried Ration Pack',89,'25-year shelf life. Tastes like "fine".','9 meals · 6,000 kcal · Just add water'],
+['Vacuum Sealer + 100 Bags',119,'Removes air. Adds years.','Double seal · Pulse mode · 100 bags'],
+['Mylar Bags & Oxygen Absorbers, 50',29,'Long-term storage for rice, beans and optimism.','5-mil mylar · 300 cc absorbers'],
+['Stackable 20L Grain Bucket',24,'Gamma lid. Rodents not invited.','Food-grade HDPE · Screw lid · Stackable']]],
+['medic','First Aid','Bunker',685,1,'The nearest emergency room is now you.',[
+['Field Trauma Kit, 180 pcs',129,'Organised for shaking hands.','180 pieces · Colour-coded pouches · MOLLE'],
+['Windlass Tourniquet',32,'One-hand application. Practise before you need it.','Windlass · 3.8 cm strap · Time tag'],
+['Water-Free Hygiene Set',27,'Clean-ish, without the plumbing.','Rinse-free wash · Wipes · Toothpowder'],
+['Pocket Medical Handbook',19,'No wifi required.','280 pages · Waterproof · Illustrated']]],
+['tools','Tools','Bunker',972,1,'Multi-tools, axes and repair kits. Duct tape is a lifestyle.',[
+['Forged Camp Axe',74,'Splits wood and arguments.','Carbon steel · Hickory handle · 1.1 kg'],
+['16-in-1 Multi-tool',59,'Sixteen tools, one pocket.','Stainless · Pliers, saw, drivers · 240 g'],
+['Folding Saw, 25cm',29,'Faster than the axe. Quieter too.','SK5 blade · Lock-back · 25 cm'],
+['Repair Kit: Tape, Wire, Epoxy',34,'Fix anything at least once.','Duct tape · Steel wire · 2-part epoxy']]],
+['security','Security','Bunker',1185,1,'Locks, alarms and night vision. Strictly defensive, mostly against raccoons.',[
+['Perimeter Motion Alarm, 4 sensors',99,'Hear them before they hear you.','PIR · 400 m range · Battery 1 yr'],
+['Night Vision Monocular',249,'See the raccoon. Judge the raccoon.','Digital IR · 200 m · Records video'],
+['Steel Hatch Lock Kit',139,'Because the hatch is the front door.','Hardened steel · Internal bolt · 2 keys'],
+['Faraday Bag Set, 3',45,'Keeps electronics safe from EMPs and curiosity.','Triple-layer · 3 sizes · Roll-top']]]
+];
+
+const BOOK={id:'book',name:'Survival Base · The Guide',price:49};
+const pad=n=>String(n).padStart(2,'0');
+const CATS=RAW.map((r,i)=>({id:r[0],name:r[1],where:r[2],blurb:r[5],ch:i+1,items:r[6].map((p,j)=>({id:r[0]+'-'+j,cat:r[0],name:p[0],price:p[1],tagline:p[2],spec:p[3],fig:(i+1)+'.'+(j+1)}))}));
+const SUBS={
+ storage:[
+  {f:'The fridge',t:'tall',c:'white',n:'Cold Storage',items:[['SolarChill 50L 12V Fridge',549,'Runs on a 100 W panel. Keeps the beer, and the insulin, cold.','50 L · 12/24 V · 45 W · Down to −20 °C'],['Rotomoulded Cooler 45L',189,'Five days of ice. Bear-resistant, allegedly.','45 L · 5-day ice retention · 9 kg'],['Thermal Food Jar Set',39,'Cooks while you walk.','3 × 0.7 L · Vacuum steel']]},
+  {f:'The pantry',t:'shelf',c:'wood',n:'Ready Meals',items:[['72-Hour Freeze-Dried Ration Pack',89,'25-year shelf life. Tastes like "fine".','9 meals · 6,000 kcal · Just add water'],['30-Day Meal Bucket',349,'A month of dinners in one bucket. Same three flavours.','120 servings · 25-year shelf life · 11 kg'],['Emergency Ration Bars, 12',29,'3,600 kcal. Lemon-flavoured cardboard.','5-year shelf life · Sealed foil']]},
+  {f:'The bulk drawer',t:'drawers',c:'ochre',n:'Bulk & Sealing',items:[['Vacuum Sealer + 100 Bags',119,'Removes air. Adds years.','Double seal · Pulse mode · 100 bags'],['Mylar Bags & Oxygen Absorbers, 50',29,'Long-term storage for rice, beans and optimism.','5-mil mylar · 300 cc absorbers'],['Stackable 20L Grain Bucket',24,'Gamma lid. Rodents not invited.','Food-grade HDPE · Screw lid']]}],
+ medic:[
+  {f:'The cabinet',t:'tall',c:'white',n:'Trauma & Bleeding',items:[['Field Trauma Kit, 180 pcs',129,'Organised for shaking hands.','180 pieces · Colour-coded pouches · MOLLE'],['Windlass Tourniquet',32,'One-hand application. Practise before you need it.','Windlass · 3.8 cm strap · Time tag'],['Pressure Bandage, 4-pack',36,'Fast to apply, hard to forget.','10 cm · Sterile · Vacuum packed']]},
+  {f:'The drawers',t:'drawers',c:'teal',n:'Everyday Medicine',items:[['Family First-Aid Refill Kit',45,'Plasters, gauze, tape and the tweezers you never find.','120 pieces · Labelled pouches'],['Water-Free Hygiene Set',27,'Clean-ish, without the plumbing.','Rinse-free wash · Wipes · Tooth powder'],['Thermometer & Pulse Oximeter',34,'Two numbers that tell you a lot.','Infrared · SpO2 · AAA batteries']]},
+  {f:'The bookcase',t:'shelf',c:'wood',n:'Manuals & Training',items:[['Pocket Medical Handbook',19,'No wifi required.','280 pages · Waterproof · Illustrated'],['CPR Training Mask',12,'For practising before it matters.','One-way valve · Keyring case'],['Wilderness First Aid Course',79,'Eight hours of video and a certificate.','8 h · Online · Certificate']]}],
+ tools:[
+  {f:'The tool chest',t:'drawers',c:'red',n:'Hand Tools',items:[['16-in-1 Multi-tool',59,'Sixteen tools, one pocket.','Stainless · Pliers, saw, drivers · 240 g'],['Socket & Bit Set, 46 pcs',49,'For things with bolts.','CrV steel · 1/4" drive · Case'],['Fibreglass Claw Hammer',22,'Ancient technology, still undefeated.','450 g · Anti-vibration grip']]},
+  {f:'The locker',t:'tall',c:'metal',n:'Cutting & Chopping',items:[['Forged Camp Axe',74,'Splits wood and arguments.','Carbon steel · Hickory handle · 1.1 kg'],['Folding Saw, 25cm',29,'Faster than the axe. Quieter too.','SK5 blade · Lock-back · 25 cm'],['Full-Tang Bushcraft Knife',89,'One blade to do most things.','Carbon steel · 11 cm · Leather sheath']]},
+  {f:'The shelves',t:'shelf',c:'wood',n:'Repair & Fix',items:[['Repair Kit: Tape, Wire, Epoxy',34,'Fix anything at least once.','Duct tape · Steel wire · 2-part epoxy'],['Sewing & Patch Kit',18,'Fix the tent, the trousers and the tarp.','Heavy-duty thread · Awl · Patches'],['Zip Ties & Clamps, 300',16,'Holds the world together, temporarily.','300 pieces · UV resistant']]}],
+ security:[
+  {f:'The locker',t:'tall',c:'olive',n:'Locks & Doors',items:[['Steel Hatch Lock Kit',139,'Because the hatch is the front door.','Hardened steel · Internal bolt · 2 keys'],['Door Brace Bar',59,'Turns any door into a wall.','Adjustable · Steel · No drilling'],['Shrouded Combination Padlock',29,'No key to lose.','4-dial · Hardened shackle']]},
+  {f:'The desk',t:'drawers',c:'metal',n:'Alarms & Sensors',items:[['Perimeter Motion Alarm, 4 sensors',99,'Hear them before they hear you.','PIR · 400 m range · 1-year battery'],['Solar Trail Camera',129,'Watches the gate while you sleep.','4K · IR night · Solar panel'],['Door & Window Alarms, 6',24,'110 dB of "no".','Magnetic · Battery']]},
+  {f:'The rack',t:'shelf',c:'navy',n:'Optics & EMP',items:[['Night Vision Monocular',249,'See the raccoon. Judge the raccoon.','Digital IR · 200 m · Records video'],['Faraday Bag Set, 3',45,'Keeps electronics safe from EMPs and curiosity.','Triple-layer · 3 sizes · Roll-top'],['Binoculars 10×42',119,'See trouble early.','10× · 42 mm · Waterproof']]}]
+};
+Object.keys(SUBS).forEach(cid=>{const c=CATS.find(x=>x.id===cid); let k=0; c.items=[]; SUBS[cid].forEach((s,si)=>{s.items=s.items.map((p,j)=>{const o={id:cid+'-'+si+'-'+j,cat:cid,sub:s.n,name:p[0],price:p[1],tagline:p[2],spec:p[3],fig:c.ch+'.'+(++k)}; c.items.push(o); return o;});});});
+const BYID={};CATS.forEach(c=>c.items.forEach(p=>BYID[p.id]=p));
+
+const LBL=[
+ ['nav','signpost',[60,330],[30,150]],['shelter','tent',[165,320],[130,90]],['fire','campfire',[265,345],[230,150]],['food','vegetable garden',[370,330],[330,90]],
+ [null,'hatch',[500,350],[470,150]],['water','water tank',[610,290],[580,90]],['comms','radio mast',[720,200],[690,150]],['energy','solar panel',[825,320],[800,90]],['energy','wind turbine',[935,180],[900,150]],
+ ['storage','pantry',[83,540],[45,660]],['medic','first aid',[250,540],[215,660]],['library','library',[416,540],[385,660]],['tools','workshop',[583,540],[548,660]],['security','guard room',[750,540],[710,660]],['stash','stash',[916,540],[890,660]]
+];
+const lower=s=>s.toLowerCase();
+class Component extends DCLogic {
+  state={view:'home',cat:null,pid:null,qty:1,cart:[],catSub:null,sw:0,stash:false,toast:null};
+  plateRef=el=>{ if(this.ro) this.ro.disconnect(); if(el){ this.ro=new ResizeObserver(e=>{const w=e[0].contentRect.width; if(w) this.setState({sw:w});}); this.ro.observe(el);} };
+  componentWillUnmount(){ if(this.ro) this.ro.disconnect(); clearTimeout(this.tt); }
+  top(){ try{window.scrollTo(0,0);}catch(e){} }
+  flash(m){ clearTimeout(this.tt); this.setState({toast:m}); this.tt=setTimeout(()=>this.setState({toast:null}),2200); }
+  add(p,n=1){ this.setState(s=>({cart:s.cart.concat(Array.from({length:n},()=>({id:p.id,name:p.name,price:p.price})))})); this.flash('Added to stash: '+p.name+(n>1?' ×'+n:'')); }
+  openCat(id){ this.setState({view:'cat',cat:id,catSub:null}); this.top(); }
+  openProduct(pid){ this.setState({view:'product',pid,qty:1,cat:BYID[pid].cat}); this.top(); }
+  go(id){ if(id==='library') this.add(BOOK); else if(id==='stash') this.setState({stash:true}); else if(id) this.openCat(id); }
+  renderVals(){
+    const s=this.state, sc=(s.sw||1000)/1000;
+    const labels=[],lines=[];
+    LBL.forEach(([id,text,d,l])=>{
+      const lw=text.length*8+8, lx=l[0], ly=l[1];
+      labels.push({text,go:()=>this.go(id),style:{position:'absolute',left:lx,top:ly,fontFamily:"'Jost',sans-serif",fontSize:17,lineHeight:'22px',whiteSpace:'nowrap',color:'#2b2622',background:'rgba(246,239,221,.85)',padding:'0 4px',cursor:id?'pointer':'default'}});
+      const ax=lx+lw/2, ay=ly<d[1]?ly+22:ly; const dx=d[0]-ax, dy=d[1]-ay; const len=Math.hypot(dx,dy), ang=Math.atan2(dy,dx)*180/Math.PI;
+      lines.push({position:'absolute',left:ax,top:ay,width:len,height:1,background:'#2b2622',transformOrigin:'0 0',transform:'rotate('+ang+'deg)',pointerEvents:'none'});
+      lines.push({position:'absolute',left:d[0]-3,top:d[1]-3,width:6,height:6,borderRadius:'50%',background:'#2b2622',pointerEvents:'none'});
+    });
+    const zones=CATS.map(c=>({label:lower(c.name),slot:'zone-'+c.id,ph:'gouache: '+lower(c.name),go:()=>this.openCat(c.id)})).concat([{label:'the guide · $49',slot:'zone-book',ph:'gouache: the book',go:()=>this.add(BOOK)}]);
+    const c=s.cat?CATS.find(x=>x.id===s.cat):null, p=s.pid?BYID[s.pid]:null;
+    const card=x=>({label:lower(x.name),price:'$'+x.price,slot:'prod-'+x.id,ph:'gouache: '+lower(x.name),open:()=>this.openProduct(x.id),add:()=>this.add(x)});
+    const g={}; s.cart.forEach(x=>{g[x.id]=g[x.id]||{...x,q:0};g[x.id].q++;});
+    const HEAD={energy:'POWER: HOW TO MAKE ELECTRICITY WHEN THE GRID GOES DOWN',water:'WATER: HOW TO FIND IT, CLEAN IT AND KEEP IT',food:'HOW TO GROW AND GATHER YOUR OWN FOOD',comms:'HOW TO TALK TO THE WORLD WITHOUT A PHONE SIGNAL',shelter:'HOW TO BUILD A ROOF IN ANY WEATHER',fire:'HOW TO MAKE FIRE AND STAY WARM',nav:'HOW TO FIND YOUR WAY WITHOUT SATELLITES',storage:'HOW TO KEEP FOOD FOR YEARS',medic:'WHAT GOES IN A FAMILY FIRST-AID ROOM',tools:'THE TOOLS EVERY BASE SHOULD HAVE',security:'HOW TO KEEP THE BASE SAFE'};
+    return {
+      isHome:s.view==='home',isCat:s.view==='cat',isProduct:s.view==='product',
+      pageNo:s.view==='home'?'1':s.view==='cat'?String(10+(c?c.ch:0)):String(100+(c?c.ch:0)),
+      goHome:()=>{this.setState({view:'home'});this.top();},addBook:()=>this.add(BOOK),
+      cartCount:s.cart.length,stashOpen:s.stash,toggleStash:()=>this.setState(x=>({stash:!x.stash})),
+      cartLines:Object.values(g).map(l=>({name:l.name+(l.q>1?' ×'+l.q:''),price:'$'+l.price*l.q})),cartTotal:'$'+s.cart.reduce((a,x)=>a+x.price,0),
+      stashNote:s.cart.length?'Checkout opens with the shop launch.':'Empty. Choose something from the plate.',
+      plateRef:this.plateRef,
+      stageStyle:{position:'relative',width:'100%',height:Math.round(700*sc),overflow:'hidden'},
+      plateStyle:{position:'absolute',left:0,top:0,width:1000,height:700,transformOrigin:'0 0',transform:'scale('+sc+')'},
+      labels,lines,zones,
+      cat:c?{headline:HEAD[c.id]||c.name.toUpperCase(),blurb:c.blurb,ch:c.ch,hasSubs:!!SUBS[c.id]}:{},
+      subChips:c&&SUBS[c.id]?[{label:'everything',v:null}].concat(SUBS[c.id].map(x=>({label:lower(x.f.replace('The ',''))+': '+lower(x.n),v:x.n}))).map(o=>({label:o.label,go:()=>this.setState({catSub:o.v}),style:{background:'none',border:'none',padding:'0 0 2px',borderBottom:s.catSub===o.v?'2px solid #c4323b':'2px solid transparent',color:s.catSub===o.v?'#c4323b':'#2b2622',cursor:'pointer',fontFamily:"'Jost',sans-serif",fontSize:15}})):[],
+      catItems:c?c.items.filter(x=>!s.catSub||x.sub===s.catSub).map(card):[],
+      prod:p?(()=>{const pc=CATS.find(x=>x.id===p.cat);return {label:lower(p.name),headline:p.name.toUpperCase(),tagline:p.tagline,price:'$'+p.price,parts:p.spec.split(' · ').map(lower),slot:'prod-'+p.id,ph:'gouache: '+lower(p.name),catLabel:lower(pc.name),ch:pc.ch,openCat:()=>this.openCat(pc.id),add:()=>this.add(p,s.qty)};})():{parts:[]},
+      related:p?CATS.find(x=>x.id===p.cat).items.filter(x=>x.id!==p.id).slice(0,6).map(card):[],
+      qty:s.qty,inc:()=>this.setState(x=>({qty:Math.min(99,x.qty+1)})),dec:()=>this.setState(x=>({qty:Math.max(1,x.qty-1)})),
+      hasToast:!!s.toast,toast:s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>
