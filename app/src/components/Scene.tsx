@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { BOOK, CATS, CAT_BY_ID, FEET, TIP_X, money, pad, type CartLine } from '../data';
 import type { WalkerState } from '../useWalker';
+import { checkoutUrl, isSellable } from '../shopify';
 
 const SCENE_W = 1600;
 const SCENE_H = 1000;
@@ -273,7 +274,13 @@ function buildPanel(
         open: () => (l.id === 'book' ? a.onZone('library') : a.onOpenProduct(l.id)),
       })),
       cta: lines.length ? 'Checkout' : 'Back to the surface',
-      onCta: () => (lines.length ? a.onFlash('Checkout opens with the shop launch.') : a.onZone('energy')),
+      onCta: () => {
+        if (!lines.length) return a.onZone('energy');
+        const url = checkoutUrl(cart);
+        if (!url) return a.onFlash('Checkout opens with the shop launch.');
+        if (cart.some(c => !isSellable(c.id))) a.onFlash('Some items are not in stock yet and stay in your stash.');
+        window.location.href = url;
+      },
     };
   }
   const c = CAT_BY_ID[id];
