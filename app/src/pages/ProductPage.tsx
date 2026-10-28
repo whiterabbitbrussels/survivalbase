@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CAT_BY_ID, money, pad, type Product } from '../data';
+import { CAT_BY_ID, PRODUCT_BY_ID, bundlesFor, money, pad, type Product } from '../data';
 import { ProductShot, RelatedCard } from '../components/ProductCard';
 
 interface Props {
@@ -15,6 +15,10 @@ export function ProductPage({ product: p, onHome, onOpenCat, onOpenProduct, onAd
   const [qty, setQty] = useState(1);
   const cat = CAT_BY_ID[p.cat];
   const related = cat.items.filter(x => x.id !== p.id);
+  const kits = bundlesFor(p.id).map(b => {
+    const items = b.items.map(id => PRODUCT_BY_ID[id]);
+    return { ...b, items, total: items.reduce((sum, x) => sum + (x.price ?? 0), 0) };
+  });
 
   return (
     <main style={{ flex: 1, maxWidth: 1240, width: '100%', boxSizing: 'border-box', margin: '0 auto', padding: '24px 24px 64px', display: 'flex', flexDirection: 'column', gap: 36 }}>
@@ -61,6 +65,35 @@ export function ProductPage({ product: p, onHome, onOpenCat, onOpenProduct, onAd
           </div>
         </div>
       </div>
+
+      {kits.length > 0 && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ fontFamily: 'var(--display)', fontWeight: 800, fontSize: 30, borderBottom: '2px solid var(--ink)', paddingBottom: 8 }}>Use it with</div>
+          {kits.map(k => (
+            <div key={k.id} style={{ border: '2px solid var(--ink)', background: 'var(--card)', padding: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '.06em' }}>KIT · {k.items.length} ITEMS</div>
+                  <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 28, lineHeight: 1 }}>{k.name}</div>
+                  <div style={{ fontSize: 15, lineHeight: 1.4 }}>{k.blurb}</div>
+                </div>
+                <button onClick={() => k.items.forEach(x => onAdd(x, 1))} className="btn btn-orange btn-shadow btn-press" style={{ padding: '10px 14px', whiteSpace: 'nowrap' }}>ADD THE KIT · {money(Math.round(k.total * 100) / 100)}</button>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(150px,1fr))', gap: 12 }}>
+                {k.items.map(x => (
+                  <div key={x.id} onClick={() => x.id !== p.id && onOpenProduct(x.id)} style={{ display: 'flex', flexDirection: 'column', border: '2px solid var(--ink)', background: '#fff', cursor: x.id === p.id ? 'default' : 'pointer', outline: x.id === p.id ? '3px solid var(--orange)' : 'none', outlineOffset: -5 }}>
+                    <ProductShot product={x} label="product shot" style={{ aspectRatio: '1/1', borderBottom: '2px solid var(--ink)', fontSize: 10 }} />
+                    <div style={{ padding: 8, display: 'flex', flexDirection: 'column', gap: 2, background: 'var(--card)', flex: 1 }}>
+                      <div style={{ fontWeight: 700, fontSize: 13, lineHeight: 1.25 }}>{x.name}</div>
+                      <div style={{ fontFamily: 'var(--mono)', fontSize: 12 }}>{money(x.price)}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         <div style={{ fontFamily: 'var(--display)', fontWeight: 800, fontSize: 30, borderBottom: '2px solid var(--ink)', paddingBottom: 8 }}>Same shelf</div>

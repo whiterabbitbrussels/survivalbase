@@ -116,11 +116,33 @@ export const money = (n: number | null) =>
 
 export const CATS: Category[] = RAW.map((r, i) => ({
   id: r[0], name: r[1], where: r[2], x: r[3], lvl: r[4], blurb: r[5], ch: i + 1,
-  items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[1], tagline: p[2], spec: p[3], image: p[4] })),
+  // Placeholder items (no supplier photo yet) are shown but not sold.
+  items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[4] ? p[1] : null, tagline: p[2], spec: p[3], image: p[4] })),
 }));
 
 export const CAT_BY_ID: Record<string, Category> = Object.fromEntries(CATS.map(c => [c.id, c]));
 export const PRODUCT_BY_ID: Record<string, Product> = Object.fromEntries(CATS.flatMap(c => c.items.map(p => [p.id, p])));
+
+export interface Bundle {
+  id: string;
+  name: string;
+  blurb: string;
+  /** Site product ids, all sellable. */
+  items: string[];
+}
+
+/** Kits that combine zones. A product page shows the kits it belongs to under "Use it with". */
+export const BUNDLES: Bundle[] = [
+  { id: 'blackout', name: 'Blackout Kit', blurb: 'Power, light and news for when the street goes dark.', items: ['energy-0', 'energy-2', 'tools-2', 'comms-0'] },
+  { id: 'grab-and-go', name: '72-Hour Grab Bag', blurb: 'Everything for the first three days, in one pack.', items: ['comms-1', 'energy-4', 'water-4', 'medic-4', 'nav-0', 'nav-3'] },
+  { id: 'clean-water', name: 'Clean Water Kit', blurb: 'Carry it, filter it, drink it.', items: ['water-1', 'water-3', 'water-4'] },
+  { id: 'off-grid-comms', name: 'Off-Grid Comms Kit', blurb: 'Messages and positions with no towers, powered by the sun.', items: ['comms-4', 'nav-1', 'energy-3'] },
+  { id: 'trail', name: 'Trail Kit', blurb: 'Find the way, stay dry, be found.', items: ['nav-0', 'nav-2', 'nav-3', 'water-0', 'medic-2'] },
+  { id: 'perimeter', name: 'Perimeter Kit', blurb: 'Light, alarm and signal blocking for the base.', items: ['security-1', 'security-2', 'security-3', 'tools-2'] },
+  { id: 'camp-tools', name: 'Camp Tools Kit', blurb: 'Cut, split, fix and see what you are doing.', items: ['tools-1', 'tools-3', 'tools-4', 'tools-2'] },
+];
+
+export const bundlesFor = (id: string) => BUNDLES.filter(b => b.items.includes(id));
 
 export type PlaceId = 'library' | 'stash';
 export const PLACES: Record<PlaceId, { x: number; lvl: Level }> = {

@@ -1,10 +1,40 @@
 import type { CartLine } from './data';
 
-/** Shopify store that handles checkout. Switch to the custom checkout domain once its DNS is live. */
-export const SHOP_DOMAIN = 'kimowi-kimonos.myshopify.com';
+/** Shopify store that handles checkout (primary domain of the SurvivalBase store). */
+export const SHOP_DOMAIN = 'shop.survivalbase.net';
 
-/** Site product id → Shopify variant id. Filled in once the products exist in Shopify. */
-export const VARIANTS: Record<string, number> = {};
+/** Site product id → Shopify variant id. BigBuy items join once their supplier price is confirmed. */
+export const VARIANTS: Record<string, number> = {
+  book: 58336211468670,
+  'energy-0': 58336272646526,
+  'energy-2': 58336272777598,
+  'energy-3': 58336273039742,
+  'energy-4': 58336273170814,
+  'water-0': 58336273269118,
+  'water-1': 58336273400190,
+  'water-3': 58336273498494,
+  'water-4': 58336273695102,
+  'comms-0': 58336273793406,
+  'comms-1': 58336273891710,
+  'comms-3': 58336275661182,
+  'comms-4': 58336275825022,
+  'nav-0': 58336277823870,
+  'nav-1': 58336278675838,
+  'nav-2': 58336281133438,
+  'nav-3': 58336283099518,
+  'nav-4': 58336283623806,
+  'medic-1': 58336285458814,
+  'medic-2': 58336285819262,
+  'medic-3': 58336286015870,
+  'medic-4': 58336286278014,
+  'tools-1': 58336286802302,
+  'tools-2': 58336287064446,
+  'tools-3': 58336287195518,
+  'tools-4': 58336287293822,
+  'security-1': 58336287424894,
+  'security-2': 58336287555966,
+  'security-3': 58336287687038,
+};
 
 export const isSellable = (id: string) => id in VARIANTS;
 
