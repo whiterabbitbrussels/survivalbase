@@ -41,7 +41,7 @@ const BB = 'https://www.bigbuy.eu/';
 
 const RAW: RawCategory[] = [
   ['energy', 'Power', 'Surface', 1220, 0, 'The grid had a good run. Solar, wind and batteries for when it stops returning your calls.', [
-    ['EcoFlow River 2 Pro Power Station', 413.9, 'LiFePO4 cells. Runs the lamp and the fridge while the street goes dark.', '716 Wh · LiFePO4 · EcoFlow', AE + 'Sb99a506f9d104b23b1f53b75eae465f9w.png_640x640.jpg'],
+    ['EcoFlow River 2 Pro Power Station', 462.9, 'LiFePO4 cells. Runs the lamp and the fridge while the street goes dark.', '716 Wh · LiFePO4 · EcoFlow', AE + 'Sb99a506f9d104b23b1f53b75eae465f9w.png_640x640.jpg'],
     ['EcoFlow River 3 Plus Power Station', null, 'Compact backup for the router, the lights and your patience.', '600 W · Portable · EcoFlow', BB + '7607795/Portable%20Power%20Station%20Ecoflow%20River%203%20Plus%20600%20W.jpg'],
     ['ALLPOWERS Foldable Solar Panel', 174.9, 'Unfold, point at the sky, charge everything.', '60–200 W · Foldable · ALLPOWERS', AE + 'S5a2c0abea18b4af388c788d67deb90c2C.png_640x640.jpg'],
     ['MHPOWOS Foldable ETFE Solar Panel', 105.9, 'Pocket-size sun harvesting for phones and power banks.', 'ETFE · Foldable · USB-C + USB-A', AE + 'S01d5b1f8d8384a1a996bc1fbfdd6b841O.jpg_640x640.jpg'],
@@ -56,7 +56,7 @@ const RAW: RawCategory[] = [
   ['food', 'Grow & Forage', 'Surface', 665, 0, 'Bags, lines and planters for the post-supermarket diet.', [
     ['Mesh Mushroom Foraging Bag', 12.9, 'Carries dinner home and sows the next crop on the way.', 'Mesh · Shoulder strap · Spore-friendly', AE + 'S735be6599fa744ec9743cf68231f927dc.jpg_640x640.jpg'],
     ['25-Piece Survival Fishing Kit with Pocket Reel', 50.9, 'Protein, eventually. Now with a reel.', '25 pieces · Pocket reel · Hooks & lures', AE + 'S33c704ed503447959645f76b0a80abe9f.jpg_640x640.jpg'],
-    ['Canvas & Leather Bushcraft Foraging Pouch', 4.9, 'A belt pocket for berries, tinder and whatever looks edible.', 'Canvas · Leather trim · Belt loop', AE + 'S4dedb6ecdb084e629189abf60ae0ce329.jpg_640x640.jpg'],
+    ['Canvas & Leather Bushcraft Foraging Pouch', 6.9, 'A belt pocket for berries, tinder and whatever looks edible.', 'Canvas · Leather trim · Belt loop', AE + 'S4dedb6ecdb084e629189abf60ae0ce329.jpg_640x640.jpg'],
     ['Garden ID Self-Watering Planter 28 L', null, 'A vegetable patch for the balcony that waters itself.', '28 L · 40 cm · Water reserve', BB + '6879699/Self-watering%20flowerpot%20Garden%20ID%20Anthracite.jpg']]],
   ['comms', 'Comms', 'Surface', 1510, 0, 'Radios that work while the cell towers take a long nap.', [
     ['Hand Crank Solar Emergency Radio 4000 mAh', 60.9, 'News, a torch and a phone charge. Batteries optional.', 'Hand crank · Solar · 4000 mAh', AE + 'S2c99a42402984016a461f73824bac75bi.jpg_640x640.jpg'],
@@ -65,15 +65,15 @@ const RAW: RawCategory[] = [
     ['Baofeng F22 PMR446 Walkie Talkie, pair', 45.9, 'Talk across the valley without a phone mast.', 'PMR446 · Licence-free · USB-C', AE + 'Sd712bfea29fa408cb9624402a75bf34e3.jpg_640x640.jpg'],
     ['Wio Tracker L1 Pro Meshtastic Node', 75.9, 'Text messages with no towers, no SIM and no bill.', 'LoRa 868 MHz · Meshtastic · GPS', AE + 'Sda4723a14cf34f89b0622ab902667791U.jpeg_640x640.jpg']]],
   ['shelter', 'Shelter', 'Surface', 290, 0, 'Tents, tarps and bivvies. Property prices have never been lower.', [
-    ['Naturehike Cloud Peak 4-Season Tent, 2P', 259.9, 'Wind, snow, the neighbours. Keeps it all out.', '2 person · 4-season · Naturehike', AE + 'Sc12773a9ca2d45f8879486984c1609e6K.jpg_640x640.jpg'],
+    ['Naturehike Cloud Peak 4-Season Tent, 2P', 291.9, 'Wind, snow, the neighbours. Keeps it all out.', '2 person · 4-season · Naturehike', AE + 'Sc12773a9ca2d45f8879486984c1609e6K.jpg_640x640.jpg'],
     ['Naturehike 2-Person Tent, Grey', null, 'Ships from the EU. Pitches before the rain does.', '2 person · Grey · Naturehike', BB + '6281945/tent-naturehike-2381600017851-grey-monochrome-2-persons_1195771.jpg'],
     ['Waterproof Camping Tarp, 19 Hang Points', 55.9, 'A roof in four knots.', '3×3 to 4×4 m · 19 hang points · Waterproof', AE + 'S8df4ec22467248e2bb32bb680ff67c0bG.jpg_640x640.jpg'],
     ['Emergency Mylar Bivy Sleeping Bag', 11.9, 'Keeps your body heat. And your dignity.', 'Mylar · Reusable · Pocket size', AE + 'Sa9fa9135fce6406c948509cafd9fb03dE.png_640x640.jpg'],
     ['Paracord 550, 9-Core 4 mm', 8.9, 'The string that holds the apocalypse together.', '550 lb · 9-core · 4 mm', AE + 'S14360a9c5a494b54a5749e84d8dd4f7c7.jpg_640x640.jpg']]],
   ['fire', 'Fire & Heat', 'Surface', 480, 0, 'Fire: humanity\'s first app. Still no subscription.', [
     ['Folding Stainless Wood-Burning Camp Stove', 43.9, 'Twigs in, dinner out. No gas cartridges.', 'Stainless steel · Folding · Burns wood', AE + 'S0b05873784ed40e3952c2ecf03e09212O.png_640x640.jpg'],
-    ['CHANGE MOORE Secondary-Combustion Wood Stove', 169.9, 'Burns everything twice. Smokes half as much.', 'Secondary combustion · Folding · Stainless', AE + 'S77510e50b9fb47b8ac0cd21d2c4725b3e.jpg_640x640.jpg'],
-    ['Waterproof Magnesium Ferro Rod', 3.9, 'Thousands of strikes. Zero matches.', 'Magnesium · Ferrocerium · Waterproof', AE + 'Sff683453d25a47fb9ca2d591c1aa40d33.jpg_640x640.jpg'],
+    ['CHANGE MOORE Secondary-Combustion Wood Stove', 190.9, 'Burns everything twice. Smokes half as much.', 'Secondary combustion · Folding · Stainless', AE + 'S77510e50b9fb47b8ac0cd21d2c4725b3e.jpg_640x640.jpg'],
+    ['Waterproof Magnesium Ferro Rod', 5.9, 'Thousands of strikes. Zero matches.', 'Magnesium · Ferrocerium · Waterproof', AE + 'Sff683453d25a47fb9ca2d591c1aa40d33.jpg_640x640.jpg'],
     ['Emergency Mylar Thermal Blankets 130×210 cm', 13.9, 'Sends 90% of your heat straight back at you.', '130×210 cm · Mylar · Multipack', AE + 'Sed8a01ef87e3421aa61e4ef27fd9f85cY.png_640x640.jpg'],
     ['Rechargeable Flexible Electric Lighter', null, 'No gas, no flint. Charges over USB.', 'USB rechargeable · Flexible neck · InnovaGoods']]],
   ['nav', 'Navigation', 'Surface', 100, 0, 'GPS is someone else\'s satellite. A map and a compass are yours.', [
@@ -81,7 +81,7 @@ const RAW: RawCategory[] = [
     ['SenseCAP T1000-E Card GPS Tracker', 85.9, 'Share your position with the group, even off-grid.', 'GPS · LoRa 868 MHz · Meshtastic', AE + 'S1e0e766d966b4ce4b44f88e0816f9bedy.png_640x640.jpg'],
     ['Weatherproof Map Case Notebook', 26.9, 'Paper never loses signal. Now it doesn\'t get wet either.', 'Map case · Notebook · Weatherproof', AE + 'Sb5fff692eadd4f50b158bf4829185559W.jpg_640x640.jpg'],
     ['Survival Signal Mirror', 10.9, 'Be found on purpose.', 'Daylight signalling · Pocket size', AE + 'S053302c38c8f4fc2ae76c20627b7d25dx.jpg_640x640.jpg'],
-    ['Clear Waterproof Map Pouch', 3.9, 'Map and passport stay dry at the river crossing.', 'Transparent · Waterproof · Neck strap', AE + 'S63dc80451ac64906bba031da84b13046u.jpg_640x640.jpg']]],
+    ['Clear Waterproof Map Pouch', 5.9, 'Map and passport stay dry at the river crossing.', 'Transparent · Waterproof · Neck strap', AE + 'S63dc80451ac64906bba031da84b13046u.jpg_640x640.jpg']]],
   ['storage', 'Food Storage', 'Bunker', 472, 1, 'Mylar, vacuum and airtight boxes, built to last. Best before: the next civilisation.', [
     // Price held until the seller confirms EU plug, CE marking and FR/NL manual.
     ['Electric Vacuum Sealer with Built-in Cutter', null, 'Removes air. Adds years.', 'Vacuum + seal · Built-in cutter', AE + 'Sa5c3bd3795f24d408cc44da4535e247bb.jpg_640x640.jpg'],
@@ -104,7 +104,7 @@ const RAW: RawCategory[] = [
     ['Galix Solar Motion Spotlight 300 lm', null, 'Lights up the gate when someone gets close.', '300 lm · Solar · Motion sensor', BB + '5567733/Solar%20lamp%20Galix%20G4565%20300%20Lm.jpg'],
     ['Solar Motion Sensor Wall Light', 11.9, 'No wiring. Switches on when it matters.', 'Solar · Motion sensor · IP65', AE + 'Sda19156631c640a9aa57ce5b346a5d37x.jpg_640x640.jpg'],
     ['Wireless PIR Motion Alarm', 8.9, 'Hear them before they hear you.', 'PIR sensor · Wireless chime', AE + 'HTB1KR2iX5DxK1Rjy1zcq6yGeXXaK.jpg_640x640.jpg'],
-    ['Faraday Bag Set, 4 sizes', 3.9, 'Keeps phones and keys off the radar.', 'Signal blocking · 4 sizes', AE + 'S31c606a61abc47d2b9d3a8fb21b2b18cX.png_640x640.jpg']]],
+    ['Faraday Bag Set, 4 sizes', 5.9, 'Keeps phones and keys off the radar.', 'Signal blocking · 4 sizes', AE + 'S31c606a61abc47d2b9d3a8fb21b2b18cX.png_640x640.jpg']]],
 ];
 
 export const BOOK: CartLine = { id: 'book', name: 'Survival Base · The Guide', price: 49 };
