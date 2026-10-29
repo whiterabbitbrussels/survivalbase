@@ -8,8 +8,10 @@ export interface Product {
   price: number | null;
   tagline: string;
   spec: string;
-  /** Supplier reference photo, until the AI lifestyle visuals replace it. */
+  /** Main photo: AI shot 1 when available, else the supplier reference photo. */
   image?: string;
+  /** AI visuals on Shopify CDN: in use · how it works · specs (project/ai-visual-shotlist.md). */
+  gallery?: string[];
 }
 
 export interface Category {
@@ -114,10 +116,17 @@ export const pad = (n: number) => String(n).padStart(2, '0');
 export const money = (n: number | null) =>
   n === null ? 'Price soon' : '€' + (Number.isInteger(n) ? String(n) : n.toFixed(2));
 
+/** Site product id → AI visuals uploaded to Shopify, in shot-list order. */
+const SC = 'https://cdn.shopify.com/s/files/1/0594/6939/8152/files/';
+const GALLERY: Record<string, string[]> = {
+  'energy-0': [SC + 'ecoflow-river-2-pro_1-in-use.jpg?v=1793269316', SC + 'ecoflow-river-2-pro_2-how-it-works.jpg?v=1793269316', SC + 'ecoflow-river-2-pro_3-specs.jpg?v=1793269315'],
+  'water-0': [SC + 'miniwell-l630_1-in-use.jpg?v=1793269335', SC + 'miniwell-l630_2-how-it-works.jpg?v=1793269418', SC + 'miniwell-l630_3-specs.jpg?v=1793269335'],
+};
+
 export const CATS: Category[] = RAW.map((r, i) => ({
   id: r[0], name: r[1], where: r[2], x: r[3], lvl: r[4], blurb: r[5], ch: i + 1,
   // Placeholder items (no supplier photo yet) are shown but not sold.
-  items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[4] ? p[1] : null, tagline: p[2], spec: p[3], image: p[4] })),
+  items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[4] ? p[1] : null, tagline: p[2], spec: p[3], image: GALLERY[r[0] + '-' + j]?.[0] ?? p[4], gallery: GALLERY[r[0] + '-' + j] })),
 }));
 
 export const CAT_BY_ID: Record<string, Category> = Object.fromEntries(CATS.map(c => [c.id, c]));

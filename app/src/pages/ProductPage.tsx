@@ -13,6 +13,7 @@ interface Props {
 
 export function ProductPage({ product: p, onHome, onOpenCat, onOpenProduct, onAdd, onAddBook }: Props) {
   const [qty, setQty] = useState(1);
+  const [shot, setShot] = useState(0);
   const cat = CAT_BY_ID[p.cat];
   const related = cat.items.filter(x => x.id !== p.id);
   const kits = bundlesFor(p.id).map(b => {
@@ -29,10 +30,14 @@ export function ProductPage({ product: p, onHome, onOpenCat, onOpenProduct, onAd
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,380px),1fr))', gap: 40 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <ProductShot product={p} label="hero product shot" style={{ aspectRatio: '1/1', border: '2px solid var(--ink)', fontSize: 12 }} />
+          <ProductShot product={p} src={p.gallery?.[shot] ?? p.image} label="hero product shot" style={{ aspectRatio: '1/1', border: '2px solid var(--ink)', fontSize: 12 }} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
-            {['AI visual · in use', 'AI visual · detail', 'AI visual · packed'].map(label => (
-              <div key={label} className="ph ph-sm" style={{ aspectRatio: '1/1', border: '2px solid var(--ink)', fontSize: 10 }}>{label}</div>
+            {['In use', 'How it works', 'Specs'].map((label, i) => p.gallery?.[i] ? (
+              <button key={label} onClick={() => setShot(i)} aria-label={label} aria-pressed={shot === i} style={{ padding: 0, background: 'none', cursor: 'pointer', border: 'none', outline: shot === i ? '3px solid var(--orange)' : 'none', outlineOffset: -3 }}>
+                <ProductShot product={p} src={p.gallery[i]} label={label} style={{ aspectRatio: '1/1', border: '2px solid var(--ink)' }} />
+              </button>
+            ) : (
+              <div key={label} className="ph ph-sm" style={{ aspectRatio: '1/1', border: '2px solid var(--ink)', fontSize: 10 }}>AI visual · {label.toLowerCase()}</div>
             ))}
           </div>
         </div>
