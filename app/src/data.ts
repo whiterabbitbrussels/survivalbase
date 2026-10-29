@@ -45,7 +45,8 @@ const RAW: RawCategory[] = [
     ['EcoFlow River 3 Plus Power Station', null, 'Compact backup for the router, the lights and your patience.', '600 W · Portable · EcoFlow', BB + '7607795/Portable%20Power%20Station%20Ecoflow%20River%203%20Plus%20600%20W.jpg'],
     ['ALLPOWERS Foldable Solar Panel', 174.9, 'Unfold, point at the sky, charge everything.', '60–200 W · Foldable · ALLPOWERS', AE + 'S5a2c0abea18b4af388c788d67deb90c2C.png_640x640.jpg'],
     ['MHPOWOS Foldable ETFE Solar Panel', 105.9, 'Pocket-size sun harvesting for phones and power banks.', 'ETFE · Foldable · USB-C + USB-A', AE + 'S01d5b1f8d8384a1a996bc1fbfdd6b841O.jpg_640x640.jpg'],
-    ['Hand Crank Solar Power Bank 5-in-1', 64.9, 'Sun when there is sun. Cardio when there is not.', 'Hand crank · Solar · Torch', AE + 'Sb85bf22f92f04bb8b0de91bb080f3e34L.jpg_640x640.jpg']]],
+    ['Hand Crank Solar Power Bank 5-in-1', 64.9, 'Sun when there is sun. Cardio when there is not.', 'Hand crank · Solar · Torch', AE + 'Sb85bf22f92f04bb8b0de91bb080f3e34L.jpg_640x640.jpg'],
+    ['Salt Water Emergency Lamp', 24.9, 'Add salt water, get light. No battery to go flat in the drawer.', 'Salt water powered · No battery · Up to 288 h', AE + 'S7f58fc4b2095403198fe7a09a861181di.jpg_640x640.jpg']]],
   ['water', 'Water', 'Surface', 990, 0, 'Rivers are free. So is dysentery. Filters, purifiers and storage that keep the two apart.', [
     ['Miniwell L630 Water Filter Straw', 72.9, 'Screws onto a bottle. Turns a lake into a drink.', 'Personal filter · Bottle-mount · Miniwell', AE + 'H4c833e23ad674e2caa926425a4d7cb21S.jpg_640x640.jpg'],
     ['Gravity Water Bag Filter System', 50.9, 'Hang it from a branch, let gravity do the work.', 'Gravity bag · Inline filter · Straw', AE + 'S6bb987ca8def4307abe33dc86a37184c3.jpg_640x640.jpg'],
@@ -144,7 +145,7 @@ export interface Bundle {
 
 /** Kits that combine zones. Product pages show the kits a product belongs to, zone pages the kits that use the zone. */
 export const BUNDLES: Bundle[] = [
-  { id: 'blackout', name: 'Blackout Kit', blurb: 'Power, light and news for when the street goes dark.', items: ['energy-0', 'energy-2', 'tools-2', 'comms-0'] },
+  { id: 'blackout', name: 'Blackout Kit', blurb: 'Power, light and news for when the street goes dark.', items: ['energy-0', 'energy-2', 'tools-2', 'comms-0', 'energy-5'] },
   { id: 'grab-and-go', name: '72-Hour Grab Bag', blurb: 'Everything for the first three days, in one pack.', items: ['comms-1', 'energy-4', 'water-4', 'medic-4', 'nav-0', 'nav-3', 'shelter-3', 'fire-2'] },
   { id: 'clean-water', name: 'Clean Water Kit', blurb: 'Carry it, filter it, drink it.', items: ['water-1', 'water-3', 'water-4'] },
   { id: 'off-grid-comms', name: 'Off-Grid Comms Kit', blurb: 'Messages and positions with no towers, powered by the sun.', items: ['comms-4', 'nav-1', 'energy-3'] },

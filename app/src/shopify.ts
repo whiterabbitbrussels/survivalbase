@@ -10,6 +10,7 @@ export const VARIANTS: Record<string, number> = {
   'energy-2': 58336272777598,
   'energy-3': 58336273039742,
   'energy-4': 58336273170814,
+  'energy-5': 58345481732478,
   'water-0': 58336273269118,
   'water-1': 58336273400190,
   'water-3': 58336273498494,

@@ -18,7 +18,7 @@ STYLE = ('Cinematic photograph, natural light, muted earth palette (dark ink bro
 STYLE_UGC = ('Casual smartphone photo taken by a real customer, user-generated content look: handheld, slightly imperfect framing, '
              'natural available light, everyday real home or outdoor setting with a little clutter, phone camera depth of field and HDR, '
              'not a studio or catalogue shot, no retouched gloss. Muted earthy tones, northern Europe. '
-             'People shown from the neck down or only hands, no faces, no weapons, no military styling, no text added. '
+             'People shown from the neck down or only hands: crop every person at the shoulders, no head or face is ever in frame, in every panel. No weapons, no military styling, no text added. '
              'The product must match the reference image exactly: same shape, colours, logos, sockets and proportions; '
              'identical size and model in every panel; no invented features.')
 EU = ' The power sockets are European type F (Schuko) sockets.'
@@ -234,6 +234,11 @@ PRODUCTS = {
         '1-in-use': 'On a pantry shelf full of rice and beans, a hand opening its lid.',
         '2-how-it-works': '1) hands pour rice into the box, 2) hands press the airtight lid shut, 3) several boxes stacked on a shelf.',
         '3-specs': 'lid seal, pouring spout, measuring cup if present in the reference.',
+    }),
+    'energy-5': (AE + 'S7f58fc4b2095403198fe7a09a861181di.jpg_640x640.jpg', 'the salt water emergency lamp (green pouch with a white LED module and a rope handle)', {
+        '1-in-use': 'Hanging by its rope from a hook in a dark kitchen during a blackout, its LED lighting a table with candles unlit and a glass of salty water.',
+        '2-how-it-works': '1) hands pour salt into a glass of water and stir, 2) hands fill the pouch with the salt water, 3) the lamp glowing, hung inside a tent at night.',
+        '3-specs': 'LED module, pouch, rope handle, fill opening.',
     }),
 }
 
