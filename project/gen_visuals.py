@@ -141,8 +141,8 @@ PRODUCTS = {
         '3-specs': 'head, paracord grip, sheath.',
     }),
     'tools-2': (AE + 'S54fa1f7660ab41e9aa38dcc1bdff9dceR.jpg_640x640.jpg', 'the motion sensor rechargeable headlamp', {
-        '1-in-use': 'Worn by someone fixing a generator in a dark cellar, seen from behind and above, the beam on the engine.',
-        '2-how-it-works': '1) hands put the headlamp on, 2) a hand waves in front of its sensor and it switches on, 3) hands working with a wrench in its beam.',
+        '1-in-use': 'Point-of-view shot from the eyes of someone wearing the headlamp in a dark cellar: its beam lights gloved hands fixing a small generator; nobody is visible except the hands.',
+        '2-how-it-works': '1) the headlamp lying on a workbench, hands adjusting its strap, 2) a hand waving in front of its sensor as it lights up on the bench, 3) point-of-view: its beam on hands turning a wrench; no head or face in any panel.',
         '3-specs': 'sensor window, strap, USB charge port.',
     }),
     'tools-3': (AE + 'S99ec0c85c13948538148795235a157b1T.jpg_640x640.jpg', 'the AIRAJ folding pruning saw', {
