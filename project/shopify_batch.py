@@ -1,12 +1,13 @@
 """Print Shopify Admin GraphQL that attaches the 3 AI shots of each product and detaches the supplier photo.
 
 Usage: python3 project/shopify_batch.py id [id ...]   (site ids, e.g. energy-2 water-1)
-Seedream URLs (visuals-ugc/<id>/*.url) are valid 24 h, so run the mutation the same day.
+Images are read from the `visuals` branch on GitHub (<id>/<shot>.jpg); Shopify copies them on import.
 """
 import json, pathlib, sys
 
 HERE = pathlib.Path(__file__).parent
 IDS = json.loads((HERE / 'shopify_ids.json').read_text())
+RAW = 'https://raw.githubusercontent.com/whiterabbitbrussels/survivalbase/visuals/'
 SHOTS = [('1-in-use', 'in use'), ('2-how-it-works', 'how it works'), ('3-specs', 'details')]
 
 
@@ -16,10 +17,10 @@ def mutation(ids, names):
         product, supplier_media = IDS[sid]
         media = ', '.join(
             '{originalSource: %s, mediaContentType: IMAGE, alt: %s}'
-            % (json.dumps((HERE / 'visuals-ugc' / sid / f'{shot}.url').read_text().strip()), json.dumps(f'{names[sid]}, {label}'))
+            % (json.dumps(f'{RAW}{sid}/{shot}.jpg'), json.dumps(f'{names[sid]}, {label}'))
             for shot, label in SHOTS)
         ops.append(f'u{i}: productUpdate(product: {{id: "gid://shopify/Product/{product}"}}, media: [{media}]) '
-                   '{ product { handle } userErrors { message } }')
+                   '{ userErrors { message } }')
         if supplier_media:
             detach.append(f'{{id: "gid://shopify/MediaImage/{supplier_media}", referencesToRemove: ["gid://shopify/Product/{product}"]}}')
     if detach:

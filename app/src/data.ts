@@ -125,6 +125,20 @@ const SC = 'https://cdn.shopify.com/s/files/1/0594/6939/8152/files/';
 const GALLERY: Record<string, string[]> = {
   'energy-0': [SC + 'ecoflow-river-2-pro_1-in-use.jpg?v=1793269316', SC + 'ecoflow-river-2-pro_2-how-it-works.jpg?v=1793269316', SC + 'ecoflow-river-2-pro_3-specs.jpg?v=1793269315'],
   'water-0': [SC + 'miniwell-l630_1-in-use.jpg?v=1793269335', SC + 'miniwell-l630_2-how-it-works.jpg?v=1793269418', SC + 'miniwell-l630_3-specs.jpg?v=1793269335'],
+  'energy-3': [SC + '1-in-use.jpg?v=1793272044', SC + '2-how-it-works_864b38b5-69bd-4ebd-8144-fa0636199f97.jpg?v=1793272044', SC + '3-specs.jpg?v=1793272044'],
+  'energy-4': [SC + '1-in-use_98d49b7f-e8a3-4908-98d6-360c4fcb2748.jpg?v=1793272044', SC + '2-how-it-works.jpg?v=1793272044', SC + '3-specs_46324329-4b51-4a81-80bc-eb1654301102.jpg?v=1793272044'],
+  'energy-5': [SC + '1-in-use_5eced0c6-5e46-465f-8104-513bc47a2a2a.jpg?v=1793272044', SC + '2-how-it-works_7b76af2f-f07a-44f7-ba55-f69b0a2534e2.jpg?v=1793272044', SC + '3-specs_18896afb-aab0-4d8e-acaa-da2d376c26d2.jpg?v=1793272045'],
+  'food-0': [SC + '1-in-use_3596f47a-1344-4ce5-a559-93802ad92119.jpg?v=1793272045', SC + '2-how-it-works_765b97b0-3768-4b8d-b3bc-9aa8dfa7f879.jpg?v=1793272045', SC + '3-specs_50737334-a509-4802-925d-7fac0657a70a.jpg?v=1793272045'],
+  'food-1': [SC + '1-in-use_ad4759e5-62eb-46a0-88e4-2cb6821912e5.jpg?v=1793272045', SC + '2-how-it-works_d6129e69-55f7-4aaf-95b7-72565b00f700.jpg?v=1793272045', SC + '3-specs_e6649994-9848-4550-9e83-80b019fbcd8b.jpg?v=1793272045'],
+  'food-2': [SC + '1-in-use_0b60a8aa-e12e-4930-94fe-e51ad736c6ad.jpg?v=1793272045', SC + '2-how-it-works_41621371-79c9-4e44-9575-6a5a5ebfc386.jpg?v=1793272045', SC + '3-specs_02666707-c2bb-49a5-89a0-34bb24f45a82.jpg?v=1793272045'],
+  'shelter-0': [SC + '1-in-use_e8521c75-2740-49b8-9c91-23c14280178e.jpg?v=1793272045', SC + '2-how-it-works_700a1050-fbe6-45e9-9e3a-807f46d68c5d.jpg?v=1793272045', SC + '3-specs_b0dcaafc-0576-4237-9c97-002e5bdfc6df.jpg?v=1793272045'],
+  'shelter-4': [SC + '1-in-use_1528a528-489d-4912-8fac-ccbbd27811e7.jpg?v=1793272046', SC + '2-how-it-works_21ad1272-6647-497e-9efc-745fec9be024.jpg?v=1793272045', SC + '3-specs_cb0c31c3-b7e9-4361-aede-4cde77c1eea6.jpg?v=1793272046'],
+  'fire-0': [SC + '1-in-use_dece2fa3-2fbb-4e0e-b31d-8622aa48395e.jpg?v=1793272046', SC + '2-how-it-works_dec45258-760d-465e-a6c9-5a028cacad26.jpg?v=1793272046', SC + '3-specs_38e58852-dc1b-46fe-95a5-250c8bf3982d.jpg?v=1793272046'],
+  'fire-1': [SC + '1-in-use_57100e72-539a-468e-9461-702240ccf1a5.jpg?v=1793272046', SC + '2-how-it-works_993b7944-e7f8-4827-bbf4-b7855056ae3f.jpg?v=1793272046', SC + '3-specs_ce1a475d-7f9d-4d46-b0af-3a981632bc70.jpg?v=1793272046'],
+  'fire-2': [SC + '1-in-use_6b1a4f49-809c-45ba-b0d3-28d379a529c2.jpg?v=1793272046', SC + '2-how-it-works_812b1c62-3cb4-4ea5-84fe-885c4f4540f2.jpg?v=1793272046', SC + '3-specs_03a19c5b-7912-4a70-b925-6c24a14e3bab.jpg?v=1793272046'],
+  'fire-3': [SC + '1-in-use_9d906d55-0c52-43b5-b623-992bdbb70d41.jpg?v=1793272046', SC + '2-how-it-works_373f1a55-f304-4180-a545-732d07cb849f.jpg?v=1793272046', SC + '3-specs_ae46a6a2-5773-47eb-9ffb-d52483a723fb.jpg?v=1793272046'],
+  'storage-2': [SC + '1-in-use_a52deb34-ef46-4f61-9968-ca2b27b982a3.jpg?v=1793272045', SC + '2-how-it-works_f3f924f1-94c9-4667-8ea4-bf6ee3c1e780.jpg?v=1793272045', SC + '3-specs_fb41e575-54c5-44fb-bc3f-b8655ac7d896.jpg?v=1793272045'],
+  'storage-3': [SC + '1-in-use_ceab1801-831e-4611-8518-955ed4b53af0.jpg?v=1793272045', SC + '2-how-it-works_4f686417-dc83-48f9-b38c-4109268cc266.jpg?v=1793272045', SC + '3-specs_ff38121d-da73-4020-9af2-a3297d44d2f9.jpg?v=1793272045'],
 };
 
 export const CATS: Category[] = RAW.map((r, i) => ({
