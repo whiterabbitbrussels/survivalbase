@@ -52,11 +52,11 @@ const RAW: RawCategory[] = [
     ['Lifetime 20 L Foldable Water Carrier', null, 'Twenty litres when full. A pancake when empty.', '20 L · Foldable · Tap', BB + '5559845/water-carrier-lifetime-20-l-foldable_1095003.jpg'],
     ['Naturehike Folding Water Bucket', 27.9, 'From river to camp without spilling half of it.', '10 L · Foldable · Naturehike', AE + 'Sb21592114a3d40dbab7d3451c7bfc4121.jpg_640x640.jpg'],
     ['Mini Water Filter Straw', 15.9, 'Drink straight from questionable sources.', 'Personal filter · Straw · Lightweight', AE + 'S3d8aa9d9ca804445976f736c622e817bF.jpg_640x640.jpg']]],
-  ['food', 'Grow & Forage', 'Surface', 665, 0, 'Seeds, beds and traps for the post-supermarket diet.', [
-    ['Heirloom Seed Vault, 32 varieties', 59, 'Open-pollinated. Plant once, save seeds, repeat forever.', '32 varieties · Sealed mylar · 5-year viability'],
-    ['Raised Bed Kit 120×60', 79, 'Your first farm. Fits on a balcony.', 'Galvanised steel · 120×60×30 cm · No tools'],
-    ['Forager\'s Field Guide & Pouch', 34, 'Know which mushroom is dinner and which is a sequel.', '220 species · Waterproof pages · Waxed pouch'],
-    ['Snare & Fishing Survival Kit', 45, 'Protein, eventually.', 'Line, hooks, wire snares · 260 g · Tin case']]],
+  ['food', 'Grow & Forage', 'Surface', 665, 0, 'Bags, lines and planters for the post-supermarket diet.', [
+    ['Mesh Mushroom Foraging Bag', 12.9, 'Carries dinner home and sows the next crop on the way.', 'Mesh · Shoulder strap · Spore-friendly', AE + 'S735be6599fa744ec9743cf68231f927dc.jpg_640x640.jpg'],
+    ['25-Piece Survival Fishing Kit with Pocket Reel', 50.9, 'Protein, eventually. Now with a reel.', '25 pieces · Pocket reel · Hooks & lures', AE + 'S33c704ed503447959645f76b0a80abe9f.jpg_640x640.jpg'],
+    ['Canvas & Leather Bushcraft Foraging Pouch', 4.9, 'A belt pocket for berries, tinder and whatever looks edible.', 'Canvas · Leather trim · Belt loop', AE + 'S4dedb6ecdb084e629189abf60ae0ce329.jpg_640x640.jpg'],
+    ['Garden ID Self-Watering Planter 28 L', null, 'A vegetable patch for the balcony that waters itself.', '28 L · 40 cm · Water reserve', BB + '6879699/Self-watering%20flowerpot%20Garden%20ID%20Anthracite.jpg']]],
   ['comms', 'Comms', 'Surface', 1510, 0, 'Radios that work while the cell towers take a long nap.', [
     ['Hand Crank Solar Emergency Radio 4000 mAh', 60.9, 'News, a torch and a phone charge. Batteries optional.', 'Hand crank · Solar · 4000 mAh', AE + 'S2c99a42402984016a461f73824bac75bi.jpg_640x640.jpg'],
     ['Compact Hand Crank Solar Radio', 34.9, 'Small enough for the 72-hour bag.', 'Hand crank · Solar · Receive only', AE + 'S49401ecb797845ed977a8ae930f87260x.jpg_640x640.jpg'],
@@ -64,26 +64,29 @@ const RAW: RawCategory[] = [
     ['Baofeng F22 PMR446 Walkie Talkie, pair', 45.9, 'Talk across the valley without a phone mast.', 'PMR446 · Licence-free · USB-C', AE + 'Sd712bfea29fa408cb9624402a75bf34e3.jpg_640x640.jpg'],
     ['Wio Tracker L1 Pro Meshtastic Node', 75.9, 'Text messages with no towers, no SIM and no bill.', 'LoRa 868 MHz · Meshtastic · GPS', AE + 'Sda4723a14cf34f89b0622ab902667791U.jpeg_640x640.jpg']]],
   ['shelter', 'Shelter', 'Surface', 290, 0, 'Tents, tarps and bivvies. Property prices have never been lower.', [
-    ['Nomad 4-Season Tent, 2P', 329, 'Wind, snow, the neighbours. Keeps it all out.', '2 person · 2.9 kg · 5,000 mm hydrostatic'],
-    ['Ripstop Tarp 3×3m', 49, 'A roof in four knots.', 'Ripstop nylon · 3×3 m · 16 tie-outs'],
-    ['Reflective Emergency Bivvy', 19, 'Keeps 90% of your body heat. And dignity.', 'Mylar-laminate · 110 g · Reusable'],
-    ['Paracord 30m, 550 lb', 15, 'The string that holds the apocalypse together.', '7-strand core · 30 m · 250 kg break']]],
+    ['Naturehike Cloud Peak 4-Season Tent, 2P', 259.9, 'Wind, snow, the neighbours. Keeps it all out.', '2 person · 4-season · Naturehike', AE + 'Sc12773a9ca2d45f8879486984c1609e6K.jpg_640x640.jpg'],
+    ['Naturehike 2-Person Tent, Grey', null, 'Ships from the EU. Pitches before the rain does.', '2 person · Grey · Naturehike', BB + '6281945/tent-naturehike-2381600017851-grey-monochrome-2-persons_1195771.jpg'],
+    ['Waterproof Camping Tarp, 19 Hang Points', 55.9, 'A roof in four knots.', '3×3 to 4×4 m · 19 hang points · Waterproof', AE + 'S8df4ec22467248e2bb32bb680ff67c0bG.jpg_640x640.jpg'],
+    ['Emergency Mylar Bivy Sleeping Bag', 11.9, 'Keeps your body heat. And your dignity.', 'Mylar · Reusable · Pocket size', AE + 'Sa9fa9135fce6406c948509cafd9fb03dE.png_640x640.jpg'],
+    ['Paracord 550, 9-Core 4 mm', 8.9, 'The string that holds the apocalypse together.', '550 lb · 9-core · 4 mm', AE + 'S14360a9c5a494b54a5749e84d8dd4f7c7.jpg_640x640.jpg']]],
   ['fire', 'Fire & Heat', 'Surface', 480, 0, 'Fire: humanity\'s first app. Still no subscription.', [
-    ['Ferro Rod XL', 22, '12,000 strikes. Zero matches.', 'Ferrocerium · 12 cm · Steel striker'],
-    ['Wood Gasifier Camp Stove', 99, 'Twigs in, dinner out, barely any smoke.', 'Stainless · 900 g · Burns biomass'],
-    ['Stormproof Matches, 2×25', 12, 'Burns underwater. Mostly for the drama.', '15 s burn · Waterproof case'],
-    ['Army-Grade Wool Blanket', 69, 'Warm when wet. Ugly by design.', '80% wool · 210×150 cm · 1.8 kg']]],
+    ['Folding Stainless Wood-Burning Camp Stove', 43.9, 'Twigs in, dinner out. No gas cartridges.', 'Stainless steel · Folding · Burns wood', AE + 'S0b05873784ed40e3952c2ecf03e09212O.png_640x640.jpg'],
+    ['CHANGE MOORE Secondary-Combustion Wood Stove', 169.9, 'Burns everything twice. Smokes half as much.', 'Secondary combustion · Folding · Stainless', AE + 'S77510e50b9fb47b8ac0cd21d2c4725b3e.jpg_640x640.jpg'],
+    ['Waterproof Magnesium Ferro Rod', 3.9, 'Thousands of strikes. Zero matches.', 'Magnesium · Ferrocerium · Waterproof', AE + 'Sff683453d25a47fb9ca2d591c1aa40d33.jpg_640x640.jpg'],
+    ['Emergency Mylar Thermal Blankets 130×210 cm', 13.9, 'Sends 90% of your heat straight back at you.', '130×210 cm · Mylar · Multipack', AE + 'Sed8a01ef87e3421aa61e4ef27fd9f85cY.png_640x640.jpg'],
+    ['Rechargeable Flexible Electric Lighter', null, 'No gas, no flint. Charges over USB.', 'USB rechargeable · Flexible neck · InnovaGoods']]],
   ['nav', 'Navigation', 'Surface', 100, 0, 'GPS is someone else\'s satellite. A map and a compass are yours.', [
     ['Waterproof Sighting Compass with Pouch', 16.9, 'Points north. Doesn\'t need charging.', 'Sighting lens · Waterproof · Pouch', AE + 'S60905a04d4604caab487a08b4eb65fa6G.jpg_640x640.jpg'],
     ['SenseCAP T1000-E Card GPS Tracker', 85.9, 'Share your position with the group, even off-grid.', 'GPS · LoRa 868 MHz · Meshtastic', AE + 'S1e0e766d966b4ce4b44f88e0816f9bedy.png_640x640.jpg'],
     ['Weatherproof Map Case Notebook', 26.9, 'Paper never loses signal. Now it doesn\'t get wet either.', 'Map case · Notebook · Weatherproof', AE + 'Sb5fff692eadd4f50b158bf4829185559W.jpg_640x640.jpg'],
     ['Survival Signal Mirror', 10.9, 'Be found on purpose.', 'Daylight signalling · Pocket size', AE + 'S053302c38c8f4fc2ae76c20627b7d25dx.jpg_640x640.jpg'],
     ['Clear Waterproof Map Pouch', 3.9, 'Map and passport stay dry at the river crossing.', 'Transparent · Waterproof · Neck strap', AE + 'S63dc80451ac64906bba031da84b13046u.jpg_640x640.jpg']]],
-  ['storage', 'Food Storage', 'Bunker', 472, 1, 'Freeze-dried, vacuum-sealed, built to last. Best before: the next civilisation.', [
-    ['72-Hour Freeze-Dried Ration Pack', 89, '25-year shelf life. Tastes like "fine".', '9 meals · 6,000 kcal · Just add water'],
-    ['Vacuum Sealer + 100 Bags', 119, 'Removes air. Adds years.', 'Double seal · Pulse mode · 100 bags'],
-    ['Mylar Bags & Oxygen Absorbers, 50', 29, 'Long-term storage for rice, beans and optimism.', '5-mil mylar · 300 cc absorbers'],
-    ['Stackable 20L Grain Bucket', 24, 'Gamma lid. Rodents not invited.', 'Food-grade HDPE · Screw lid · Stackable']]],
+  ['storage', 'Food Storage', 'Bunker', 472, 1, 'Mylar, vacuum and airtight boxes, built to last. Best before: the next civilisation.', [
+    // Price held until the seller confirms EU plug, CE marking and FR/NL manual.
+    ['Electric Vacuum Sealer with Built-in Cutter', null, 'Removes air. Adds years.', 'Vacuum + seal · Built-in cutter', AE + 'Sa5c3bd3795f24d408cc44da4535e247bb.jpg_640x640.jpg'],
+    ['Alfa AL4451 Vacuum Sealer', null, 'EU plug, CE marked, ships from Spain.', 'Vacuum sealer · EU plug · Alfa', BB + '5111491/Vacuum-sealed%20packaging%20Alfa%20AL4451.jpg'],
+    ['5-Gallon Mylar Bags with Oxygen Absorbers, 10', 44.9, 'Long-term storage for rice, beans and optimism.', '5 gallon · 10 bags · O₂ absorbers', AE + 'Sc4f2bee893914031aa73a657d8930f10M.jpg_640x640.jpg'],
+    ['Food-Grade Airtight Grain Storage Box', 11.9, 'Rodents not invited.', 'Airtight · Food-grade · Stackable', AE + 'S910fd924e70749548c6136a7ff855df5x.jpg_640x640.jpg']]],
   ['medic', 'First Aid', 'Bunker', 685, 1, 'The nearest emergency room is now you.', [
     ['Kerbl First Aid Kit', null, 'Wall-mounted, CE marked, where you can reach it.', 'CE marked · Stocked · Kerbl', BB + '6166705/Fist%20Aid%20kit%20Kerbl.jpg'],
     ['Rhino Rescue Large IFAK Pouch', 56.9, 'Organised for shaking hands. Fill it your way.', 'IFAK · Empty · MOLLE', AE + 'S80f6a7f1e1254e38b5bc95c737e02b9dx.jpg_640x640.jpg'],
@@ -125,8 +128,7 @@ const GALLERY: Record<string, string[]> = {
 
 export const CATS: Category[] = RAW.map((r, i) => ({
   id: r[0], name: r[1], where: r[2], x: r[3], lvl: r[4], blurb: r[5], ch: i + 1,
-  // Placeholder items (no supplier photo yet) are shown but not sold.
-  items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[4] ? p[1] : null, tagline: p[2], spec: p[3], image: GALLERY[r[0] + '-' + j]?.[0] ?? p[4], gallery: GALLERY[r[0] + '-' + j] })),
+    items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[4] ? p[1] : null, tagline: p[2], spec: p[3], image: GALLERY[r[0] + '-' + j]?.[0] ?? p[4], gallery: GALLERY[r[0] + '-' + j] })),
 }));
 
 export const CAT_BY_ID: Record<string, Category> = Object.fromEntries(CATS.map(c => [c.id, c]));
@@ -140,18 +142,27 @@ export interface Bundle {
   items: string[];
 }
 
-/** Kits that combine zones. A product page shows the kits it belongs to under "Use it with". */
+/** Kits that combine zones. Product pages show the kits a product belongs to, zone pages the kits that use the zone. */
 export const BUNDLES: Bundle[] = [
   { id: 'blackout', name: 'Blackout Kit', blurb: 'Power, light and news for when the street goes dark.', items: ['energy-0', 'energy-2', 'tools-2', 'comms-0'] },
-  { id: 'grab-and-go', name: '72-Hour Grab Bag', blurb: 'Everything for the first three days, in one pack.', items: ['comms-1', 'energy-4', 'water-4', 'medic-4', 'nav-0', 'nav-3'] },
+  { id: 'grab-and-go', name: '72-Hour Grab Bag', blurb: 'Everything for the first three days, in one pack.', items: ['comms-1', 'energy-4', 'water-4', 'medic-4', 'nav-0', 'nav-3', 'shelter-3', 'fire-2'] },
   { id: 'clean-water', name: 'Clean Water Kit', blurb: 'Carry it, filter it, drink it.', items: ['water-1', 'water-3', 'water-4'] },
   { id: 'off-grid-comms', name: 'Off-Grid Comms Kit', blurb: 'Messages and positions with no towers, powered by the sun.', items: ['comms-4', 'nav-1', 'energy-3'] },
-  { id: 'trail', name: 'Trail Kit', blurb: 'Find the way, stay dry, be found.', items: ['nav-0', 'nav-2', 'nav-3', 'water-0', 'medic-2'] },
+  { id: 'trail', name: 'Trail Kit', blurb: 'Find the way, stay dry, be found.', items: ['nav-0', 'nav-2', 'nav-3', 'nav-4', 'water-0', 'medic-2'] },
   { id: 'perimeter', name: 'Perimeter Kit', blurb: 'Light, alarm and signal blocking for the base.', items: ['security-1', 'security-2', 'security-3', 'tools-2'] },
+  { id: 'group-comms', name: 'Group Comms Kit', blurb: 'Talk across the valley and see where everyone is.', items: ['comms-3', 'comms-4', 'nav-1'] },
+  { id: 'home-first-aid', name: 'Home First Aid Kit', blurb: 'One for the house, one for the car, one for the bike.', items: ['medic-1', 'medic-3', 'medic-4'] },
+  { id: 'bivouac', name: 'Bivouac Kit', blurb: 'A dry night anywhere: tent, tarp, cord and a backup bivvy.', items: ['shelter-0', 'shelter-2', 'shelter-4', 'shelter-3'] },
+  { id: 'warmth', name: 'Warmth Kit', blurb: 'Spark, shine and keep the heat you made.', items: ['fire-2', 'fire-3', 'shelter-3'] },
+  { id: 'camp-kitchen', name: 'Camp Kitchen Kit', blurb: 'Fetch water, filter it, boil it on twigs.', items: ['fire-0', 'fire-2', 'water-3', 'water-1'] },
+  { id: 'bushcraft-fire', name: 'Bushcraft Fire Kit', blurb: 'Cut, split and burn it clean.', items: ['fire-1', 'fire-2', 'tools-1', 'tools-3'] },
+  { id: 'forager', name: 'Forager Kit', blurb: 'Pick it, catch it, carry it home.', items: ['food-0', 'food-1', 'food-2', 'tools-3'] },
+  { id: 'pantry', name: 'Long-Term Pantry Kit', blurb: 'Seal it, box it, forget it for a decade.', items: ['storage-2', 'storage-3'] },
   { id: 'camp-tools', name: 'Camp Tools Kit', blurb: 'Cut, split, fix and see what you are doing.', items: ['tools-1', 'tools-3', 'tools-4', 'tools-2'] },
 ];
 
 export const bundlesFor = (id: string) => BUNDLES.filter(b => b.items.includes(id));
+export const bundlesForCat = (cat: string) => BUNDLES.filter(b => b.items.some(id => id.startsWith(cat + '-')));
 
 export type PlaceId = 'library' | 'stash';
 export const PLACES: Record<PlaceId, { x: number; lvl: Level }> = {

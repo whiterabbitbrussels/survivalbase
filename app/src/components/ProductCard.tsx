@@ -1,11 +1,14 @@
 import { money, type Product } from '../data';
 
+/** Shopify CDN resizes on the fly; the masters are up to 2048 px and several MB. */
+const sized = (src: string) => (src.includes('cdn.shopify.com') ? src + (src.includes('?') ? '&' : '?') + 'width=1200' : src);
+
 /** AI photo full-bleed, supplier photo on a white ground, or the striped placeholder when there is none. */
 export function ProductShot({ product, label, style, src = product.image }: { product: Product; label: string; style: React.CSSProperties; src?: string }) {
   if (!src) return <div className="ph" style={style}>{label}</div>;
   return (
     <div style={{ ...style, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-      <img src={src} alt={product.name} loading="lazy" referrerPolicy="no-referrer" style={{ width: '100%', height: '100%', objectFit: product.gallery ? 'cover' : 'contain' }} />
+      <img src={sized(src)} alt={product.name} loading="lazy" referrerPolicy="no-referrer" style={{ width: '100%', height: '100%', objectFit: product.gallery ? 'cover' : 'contain' }} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import { pad, type Category, type Product } from '../data';
+import { bundlesForCat, pad, type Category, type Product } from '../data';
 import { ProductCard } from '../components/ProductCard';
+import { KitSection } from '../components/KitSection';
 
 interface Props {
   cat: Category;
@@ -36,6 +37,8 @@ export function CategoryPage({ cat, onHome, onAddBook, onOpenProduct, onAdd }: P
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: 20 }}>
         {cat.items.map(p => <ProductCard key={p.id} product={p} onOpen={() => onOpenProduct(p.id)} onAdd={() => onAdd(p)} />)}
       </div>
+
+      <KitSection title="Kits for this zone" kits={bundlesForCat(cat.id)} onAdd={p => onAdd(p)} onOpenProduct={onOpenProduct} />
     </main>
   );
 }
