@@ -129,9 +129,12 @@ export const SHAFT_X = 820;
 
 export const pad = (n: number) => String(n).padStart(2, '0');
 
+/** Label for a product whose price is not confirmed yet; set by the language module. */
+export const LABELS = { priceSoon: 'Price soon' };
+
 /** "€49" for whole euros, "€64.90" otherwise; "Price soon" while unknown. */
 export const money = (n: number | null) =>
-  n === null ? 'Price soon' : '€' + (Number.isInteger(n) ? String(n) : n.toFixed(2));
+  n === null ? LABELS.priceSoon : '€' + (Number.isInteger(n) ? String(n) : n.toFixed(2));
 
 /** Site product id → AI visuals uploaded to Shopify, in shot-list order. */
 const SC = 'https://cdn.shopify.com/s/files/1/0594/6939/8152/files/';

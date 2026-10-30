@@ -2,6 +2,10 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { BOOK, CATS, CAT_BY_ID, FEET, TIP_X, money, pad, type CartLine } from '../data';
 import type { WalkerState } from '../useWalker';
 import { checkoutUrl, isSellable } from '../shopify';
+import { currentLang, t } from '../i18n';
+
+/** Scene sign for a zone: the drawn English label, or the translated zone name. */
+const sign = (id: string, en: string) => (currentLang() === 'en' ? en : CAT_BY_ID[id].name.toUpperCase());
 
 const SCENE_W = 1600;
 const SCENE_H = 1000;
@@ -94,7 +98,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
         {Box({ left: 340, top: 515, width: 960, height: 450, background: '#8f897e', zIndex: 6 })}
 
         {room('storage', { left: 360, top: 535, width: 225, height: 195 }, <>
-          {roomLabel('FOOD STORAGE')}
+          {roomLabel(sign('storage', 'FOOD STORAGE'))}
           <div style={abs({ left: 18, top: 52, display: 'flex', gap: 6 })}>
             {['#c0503a', '#d6a24a', '#c0503a', '#6b7f4f', '#d6a24a', '#3f6b88', '#c0503a'].map((c, i) => <div key={i} style={{ width: 20, height: 26, background: c }} />)}
           </div>
@@ -109,7 +113,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
         </>)}
 
         {room('medic', { left: 600, top: 535, width: 170, height: 195 }, <>
-          {roomLabel('FIRST AID')}
+          {roomLabel(sign('medic', 'FIRST AID'))}
           {Box({ left: 18, top: 52, width: 70, height: 110, background: '#f6f3ec', border: '2px solid #b9b2a4' })}
           {Box({ left: 46, top: 80, width: 14, height: 44, background: '#c0392b' })}
           {Box({ left: 31, top: 95, width: 44, height: 14, background: '#c0392b' })}
@@ -119,7 +123,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
         </>)}
 
         {room('tools', { left: 870, top: 535, width: 205, height: 195 }, <>
-          {roomLabel('TOOLS')}
+          {roomLabel(sign('tools', 'TOOLS'))}
           {Box({ left: 14, top: 48, width: 177, height: 96, background: '#b8955f', backgroundImage: 'radial-gradient(#8a6c40 2px,transparent 2.5px)', backgroundSize: '14px 14px' })}
           {Box({ left: 34, top: 58, width: 6, height: 70, background: '#6b4a2c' })}
           {Box({ left: 24, top: 58, width: 26, height: 16, background: '#5c5c58' })}
@@ -130,7 +134,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
         </>)}
 
         {room('security', { left: 1090, top: 535, width: 190, height: 195 }, <>
-          {roomLabel('SECURITY')}
+          {roomLabel(sign('security', 'SECURITY'))}
           {Box({ left: 20, top: 50, width: 110, height: 110, background: '#8a867d', border: '7px solid #5e5b55', boxSizing: 'border-box' })}
           {Box({ left: 60, top: 90, width: 30, height: 30, background: '#4a4744' })}
           {Box({ left: 73, top: 66, width: 4, height: 78, background: '#4a4744' })}
@@ -139,7 +143,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
         </>)}
 
         {room('library', { left: 360, top: 750, width: 410, height: 195 }, <>
-          {roomLabel('LIBRARY · THE GUIDE')}
+          {roomLabel(t('scene.library'))}
           {Box({ left: 16, top: 46, width: 160, height: 128, background: '#6b4a2c' })}
           {Box({ left: 24, top: 54, width: 144, height: 34, backgroundImage: 'repeating-linear-gradient(90deg,#c0503a 0 9px,#d6a24a 9px 17px,#3f6b88 17px 26px,#e9e4d8 26px 32px)' })}
           {Box({ left: 24, top: 96, width: 144, height: 34, backgroundImage: 'repeating-linear-gradient(90deg,#6b7f4f 0 11px,#e9e4d8 11px 18px,#c0503a 18px 26px)' })}
@@ -148,12 +152,12 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
           {Box({ left: 276, top: 122, width: 56, height: 62, background: '#5a4030' })}
           <div style={abs({ left: 236, top: 64, width: 136, height: 60, background: 'var(--orange)', border: '2px solid var(--ink)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: 'rotate(-4deg)' })}>
             <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 22, lineHeight: 0.9, color: 'var(--ink)' }}>SURVIVAL BASE</div>
-            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--ink)' }}>THE GUIDE · €49</div>
+            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--ink)' }}>{t('scene.bookCover')}</div>
           </div>
         </>)}
 
         {room('stash', { left: 870, top: 750, width: 410, height: 195 }, <>
-          {roomLabel(`YOUR STASH · ${cart.length} ITEMS`)}
+          {roomLabel(t('scene.stash', { n: cart.length }))}
           {Box({ left: 220, top: 110, width: 78, height: 68, background: '#a5844f', border: '3px solid #6b4a2c', boxSizing: 'border-box' })}
           {Box({ left: 304, top: 110, width: 78, height: 68, background: '#a5844f', border: '3px solid #6b4a2c', boxSizing: 'border-box' })}
           {Box({ left: 262, top: 46, width: 78, height: 64, background: '#b8955f', border: '3px solid #6b4a2c', boxSizing: 'border-box' })}
@@ -161,18 +165,18 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
         </>)}
 
         {/* Surface zones */}
-        {surface('nav', 20, 160, 'NAVIGATION', <>
+        {surface('nav', 20, 160, sign('nav', 'NAVIGATION'), <>
           {Box({ left: 76, top: 150, width: 8, height: 95, background: '#5a4632' })}
           {Box({ left: 84, top: 156, width: 62, height: 20, background: 'var(--orange)', border: '2px solid var(--ink)', boxSizing: 'border-box' })}
           {Box({ left: 16, top: 186, width: 60, height: 20, background: '#e9e4d8', border: '2px solid var(--ink)', boxSizing: 'border-box' })}
         </>)}
 
-        {surface('shelter', 200, 180, 'SHELTER', <>
+        {surface('shelter', 200, 180, sign('shelter', 'SHELTER'), <>
           {Box({ left: 15, top: 138, width: 150, height: 107, background: '#6b7f4f', clipPath: 'polygon(50% 0,100% 100%,0 100%)' })}
           {Box({ left: 68, top: 190, width: 44, height: 55, background: '#3b4630', clipPath: 'polygon(50% 0,100% 100%,0 100%)' })}
         </>)}
 
-        {surface('fire', 400, 160, 'FIRE & HEAT', <>
+        {surface('fire', 400, 160, sign('fire', 'FIRE & HEAT'), <>
           {Box({ left: 44, top: 228, width: 72, height: 11, background: '#6b4a2c', transform: 'rotate(12deg)' })}
           {Box({ left: 44, top: 228, width: 72, height: 11, background: '#7a5636', transform: 'rotate(-12deg)' })}
           <div style={abs({ left: 60, top: 190, width: 40, height: 46, transformOrigin: '50% 100%', animation: 'sbflick .5s ease-in-out infinite', zIndex: night ? 6 : 1 })}>
@@ -183,7 +187,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
           {Box({ left: 114, top: 236, width: 16, height: 12, background: '#8a867d' })}
         </>)}
 
-        {surface('food', 570, 190, 'GROW & FORAGE', <>
+        {surface('food', 570, 190, sign('food', 'GROW & FORAGE'), <>
           <div style={abs({ left: 20, top: 206, display: 'flex', gap: 6 })}>
             {['#5f8f3e', '#6f9a45', '#5f8f3e', '#c0503a', '#6f9a45', '#5f8f3e'].map((c, i) => <div key={i} style={{ width: 20, height: 20, background: c }} />)}
           </div>
@@ -192,7 +196,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
           {Box({ left: 162, top: 164, width: 5, height: 62, background: '#7a8a44' })}
         </>)}
 
-        {surface('water', 890, 200, 'WATER', <>
+        {surface('water', 890, 200, sign('water', 'WATER'), <>
           {Box({ left: 24, top: 175, width: 54, height: 70, background: '#3f6b88' })}
           {Box({ left: 24, top: 192, width: 54, height: 5, background: '#2e5068' })}
           {Box({ left: 24, top: 222, width: 54, height: 5, background: '#2e5068' })}
@@ -202,7 +206,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
           {Box({ left: 138, top: 185, width: 6, height: 34, background: '#2e5068' })}
         </>)}
 
-        {surface('energy', 1105, 235, 'POWER', <>
+        {surface('energy', 1105, 235, sign('energy', 'POWER'), <>
           {Box({ left: 44, top: 214, width: 6, height: 31, background: '#4a4744' })}
           {Box({ left: 118, top: 206, width: 6, height: 39, background: '#4a4744' })}
           {Box({ left: 14, top: 156, width: 140, height: 60, background: '#2b3b58', backgroundImage: 'linear-gradient(90deg,#4f6a94 2px,transparent 2px),linear-gradient(180deg,#4f6a94 2px,transparent 2px)', backgroundSize: '28px 20px', border: '3px solid var(--ink)', boxSizing: 'border-box', transform: 'skewX(-18deg)' })}
@@ -215,7 +219,7 @@ export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd,
           </div>
         </>)}
 
-        {surface('comms', 1370, 210, 'COMMS', <>
+        {surface('comms', 1370, 210, sign('comms', 'COMMS'), <>
           {Box({ left: 20, top: 190, width: 76, height: 55, background: '#8f8a7d', border: '2px solid #5e5b55', boxSizing: 'border-box' })}
           {Box({ left: 14, top: 180, width: 88, height: 12, background: '#5e5b55' })}
           {Box({ left: 44, top: 208, width: 26, height: 18, background: '#0e1a10' })}
@@ -254,10 +258,10 @@ function buildPanel(
 ): PanelData {
   if (id === 'library') {
     return {
-      kicker: 'BUNKER · LIBRARY', title: 'Survival Base',
-      blurb: 'The guide behind the shop. Eleven chapters, one for every zone of this base. Printed on paper, which still works in a blackout.',
-      items: [{ n: '01', name: 'Print + PDF edition', price: '€49', open: () => a.onAdd(BOOK) }],
-      cta: 'Add the guide · €49', onCta: () => a.onAdd(BOOK),
+      kicker: t('scene.guideKicker'), title: 'Survival Base',
+      blurb: t('scene.guidePanel'),
+      items: [{ n: '01', name: t('scene.guideEdition'), price: '€49', open: () => a.onAdd(BOOK) }],
+      cta: t('product.addGuide'), onCta: () => a.onAdd(BOOK),
     };
   }
   if (id === 'stash') {
@@ -266,28 +270,28 @@ function buildPanel(
     const lines = [...grouped.values()];
     const total = cart.reduce((sum, c) => sum + c.price, 0);
     return {
-      kicker: 'BUNKER · YOUR STASH',
-      title: lines.length ? money(total) : 'Empty',
-      blurb: lines.length ? cart.length + ' items packed and waiting.' : 'Like the shelves after the first rumour. Go shopping.',
+      kicker: t('scene.stashKicker'),
+      title: lines.length ? money(total) : t('scene.empty'),
+      blurb: lines.length ? t('scene.packed', { n: cart.length }) : t('scene.emptyText'),
       items: lines.map((l, i) => ({
         n: pad(i + 1), name: l.name + (l.q > 1 ? ' ×' + l.q : ''), price: money(l.price * l.q),
         open: () => (l.id === 'book' ? a.onZone('library') : a.onOpenProduct(l.id)),
       })),
-      cta: lines.length ? 'Checkout' : 'Back to the surface',
+      cta: lines.length ? t('scene.checkout') : t('scene.backUp'),
       onCta: () => {
         if (!lines.length) return a.onZone('energy');
         const url = checkoutUrl(cart);
-        if (!url) return a.onFlash('Checkout opens with the shop launch.');
-        if (cart.some(c => !isSellable(c.id))) a.onFlash('Some items are not in stock yet and stay in your stash.');
+        if (!url) return a.onFlash(t('toast.checkoutSoon'));
+        if (cart.some(c => !isSellable(c.id))) a.onFlash(t('toast.notSellable'));
         window.location.href = url;
       },
     };
   }
   const c = CAT_BY_ID[id];
   return {
-    kicker: c.where.toUpperCase() + ' · CHAPTER ' + pad(c.ch), title: c.name, blurb: c.blurb,
+    kicker: t(`where.${c.where}`).toUpperCase() + ' · ' + t('scene.chapter', { n: pad(c.ch) }), title: c.name, blurb: c.blurb,
     items: c.items.slice(0, 3).map((p, i) => ({ n: pad(i + 1), name: p.name, price: money(p.price), open: () => a.onOpenProduct(p.id) })),
-    cta: 'Enter ' + c.name + ' · ' + c.items.length + ' items', onCta: () => a.onZone(c.id),
+    cta: t('scene.enter', { name: c.name, n: c.items.length }), onCta: () => a.onZone(c.id),
   };
 }
 
@@ -295,10 +299,10 @@ function Tooltip({ id, cartCount }: { id: string; cartCount: number }) {
   const c = CATS.find(x => x.id === id);
   const floor = c ? c.lvl : 2;
   const tip = c
-    ? { kicker: (c.lvl ? 'BUNKER ROOM' : 'SURFACE ZONE') + ' · CHAPTER ' + pad(c.ch), title: c.name, blurb: c.blurb, hint: c.items.length + ' items · click to enter →' }
+    ? { kicker: t(c.lvl ? 'scene.bunkerRoom' : 'scene.surfaceZone') + ' · ' + t('scene.chapter', { n: pad(c.ch) }), title: c.name, blurb: c.blurb, hint: t('scene.enterHint', { n: c.items.length }) }
     : id === 'library'
-      ? { kicker: 'BUNKER · LIBRARY', title: 'The Guide', blurb: 'Survival Base, the book behind the shop. One chapter for every zone of this base.', hint: '€49 · click to open →' }
-      : { kicker: 'BUNKER · STASH', title: 'Your Stash', blurb: 'Everything you have packed so far.', hint: cartCount + ' items · click to open →' };
+      ? { kicker: t('scene.guideKicker'), title: t('scene.guideTitle'), blurb: t('scene.guideTip'), hint: t('scene.guideHint') }
+      : { kicker: t('scene.stashKicker'), title: t('scene.stashTitle'), blurb: t('scene.stashTip'), hint: t('scene.stashHint', { n: cartCount }) };
   const w = 400;
   const left = Math.max(16, Math.min(SCENE_W - w - 16, TIP_X[id] - w / 2));
   const top = floor === 0 ? 24 : floor === 1 ? 250 : 470;

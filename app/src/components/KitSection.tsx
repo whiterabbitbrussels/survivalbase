@@ -1,5 +1,6 @@
 import { PRODUCT_BY_ID, money, type Bundle, type Product } from '../data';
 import { ProductShot } from './ProductCard';
+import { t } from '../i18n';
 
 /** "Use it with" / "Kits for this zone": each kit with its items and one add-all button. */
 export function KitSection({ title, kits, currentId, onAdd, onOpenProduct }: {
@@ -22,11 +23,11 @@ export function KitSection({ title, kits, currentId, onAdd, onOpenProduct }: {
             <div key={k.id} style={{ border: '2px solid var(--ink)', background: 'var(--card)', padding: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12, flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                  <div style={{ fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '.06em' }}>KIT · {k.items.length} ITEMS</div>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '.06em' }}>{t('kit.items', { n: k.items.length })}</div>
                   <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 28, lineHeight: 1 }}>{k.name}</div>
                   <div style={{ fontSize: 15, lineHeight: 1.4 }}>{k.blurb}</div>
                 </div>
-                <button onClick={() => k.items.forEach(x => onAdd(x, 1))} className="btn btn-orange btn-shadow btn-press" style={{ padding: '10px 14px', whiteSpace: 'nowrap' }}>ADD THE KIT · {money(Math.round(k.total * 100) / 100)}</button>
+                <button onClick={() => k.items.forEach(x => onAdd(x, 1))} className="btn btn-orange btn-shadow btn-press" style={{ padding: '10px 14px', whiteSpace: 'nowrap' }}>{t('kit.add', { price: money(Math.round(k.total * 100) / 100) })}</button>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(150px,1fr))', gap: 12 }}>
                 {k.items.map(x => (

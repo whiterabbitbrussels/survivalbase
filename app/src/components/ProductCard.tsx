@@ -1,4 +1,5 @@
 import { money, type Product } from '../data';
+import { t } from '../i18n';
 
 /** Shopify CDN resizes on the fly; the masters are up to 2048 px and several MB. */
 const sized = (src: string) => (src.includes('cdn.shopify.com') ? src + (src.includes('?') ? '&' : '?') + 'width=1200' : src);
@@ -24,7 +25,7 @@ export function ProductCard({ product, onOpen, onAdd }: { product: Product; onOp
         <div style={{ fontSize: 14, lineHeight: 1.4, color: 'var(--muted)', flex: 1 }}>{product.tagline}</div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: 16, fontWeight: 600 }}>{money(product.price)}</div>
-          {product.price !== null && <button onClick={onAdd} className="card-add">+ STASH</button>}
+          {product.price !== null && <button onClick={onAdd} className="card-add">{t('card.add')}</button>}
         </div>
       </div>
     </div>
