@@ -178,6 +178,19 @@ const GALLERY: Record<string, string[]> = {
   'shelter-3': [SC + '1-in-use_9848bc33-3eda-4e5e-a235-1b2fab1b504d.jpg?v=1793272577', SC + '2-how-it-works_fea8055e-437e-47d9-bc2e-e7158d1ac01a.jpg?v=1793272577', SC + '3-specs_ba24f17a-484c-487f-8a64-db2b551f24ec.jpg?v=1793272577'],
   'tools-2': [SC + '1-in-use_4e7ec264-ac88-40f7-a633-eb7fc76ce576.jpg?v=1793272704', SC + '2-how-it-works_cab78f8c-0da1-428d-86e8-770065a13a95.jpg?v=1793272703', SC + '3-specs_cc577497-2377-4f56-b7dc-45697563652f.jpg?v=1793272703'],
   'tools-4': [SC + '1-in-use_96b15690-bcc7-4233-a43b-ae1164c87914.jpg?v=1793272704', SC + '2-how-it-works_16a35c6b-1dff-47f1-b650-41434ab21dc4.jpg?v=1793272703', SC + '3-specs_8e94423d-0712-4431-a251-b2c41000ab7a.jpg?v=1793272704'],
+  'energy-6': [SC + '1-in-use_2c0c5a6a-0243-454b-a0f1-d809ce8d869a.jpg?v=1793355209', SC + '2-how-it-works_1f8fbcfa-9760-45ae-92fa-11dae63a559f.jpg?v=1793355209', SC + '3-specs_7fe0de52-bbb9-4b99-ba10-8d18b4f76af7.jpg?v=1793355209'],
+  'water-5': [SC + '1-in-use_a027dd44-1240-4db7-a79b-23d451a07757.jpg?v=1793355209', SC + '2-how-it-works_efe1c5f3-107a-4f15-bbd5-7a87d1a03907.jpg?v=1793355209', SC + '3-specs_87adb7d5-c7c9-4a4b-a219-b73316a96787.jpg?v=1793355209'],
+  'water-6': [SC + '1-in-use_9d235115-f5e8-4766-8448-269929e4ae8a.jpg?v=1793355209', SC + '2-how-it-works_a9c5519c-ad34-4ce8-861a-958cb1c14052.jpg?v=1793355209', SC + '3-specs_d560fbdc-14db-4e5f-98b8-9ffdd891d486.jpg?v=1793355209'],
+  'food-4': [SC + '1-in-use_49252711-882c-4aa7-8589-238d452b4bab.jpg?v=1793355209', SC + '2-how-it-works_2e8f4e23-eecd-44e8-b96b-382119ae9fa4.jpg?v=1793355209', SC + '3-specs_06814873-4596-4788-814c-d17d7b228324.jpg?v=1793355209'],
+  'shelter-5': [SC + '1-in-use_07302ef5-d4c8-4228-b372-ce3b9fe56290.jpg?v=1793355209', SC + '2-how-it-works_322a2c0e-dd96-4ffc-b55a-ca5f4be03f68.jpg?v=1793355210', SC + '3-specs_68bdcece-9eab-48bb-8222-a958faee3cf2.jpg?v=1793355210'],
+  'shelter-6': [SC + '1-in-use_1c6ba223-41c1-4595-a8f9-d262602ffe06.jpg?v=1793355210', SC + '2-how-it-works_cf0ba91f-c1f3-49a9-b838-978c16d6a042.jpg?v=1793355210', SC + '3-specs_0b930531-3a7e-4bd3-bd02-b154d9affaa9.jpg?v=1793355209'],
+  'fire-5': [SC + '1-in-use_eefd63fd-16a0-45dc-84ca-1498cbe428c0.jpg?v=1793355210', SC + '2-how-it-works_44c6afbe-1249-410f-b040-ae31892c9c5b.jpg?v=1793355210', SC + '3-specs_8b073f63-0a65-49a4-84ac-ff2377960d34.jpg?v=1793355210'],
+  'fire-6': [SC + '1-in-use_a46e4b17-4220-4509-ae07-2742488c1018.jpg?v=1793355210', SC + '2-how-it-works_09009df9-0a43-4c28-86cd-8ba984e81f81.jpg?v=1793355210', SC + '3-specs_1e54fb42-883f-4e12-9970-b5f7a1e539f4.jpg?v=1793355210'],
+  'storage-4': [SC + '1-in-use_38c7434e-dc5e-4949-a8db-869c9d2cbb1c.jpg?v=1793355210', SC + '2-how-it-works_5fb42a5e-ae9a-480c-9dc6-5532ac987327.jpg?v=1793355210', SC + '3-specs_fce79ae5-8386-457f-88a3-6a1f48096f55.jpg?v=1793355210'],
+  'storage-5': [SC + '1-in-use_4ffaafd7-ac0e-4d45-8eff-bf31d31d2180.jpg?v=1793355210', SC + '2-how-it-works_7cadf7df-34d9-48aa-ad50-a815d1da449b.jpg?v=1793355210', SC + '3-specs_8a3d3197-b631-4553-9ca4-13499c04e5a1.jpg?v=1793355210'],
+  'security-4': [SC + '1-in-use_cd6386cd-c0e3-4578-8187-b6ef5a07dfd6.jpg?v=1793355211', SC + '2-how-it-works_2619744f-4b24-4452-b306-fd6174efc3f9.jpg?v=1793355210', SC + '3-specs_e4b08983-003d-4a38-b783-0bd6726af5f3.jpg?v=1793355210'],
+  'security-5': [SC + '1-in-use_b2f3faa1-f26e-4e15-9448-779fe21c57f2.jpg?v=1793355210', SC + '2-how-it-works_6b1d9030-41a3-4fa3-a124-27421309c430.jpg?v=1793355210', SC + '3-specs_efe19cae-f8b2-43d8-aecc-69fc3e4bdcdc.jpg?v=1793355211'],
+  'security-6': [SC + '1-in-use_2083b071-90e7-49d1-a027-2f9562c337bd.jpg?v=1793355211', SC + '2-how-it-works_e653ef70-7b2f-4fb4-a804-29994af90f1c.jpg?v=1793355210', SC + '3-specs_1795a3b0-6197-499b-9d4f-90384dfa1320.jpg?v=1793355210'],
 };
 
 export const CATS: Category[] = RAW.map((r, i) => ({
