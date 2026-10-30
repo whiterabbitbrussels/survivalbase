@@ -240,7 +240,7 @@ PRODUCTS = {
         '2-how-it-works': '1) hands pour salt into a glass of water and stir, 2) hands fill the pouch with the salt water, 3) the lamp glowing, hung inside a tent at night.',
         '3-specs': 'LED module, pouch, rope handle, fill opening.',
     }),
-    'energy-6': (AE + 'Scd6ec1131e62482e85d58da8fb2c6502d.jpg_640x640.jpg', 'the hand-squeeze dynamo flashlight', {
+    'energy-6': (AE + 'Scd6ec1131e62482e85d58da8fb2c6502d.jpg_640x640.jpg', 'the hand crank solar flashlight', {
         '1-in-use': 'A hand squeezing its lever in a dark hallway during a power cut, its beam on the floor.',
         '2-how-it-works': '1) a hand picks it from a drawer, 2) fingers squeeze the lever repeatedly, 3) its beam lighting a fuse box in the dark.',
         '3-specs': 'squeeze lever, lens, body.',

@@ -47,7 +47,7 @@ const RAW: RawCategory[] = [
     ['MHPOWOS Foldable ETFE Solar Panel', 105.9, 'Pocket-size sun harvesting for phones and power banks.', 'ETFE · Foldable · USB-C + USB-A', AE + 'S01d5b1f8d8384a1a996bc1fbfdd6b841O.jpg_640x640.jpg'],
     ['Hand Crank Solar Power Bank 5-in-1', 64.9, 'Sun when there is sun. Cardio when there is not.', 'Hand crank · Solar · Torch', AE + 'Sb85bf22f92f04bb8b0de91bb080f3e34L.jpg_640x640.jpg'],
     ['Salt Water Emergency Lamp', 24.9, 'Add salt water, get light. No battery to go flat in the drawer.', 'Salt water powered · No battery · Up to 288 h', AE + 'S7f58fc4b2095403198fe7a09a861181di.jpg_640x640.jpg'],
-    ['Hand-Squeeze Dynamo Flashlight', 11.9, 'Squeeze, light. Nothing to charge, nothing to replace.', 'Dynamo · Squeeze-powered · Pocket size', AE + 'Scd6ec1131e62482e85d58da8fb2c6502d.jpg_640x640.jpg']]],
+    ['Hand Crank Solar Flashlight', 11.9, 'Crank it or leave it in the sun. Light without hunting for batteries.', 'Hand crank · Solar panel · Built-in battery', AE + 'Scd6ec1131e62482e85d58da8fb2c6502d.jpg_640x640.jpg']]],
   ['water', 'Water', 'Surface', 990, 0, 'Rivers are free. So is dysentery. Filters, purifiers and storage that keep the two apart.', [
     ['Miniwell L630 Water Filter Straw', 72.9, 'Screws onto a bottle. Turns a lake into a drink.', 'Personal filter · Bottle-mount · Miniwell', AE + 'H4c833e23ad674e2caa926425a4d7cb21S.jpg_640x640.jpg'],
     ['Gravity Water Bag Filter System', 50.9, 'Hang it from a branch, let gravity do the work.', 'Gravity bag · Inline filter · Straw', AE + 'S6bb987ca8def4307abe33dc86a37184c3.jpg_640x640.jpg'],
@@ -82,7 +82,7 @@ const RAW: RawCategory[] = [
     ['Waterproof Magnesium Ferro Rod', 5.9, 'Thousands of strikes. Zero matches.', 'Magnesium · Ferrocerium · Waterproof', AE + 'Sff683453d25a47fb9ca2d591c1aa40d33.jpg_640x640.jpg'],
     ['Emergency Mylar Thermal Blankets 130×210 cm', 13.9, 'Sends 90% of your heat straight back at you.', '130×210 cm · Mylar · Multipack', AE + 'Sed8a01ef87e3421aa61e4ef27fd9f85cY.png_640x640.jpg'],
     ['Rechargeable Flexible Electric Lighter', null, 'No gas, no flint. Charges over USB.', 'USB rechargeable · Flexible neck · InnovaGoods'],
-    ['Thermoelectric Stove-Top Fan', 70.9, "Runs on the stove's own heat. No plug, no battery, no idea how. (Physics.)", 'Heat-powered · 6 blades · Silent', AE + 'S1db3b4c49c5541be94d0bd80378f007ck.jpg_640x640.jpg'],
+    ['Thermoelectric Stove-Top Fan', 70.9, "Runs on the stove's own heat. No plug, no battery, no idea how. (Physics.)", 'Heat-powered · 6 blades · Stove-top', AE + 'S1db3b4c49c5541be94d0bd80378f007ck.jpg_640x640.jpg'],
     ['Brass Fire Piston', 46.9, 'Fire from a push of air. Like a diesel engine, in your pocket.', 'Brass · Air compression · Tinder chamber', AE + 'S0d0c34acfa514a7192b0ac0dfba8be1br.jpg_640x640.jpg']]],
   ['nav', 'Navigation', 'Surface', 100, 0, 'GPS is someone else\'s satellite. A map and a compass are yours.', [
     ['Waterproof Sighting Compass with Pouch', 16.9, 'Points north. Doesn\'t need charging.', 'Sighting lens · Waterproof · Pouch', AE + 'S60905a04d4604caab487a08b4eb65fa6G.jpg_640x640.jpg'],
@@ -96,8 +96,8 @@ const RAW: RawCategory[] = [
     ['Alfa AL4451 Vacuum Sealer', null, 'EU plug, CE marked, ships from Spain.', 'Vacuum sealer · EU plug · Alfa', BB + '5111491/Vacuum-sealed%20packaging%20Alfa%20AL4451.jpg'],
     ['5-Gallon Mylar Bags with Oxygen Absorbers, 10', 44.9, 'Long-term storage for rice, beans and optimism.', '5 gallon · 10 bags · O₂ absorbers', AE + 'Sc4f2bee893914031aa73a657d8930f10M.jpg_640x640.jpg'],
     ['Food-Grade Airtight Grain Storage Box', 11.9, 'Rodents not invited.', 'Airtight · Food-grade · Stackable', AE + 'S910fd924e70749548c6136a7ff855df5x.jpg_640x640.jpg'],
-    ['Cast-Iron Hand Grain Mill', 107.9, 'Wheat in, flour out. The bakery runs on elbow grease.', 'Cast iron · Clamp-on · Adjustable grind', AE + 'S2fbf40aabfd643c1ab6f09966848e37aQ.jpg_640x640.jpg'],
-    ['12 V Compressor Fridge 21–55 L', 234.9, 'Keeps food cold on a battery or a solar panel.', '12/24 V · Compressor · App control', AE + 'A55810aa5c86e4ceabf07f5d5b42045d7L.jpg_640x640.jpg']]],
+    ['Cast-Iron Hand Grain Mill', 107.9, 'Wheat in, flour out. The bakery runs on elbow grease.', 'Cast iron · Clamp-on · Hand crank', AE + 'S2fbf40aabfd643c1ab6f09966848e37aQ.jpg_640x640.jpg'],
+    ['12 V Compressor Fridge 21–55 L', 234.9, 'Keeps food cold on a battery or a solar panel.', '12 V · Compressor · App control', AE + 'A55810aa5c86e4ceabf07f5d5b42045d7L.jpg_640x640.jpg']]],
   ['medic', 'First Aid', 'Bunker', 685, 1, 'The nearest emergency room is now you.', [
     ['Kerbl First Aid Kit', null, 'Wall-mounted, CE marked, where you can reach it.', 'CE marked · Stocked · Kerbl', BB + '6166705/Fist%20Aid%20kit%20Kerbl.jpg'],
     ['Rhino Rescue Large IFAK Pouch', 56.9, 'Organised for shaking hands. Fill it your way.', 'IFAK · Empty · MOLLE', AE + 'S80f6a7f1e1254e38b5bc95c737e02b9dx.jpg_640x640.jpg'],
@@ -116,7 +116,7 @@ const RAW: RawCategory[] = [
     ['Wireless PIR Motion Alarm', 8.9, 'Hear them before they hear you.', 'PIR sensor · Wireless chime', AE + 'HTB1KR2iX5DxK1Rjy1zcq6yGeXXaK.jpg_640x640.jpg'],
     ['Faraday Bag Set, 4 sizes', 5.9, 'Keeps phones and keys off the radar.', 'Signal blocking · 4 sizes', AE + 'S31c606a61abc47d2b9d3a8fb21b2b18cX.png_640x640.jpg'],
     ['Glow-in-the-Dark Tape 5 m', 6.9, 'Charges in daylight, finds the stairs in the blackout.', '5 m · Photoluminescent · Self-adhesive', AE + 'S7288f1f1fce847c1957c706187b8b239w.jpg_640x640.jpg'],
-    ['FNIRSI GC-01 Geiger Counter', 87.9, "Hear the radiation you can't see. Check food, water and the wind.", 'X / γ / β · Rechargeable · Data log', AE + 'S69783d8bc2b54905a124b0f49b5581e5f.jpg_640x640.jpg'],
+    ['FNIRSI GC-01 Geiger Counter', 87.9, "Hear the radiation you can't see. Check food, water and the wind.", 'X / γ / β · Rechargeable · Trend graph', AE + 'S69783d8bc2b54905a124b0f49b5581e5f.jpg_640x640.jpg'],
     ['Pen Dosimeter with Dose Alarm', 73.9, 'Clips on, counts up, beeps before it matters.', 'Dose alarm · Pocket pen · Rechargeable', AE + 'S6ec38a8aad4e489f9507c93ac1c0469e8.jpg_640x640.jpg']]],
 ];
 
