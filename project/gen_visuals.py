@@ -240,6 +240,71 @@ PRODUCTS = {
         '2-how-it-works': '1) hands pour salt into a glass of water and stir, 2) hands fill the pouch with the salt water, 3) the lamp glowing, hung inside a tent at night.',
         '3-specs': 'LED module, pouch, rope handle, fill opening.',
     }),
+    'energy-6': (AE + 'Scd6ec1131e62482e85d58da8fb2c6502d.jpg_640x640.jpg', 'the hand-squeeze dynamo flashlight', {
+        '1-in-use': 'A hand squeezing its lever in a dark hallway during a power cut, its beam on the floor.',
+        '2-how-it-works': '1) a hand picks it from a drawer, 2) fingers squeeze the lever repeatedly, 3) its beam lighting a fuse box in the dark.',
+        '3-specs': 'squeeze lever, lens, body.',
+    }),
+    'water-5': (AE + 'S0d3416dfed5d42a3ae56f9681fbb4b462.png_640x640.jpg', 'the 20 L solar shower bag', {
+        '1-in-use': 'Hanging from a tree branch at a campsite, a hand turning on its shower head, water running.',
+        '2-how-it-works': '1) hands fill the bag at a tap, 2) the bag lying in the sun on a wooden deck, 3) hung from a branch with water running from the shower head onto hands.',
+        '3-specs': 'black bag, shower head, hanging handle, fill cap.',
+    }),
+    'water-6': (AE + 'S028a86f373164a059936e05846ce22a2A.jpg_640x640.jpg', 'the collapsible water tank with tap', {
+        '1-in-use': 'Full of water on a kitchen counter during a water cut, a hand filling a glass from its tap.',
+        '2-how-it-works': '1) the tank folded flat in a cupboard, 2) hands filling it at a sink, 3) a glass being filled from its tap.',
+        '3-specs': 'tap, handle, folded vs full.',
+    }),
+    'food-4': (AE + 'S2c0b728c9d0a486783bd7a5f92830af0q.jpg_640x640.jpg', 'the sprouting jar kit', {
+        '1-in-use': 'On a kitchen windowsill, jars full of fresh green sprouts, a hand taking a pinch.',
+        '2-how-it-works': '1) hands pour seeds into a jar, 2) the jars tilted on their stand to drain, 3) jars full of green sprouts.',
+        '3-specs': 'mesh lids, jars, drainage stand.',
+    }),
+    'shelter-5': (AE + 'Sdae6e767d43e4141b87741e4271aed85t.jpg_640x640.jpg', 'the folding emergency toilet', {
+        '1-in-use': 'Set up in a small bathroom with the lights off and a lantern on, during a water cut.',
+        '2-how-it-works': '1) hands unfold the toilet, 2) hands fit a bag under the seat, 3) the toilet ready with its lid closed.',
+        '3-specs': 'folding legs, lid, bag holder.',
+    }),
+    'shelter-6': (AE + 'S6dfefc9e1a7c4e15832521993618bdffa.jpg_640x640.jpg', 'the emergency toilet bags', {
+        '1-in-use': 'A pack of the bags on a bathroom shelf next to a folding toilet, a hand taking one.',
+        '2-how-it-works': '1) a hand takes a bag from the pack, 2) hands fit it over a toilet seat, 3) hands tie it closed.',
+        '3-specs': 'pack, single bag unfolded, tie closure.',
+    }),
+    'fire-5': (AE + 'S1db3b4c49c5541be94d0bd80378f007ck.jpg_640x640.jpg', 'the thermoelectric stove-top fan', {
+        '1-in-use': 'Spinning on top of a cast-iron wood stove in a cosy cabin at night, fire visible through the stove door.',
+        '2-how-it-works': '1) hands place the fan on the cold stove top, 2) the fire lit inside the stove, 3) the fan blades spinning, motion blur.',
+        '3-specs': 'blades, heat sink base, thermoelectric module.',
+    }),
+    'fire-6': (AE + 'S0d0c34acfa514a7192b0ac0dfba8be1br.jpg_640x640.jpg', 'the brass fire piston', {
+        '1-in-use': 'Hands striking it down hard on a log at a forest camp, a small ember glowing in a tinder bundle.',
+        '2-how-it-works': '1) hands place char cloth in the piston tip, 2) a palm slams the piston down, 3) the glowing ember placed in a tinder nest.',
+        '3-specs': 'brass cylinder, piston, o-ring, tinder chamber.',
+    }),
+    'storage-4': (AE + 'S2fbf40aabfd643c1ab6f09966848e37aQ.jpg_640x640.jpg', 'the cast-iron hand grain mill', {
+        '1-in-use': 'Clamped to a wooden kitchen table, a hand turning its crank, flour falling into a bowl.',
+        '2-how-it-works': '1) hands clamp it to a table, 2) hands pour wheat into the hopper, 3) flour falling into a bowl.',
+        '3-specs': 'hopper, crank, clamp, grinding plates.',
+    }),
+    'storage-5': (AE + 'A55810aa5c86e4ceabf07f5d5b42045d7L.jpg_640x640.jpg', 'the 12 V compressor fridge', {
+        '1-in-use': 'In the back of a van or a garage off-grid setup, lid open showing cold food, powered by a cable to a portable power station.',
+        '2-how-it-works': '1) hands plug its 12 V cable into a power station, 2) its display showing a low temperature, 3) hands taking a cold drink out.',
+        '3-specs': 'lid, display panel, handles, 12 V socket.',
+    }),
+    'security-4': (AE + 'S7288f1f1fce847c1957c706187b8b239w.jpg_640x640.jpg', 'the glow-in-the-dark tape', {
+        '1-in-use': 'Dark staircase during a blackout, the stair edges glowing green from the tape.',
+        '2-how-it-works': '1) hands stick the tape along a stair edge in daylight, 2) the room going dark, 3) the stairs outlined in glowing green.',
+        '3-specs': 'roll of tape, glowing strip, backing.',
+    }),
+    'security-5': (AE + 'S69783d8bc2b54905a124b0f49b5581e5f.jpg_640x640.jpg', 'the FNIRSI GC-01 Geiger counter', {
+        '1-in-use': 'A hand holding it over vegetables on a kitchen table, its screen showing a reading.',
+        '2-how-it-works': '1) a hand switches it on, 2) held over a glass of water, 3) its screen showing a normal dose reading.',
+        '3-specs': 'screen, buttons, sensor window, USB-C port.',
+    }),
+    'security-6': (AE + 'S6ec38a8aad4e489f9507c93ac1c0469e8.jpg_640x640.jpg', 'the pen dosimeter with dose alarm', {
+        '1-in-use': 'Clipped to a jacket pocket on a hiker walking a trail, seen from the neck down.',
+        '2-how-it-works': '1) a hand clips it to a pocket, 2) a thumb presses its button, 3) its screen showing the accumulated dose.',
+        '3-specs': 'pocket clip, screen, button.',
+    }),
 }
 
 

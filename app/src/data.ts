@@ -46,18 +46,22 @@ const RAW: RawCategory[] = [
     ['ALLPOWERS Foldable Solar Panel', 174.9, 'Unfold, point at the sky, charge everything.', '60–200 W · Foldable · ALLPOWERS', AE + 'S5a2c0abea18b4af388c788d67deb90c2C.png_640x640.jpg'],
     ['MHPOWOS Foldable ETFE Solar Panel', 105.9, 'Pocket-size sun harvesting for phones and power banks.', 'ETFE · Foldable · USB-C + USB-A', AE + 'S01d5b1f8d8384a1a996bc1fbfdd6b841O.jpg_640x640.jpg'],
     ['Hand Crank Solar Power Bank 5-in-1', 64.9, 'Sun when there is sun. Cardio when there is not.', 'Hand crank · Solar · Torch', AE + 'Sb85bf22f92f04bb8b0de91bb080f3e34L.jpg_640x640.jpg'],
-    ['Salt Water Emergency Lamp', 24.9, 'Add salt water, get light. No battery to go flat in the drawer.', 'Salt water powered · No battery · Up to 288 h', AE + 'S7f58fc4b2095403198fe7a09a861181di.jpg_640x640.jpg']]],
+    ['Salt Water Emergency Lamp', 24.9, 'Add salt water, get light. No battery to go flat in the drawer.', 'Salt water powered · No battery · Up to 288 h', AE + 'S7f58fc4b2095403198fe7a09a861181di.jpg_640x640.jpg'],
+    ['Hand-Squeeze Dynamo Flashlight', 11.9, 'Squeeze, light. Nothing to charge, nothing to replace.', 'Dynamo · Squeeze-powered · Pocket size', AE + 'Scd6ec1131e62482e85d58da8fb2c6502d.jpg_640x640.jpg']]],
   ['water', 'Water', 'Surface', 990, 0, 'Rivers are free. So is dysentery. Filters, purifiers and storage that keep the two apart.', [
     ['Miniwell L630 Water Filter Straw', 72.9, 'Screws onto a bottle. Turns a lake into a drink.', 'Personal filter · Bottle-mount · Miniwell', AE + 'H4c833e23ad674e2caa926425a4d7cb21S.jpg_640x640.jpg'],
     ['Gravity Water Bag Filter System', 50.9, 'Hang it from a branch, let gravity do the work.', 'Gravity bag · Inline filter · Straw', AE + 'S6bb987ca8def4307abe33dc86a37184c3.jpg_640x640.jpg'],
     ['Lifetime 20 L Foldable Water Carrier', null, 'Twenty litres when full. A pancake when empty.', '20 L · Foldable · Tap', BB + '5559845/water-carrier-lifetime-20-l-foldable_1095003.jpg'],
     ['Naturehike Folding Water Bucket', 27.9, 'From river to camp without spilling half of it.', '10 L · Foldable · Naturehike', AE + 'Sb21592114a3d40dbab7d3451c7bfc4121.jpg_640x640.jpg'],
-    ['Mini Water Filter Straw', 15.9, 'Drink straight from questionable sources.', 'Personal filter · Straw · Lightweight', AE + 'S3d8aa9d9ca804445976f736c622e817bF.jpg_640x640.jpg']]],
+    ['Mini Water Filter Straw', 15.9, 'Drink straight from questionable sources.', 'Personal filter · Straw · Lightweight', AE + 'S3d8aa9d9ca804445976f736c622e817bF.jpg_640x640.jpg'],
+    ['Solar Shower Bag 20 L', 20.9, 'Leave it in the sun, get a hot shower. The boiler is optional.', '20 L · Solar heated · Shower head', AE + 'S0d3416dfed5d42a3ae56f9681fbb4b462.png_640x640.jpg'],
+    ['Collapsible Water Tank with Tap', 12.9, 'Fill it before the taps go quiet. Folds flat after.', '5–20 L · Foldable · Tap', AE + 'S028a86f373164a059936e05846ce22a2A.jpg_640x640.jpg']]],
   ['food', 'Grow & Forage', 'Surface', 665, 0, 'Bags, lines and planters for the post-supermarket diet.', [
     ['Mesh Mushroom Foraging Bag', 12.9, 'Carries dinner home and sows the next crop on the way.', 'Mesh · Shoulder strap · Spore-friendly', AE + 'S735be6599fa744ec9743cf68231f927dc.jpg_640x640.jpg'],
     ['25-Piece Survival Fishing Kit with Pocket Reel', 50.9, 'Protein, eventually. Now with a reel.', '25 pieces · Pocket reel · Hooks & lures', AE + 'S33c704ed503447959645f76b0a80abe9f.jpg_640x640.jpg'],
     ['Canvas & Leather Bushcraft Foraging Pouch', 6.9, 'A belt pocket for berries, tinder and whatever looks edible.', 'Canvas · Leather trim · Belt loop', AE + 'S4dedb6ecdb084e629189abf60ae0ce329.jpg_640x640.jpg'],
-    ['Garden ID Self-Watering Planter 28 L', null, 'A vegetable patch for the balcony that waters itself.', '28 L · 40 cm · Water reserve', BB + '6879699/Self-watering%20flowerpot%20Garden%20ID%20Anthracite.jpg']]],
+    ['Garden ID Self-Watering Planter 28 L', null, 'A vegetable patch for the balcony that waters itself.', '28 L · 40 cm · Water reserve', BB + '6879699/Self-watering%20flowerpot%20Garden%20ID%20Anthracite.jpg'],
+    ['Sprouting Jar Kit', 20.9, 'Fresh greens in three days. No soil, no garden, no excuses.', 'Mesh lids · Jars · Stand', AE + 'S2c0b728c9d0a486783bd7a5f92830af0q.jpg_640x640.jpg']]],
   ['comms', 'Comms', 'Surface', 1510, 0, 'Radios that work while the cell towers take a long nap.', [
     ['Hand Crank Solar Emergency Radio 4000 mAh', 60.9, 'News, a torch and a phone charge. Batteries optional.', 'Hand crank · Solar · 4000 mAh', AE + 'S2c99a42402984016a461f73824bac75bi.jpg_640x640.jpg'],
     ['Compact Hand Crank Solar Radio', 34.9, 'Small enough for the 72-hour bag.', 'Hand crank · Solar · Receive only', AE + 'S49401ecb797845ed977a8ae930f87260x.jpg_640x640.jpg'],
@@ -69,13 +73,17 @@ const RAW: RawCategory[] = [
     ['Naturehike 2-Person Tent, Grey', null, 'Ships from the EU. Pitches before the rain does.', '2 person · Grey · Naturehike', BB + '6281945/tent-naturehike-2381600017851-grey-monochrome-2-persons_1195771.jpg'],
     ['Waterproof Camping Tarp, 19 Hang Points', 55.9, 'A roof in four knots.', '3×3 to 4×4 m · 19 hang points · Waterproof', AE + 'S8df4ec22467248e2bb32bb680ff67c0bG.jpg_640x640.jpg'],
     ['Emergency Mylar Bivy Sleeping Bag', 11.9, 'Keeps your body heat. And your dignity.', 'Mylar · Reusable · Pocket size', AE + 'Sa9fa9135fce6406c948509cafd9fb03dE.png_640x640.jpg'],
-    ['Paracord 550, 9-Core 4 mm', 8.9, 'The string that holds the apocalypse together.', '550 lb · 9-core · 4 mm', AE + 'S14360a9c5a494b54a5749e84d8dd4f7c7.jpg_640x640.jpg']]],
+    ['Paracord 550, 9-Core 4 mm', 8.9, 'The string that holds the apocalypse together.', '550 lb · 9-core · 4 mm', AE + 'S14360a9c5a494b54a5749e84d8dd4f7c7.jpg_640x640.jpg'],
+    ['Folding Emergency Toilet', 50.9, "When the water stops, the bathroom doesn't have to.", 'Folding · Lid · Bag holder', AE + 'Sdae6e767d43e4141b87741e4271aed85t.jpg_640x640.jpg'],
+    ['Emergency Toilet Bags', 9.9, 'The refill nobody talks about. Everybody needs.', 'Leak-proof · Tie closure · Pack', AE + 'S6dfefc9e1a7c4e15832521993618bdffa.jpg_640x640.jpg']]],
   ['fire', 'Fire & Heat', 'Surface', 480, 0, 'Fire: humanity\'s first app. Still no subscription.', [
     ['Folding Stainless Wood-Burning Camp Stove', 43.9, 'Twigs in, dinner out. No gas cartridges.', 'Stainless steel · Folding · Burns wood', AE + 'S0b05873784ed40e3952c2ecf03e09212O.png_640x640.jpg'],
     ['CHANGE MOORE Secondary-Combustion Wood Stove', 190.9, 'Burns everything twice. Smokes half as much.', 'Secondary combustion · Folding · Stainless', AE + 'S77510e50b9fb47b8ac0cd21d2c4725b3e.jpg_640x640.jpg'],
     ['Waterproof Magnesium Ferro Rod', 5.9, 'Thousands of strikes. Zero matches.', 'Magnesium · Ferrocerium · Waterproof', AE + 'Sff683453d25a47fb9ca2d591c1aa40d33.jpg_640x640.jpg'],
     ['Emergency Mylar Thermal Blankets 130×210 cm', 13.9, 'Sends 90% of your heat straight back at you.', '130×210 cm · Mylar · Multipack', AE + 'Sed8a01ef87e3421aa61e4ef27fd9f85cY.png_640x640.jpg'],
-    ['Rechargeable Flexible Electric Lighter', null, 'No gas, no flint. Charges over USB.', 'USB rechargeable · Flexible neck · InnovaGoods']]],
+    ['Rechargeable Flexible Electric Lighter', null, 'No gas, no flint. Charges over USB.', 'USB rechargeable · Flexible neck · InnovaGoods'],
+    ['Thermoelectric Stove-Top Fan', 70.9, "Runs on the stove's own heat. No plug, no battery, no idea how. (Physics.)", 'Heat-powered · 6 blades · Silent', AE + 'S1db3b4c49c5541be94d0bd80378f007ck.jpg_640x640.jpg'],
+    ['Brass Fire Piston', 46.9, 'Fire from a push of air. Like a diesel engine, in your pocket.', 'Brass · Air compression · Tinder chamber', AE + 'S0d0c34acfa514a7192b0ac0dfba8be1br.jpg_640x640.jpg']]],
   ['nav', 'Navigation', 'Surface', 100, 0, 'GPS is someone else\'s satellite. A map and a compass are yours.', [
     ['Waterproof Sighting Compass with Pouch', 16.9, 'Points north. Doesn\'t need charging.', 'Sighting lens · Waterproof · Pouch', AE + 'S60905a04d4604caab487a08b4eb65fa6G.jpg_640x640.jpg'],
     ['SenseCAP T1000-E Card GPS Tracker', 85.9, 'Share your position with the group, even off-grid.', 'GPS · LoRa 868 MHz · Meshtastic', AE + 'S1e0e766d966b4ce4b44f88e0816f9bedy.png_640x640.jpg'],
@@ -87,7 +95,9 @@ const RAW: RawCategory[] = [
     ['Electric Vacuum Sealer with Built-in Cutter', null, 'Removes air. Adds years.', 'Vacuum + seal · Built-in cutter', AE + 'Sa5c3bd3795f24d408cc44da4535e247bb.jpg_640x640.jpg'],
     ['Alfa AL4451 Vacuum Sealer', null, 'EU plug, CE marked, ships from Spain.', 'Vacuum sealer · EU plug · Alfa', BB + '5111491/Vacuum-sealed%20packaging%20Alfa%20AL4451.jpg'],
     ['5-Gallon Mylar Bags with Oxygen Absorbers, 10', 44.9, 'Long-term storage for rice, beans and optimism.', '5 gallon · 10 bags · O₂ absorbers', AE + 'Sc4f2bee893914031aa73a657d8930f10M.jpg_640x640.jpg'],
-    ['Food-Grade Airtight Grain Storage Box', 11.9, 'Rodents not invited.', 'Airtight · Food-grade · Stackable', AE + 'S910fd924e70749548c6136a7ff855df5x.jpg_640x640.jpg']]],
+    ['Food-Grade Airtight Grain Storage Box', 11.9, 'Rodents not invited.', 'Airtight · Food-grade · Stackable', AE + 'S910fd924e70749548c6136a7ff855df5x.jpg_640x640.jpg'],
+    ['Cast-Iron Hand Grain Mill', 107.9, 'Wheat in, flour out. The bakery runs on elbow grease.', 'Cast iron · Clamp-on · Adjustable grind', AE + 'S2fbf40aabfd643c1ab6f09966848e37aQ.jpg_640x640.jpg'],
+    ['12 V Compressor Fridge 21–55 L', 234.9, 'Keeps food cold on a battery or a solar panel.', '12/24 V · Compressor · App control', AE + 'A55810aa5c86e4ceabf07f5d5b42045d7L.jpg_640x640.jpg']]],
   ['medic', 'First Aid', 'Bunker', 685, 1, 'The nearest emergency room is now you.', [
     ['Kerbl First Aid Kit', null, 'Wall-mounted, CE marked, where you can reach it.', 'CE marked · Stocked · Kerbl', BB + '6166705/Fist%20Aid%20kit%20Kerbl.jpg'],
     ['Rhino Rescue Large IFAK Pouch', 56.9, 'Organised for shaking hands. Fill it your way.', 'IFAK · Empty · MOLLE', AE + 'S80f6a7f1e1254e38b5bc95c737e02b9dx.jpg_640x640.jpg'],
@@ -104,7 +114,10 @@ const RAW: RawCategory[] = [
     ['Galix Solar Motion Spotlight 300 lm', null, 'Lights up the gate when someone gets close.', '300 lm · Solar · Motion sensor', BB + '5567733/Solar%20lamp%20Galix%20G4565%20300%20Lm.jpg'],
     ['Solar Motion Sensor Wall Light', 11.9, 'No wiring. Switches on when it matters.', 'Solar · Motion sensor · IP65', AE + 'Sda19156631c640a9aa57ce5b346a5d37x.jpg_640x640.jpg'],
     ['Wireless PIR Motion Alarm', 8.9, 'Hear them before they hear you.', 'PIR sensor · Wireless chime', AE + 'HTB1KR2iX5DxK1Rjy1zcq6yGeXXaK.jpg_640x640.jpg'],
-    ['Faraday Bag Set, 4 sizes', 5.9, 'Keeps phones and keys off the radar.', 'Signal blocking · 4 sizes', AE + 'S31c606a61abc47d2b9d3a8fb21b2b18cX.png_640x640.jpg']]],
+    ['Faraday Bag Set, 4 sizes', 5.9, 'Keeps phones and keys off the radar.', 'Signal blocking · 4 sizes', AE + 'S31c606a61abc47d2b9d3a8fb21b2b18cX.png_640x640.jpg'],
+    ['Glow-in-the-Dark Tape 5 m', 6.9, 'Charges in daylight, finds the stairs in the blackout.', '5 m · Photoluminescent · Self-adhesive', AE + 'S7288f1f1fce847c1957c706187b8b239w.jpg_640x640.jpg'],
+    ['FNIRSI GC-01 Geiger Counter', 87.9, "Hear the radiation you can't see. Check food, water and the wind.", 'X / γ / β · Rechargeable · Data log', AE + 'S69783d8bc2b54905a124b0f49b5581e5f.jpg_640x640.jpg'],
+    ['Pen Dosimeter with Dose Alarm', 73.9, 'Clips on, counts up, beeps before it matters.', 'Dose alarm · Pocket pen · Rechargeable', AE + 'S6ec38a8aad4e489f9507c93ac1c0469e8.jpg_640x640.jpg']]],
 ];
 
 export const BOOK: CartLine = { id: 'book', name: 'Survival Base · The Guide', price: 49 };
@@ -185,7 +198,7 @@ export interface Bundle {
 
 /** Kits that combine zones. Product pages show the kits a product belongs to, zone pages the kits that use the zone. */
 export const BUNDLES: Bundle[] = [
-  { id: 'blackout', name: 'Blackout Kit', blurb: 'Power, light and news for when the street goes dark.', items: ['energy-0', 'energy-2', 'tools-2', 'comms-0', 'energy-5'] },
+  { id: 'blackout', name: 'Blackout Kit', blurb: 'Power, light and news for when the street goes dark.', items: ['energy-0', 'energy-2', 'tools-2', 'comms-0', 'energy-5', 'energy-6', 'security-4'] },
   { id: 'grab-and-go', name: '72-Hour Grab Bag', blurb: 'Everything for the first three days, in one pack.', items: ['comms-1', 'energy-4', 'water-4', 'medic-4', 'nav-0', 'nav-3', 'shelter-3', 'fire-2'] },
   { id: 'clean-water', name: 'Clean Water Kit', blurb: 'Carry it, filter it, drink it.', items: ['water-1', 'water-3', 'water-4'] },
   { id: 'off-grid-comms', name: 'Off-Grid Comms Kit', blurb: 'Messages and positions with no towers, powered by the sun.', items: ['comms-4', 'nav-1', 'energy-3'] },
@@ -194,11 +207,14 @@ export const BUNDLES: Bundle[] = [
   { id: 'group-comms', name: 'Group Comms Kit', blurb: 'Talk across the valley and see where everyone is.', items: ['comms-3', 'comms-4', 'nav-1'] },
   { id: 'home-first-aid', name: 'Home First Aid Kit', blurb: 'One for the house, one for the car, one for the bike.', items: ['medic-1', 'medic-3', 'medic-4'] },
   { id: 'bivouac', name: 'Bivouac Kit', blurb: 'A dry night anywhere: tent, tarp, cord and a backup bivvy.', items: ['shelter-0', 'shelter-2', 'shelter-4', 'shelter-3'] },
-  { id: 'warmth', name: 'Warmth Kit', blurb: 'Spark, shine and keep the heat you made.', items: ['fire-2', 'fire-3', 'shelter-3'] },
+  { id: 'warmth', name: 'Warmth Kit', blurb: 'Spark, shine and keep the heat you made.', items: ['fire-2', 'fire-3', 'shelter-3', 'fire-6'] },
   { id: 'camp-kitchen', name: 'Camp Kitchen Kit', blurb: 'Fetch water, filter it, boil it on twigs.', items: ['fire-0', 'fire-2', 'water-3', 'water-1'] },
   { id: 'bushcraft-fire', name: 'Bushcraft Fire Kit', blurb: 'Cut, split and burn it clean.', items: ['fire-1', 'fire-2', 'tools-1', 'tools-3'] },
   { id: 'forager', name: 'Forager Kit', blurb: 'Pick it, catch it, carry it home.', items: ['food-0', 'food-1', 'food-2', 'tools-3'] },
-  { id: 'pantry', name: 'Long-Term Pantry Kit', blurb: 'Seal it, box it, forget it for a decade.', items: ['storage-2', 'storage-3'] },
+  { id: 'pantry', name: 'Long-Term Pantry Kit', blurb: 'Seal it, box it, forget it for a decade.', items: ['storage-2', 'storage-3', 'storage-4', 'food-4'] },
+  { id: 'emergency-toilet', name: 'Emergency Toilet Kit', blurb: 'When the taps stop: a toilet, the bags and water in reserve.', items: ['shelter-5', 'shelter-6', 'water-6'] },
+  { id: 'radiation-watch', name: 'Radiation Watch Kit', blurb: 'Measure what you cannot see. Hear what is happening.', items: ['security-5', 'security-6', 'comms-0'] },
+  { id: 'off-grid-home', name: 'Off-Grid Home Kit', blurb: 'Cold food, fresh flour, a warm room and a hot shower with no grid.', items: ['storage-5', 'storage-4', 'fire-5', 'water-5'] },
   { id: 'camp-tools', name: 'Camp Tools Kit', blurb: 'Cut, split, fix and see what you are doing.', items: ['tools-1', 'tools-3', 'tools-4', 'tools-2'] },
 ];
 
