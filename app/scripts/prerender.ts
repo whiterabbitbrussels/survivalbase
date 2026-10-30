@@ -15,6 +15,7 @@ const SITE = 'https://survivalbase.net';
 const DIST = join(import.meta.dirname, '..', 'dist');
 const TEMPLATE = readFileSync(join(DIST, 'index.html'), 'utf8');
 const LOGO = SITE + '/survivalbase-logo.png';
+const SHARE = SITE + '/social/share-image-1200x630.png';
 const TODAY = new Date().toISOString().slice(0, 10);
 
 /** EU countries the shop ships to at the flat rate set in Shopify. */
@@ -84,7 +85,7 @@ function pages(lang: Lang): Page[] {
     route: { view: 'home' }, type: 'website',
     title: 'SurvivalBase · ' + t('home.h1'),
     description: clip(t('home.h1') + ' ' + t('home.intro')),
-    image: LOGO,
+    image: SHARE,
     body: `<h1>${esc(t('home.h1'))}</h1><p>${esc(t('home.intro'))}</p>` + zoneNav(lang)
       + `<p>${esc(BOOK.name)} · €${BOOK.price}</p>`,
     jsonld: [
@@ -99,7 +100,7 @@ function pages(lang: Lang): Page[] {
       route: { view: 'cat', id: c.id }, type: 'website',
       title: `${c.name} · SurvivalBase`,
       description: clip(c.blurb + ' ' + c.items.slice(0, 4).map(p => p.name).join(', ') + '.'),
-      image: c.items.find(p => p.image)?.image ?? LOGO,
+      image: c.items.find(p => p.image)?.image ?? SHARE,
       body: `<p>${esc(t('cat.kicker', { where: t(`where.${c.where}`).toUpperCase(), n: pad(c.ch) }))}</p><h1>${esc(c.name)}</h1><p>${esc(c.blurb)}</p>`
         + `<h2>${esc(t('cat.onShelf'))}</h2>` + productList(c.items, lang) + zoneNav(lang),
       jsonld: [
