@@ -42,3 +42,14 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # Tell Bing (and the other IndexNow engines, which feed ChatGPT search and Copilot) that every page in the sitemap is fresh.
+      # The key matches INDEXNOW_KEY in app/scripts/prerender.ts and is served at /<key>.txt.
+      - name: Ping IndexNow
+        continue-on-error: true
+        env:
+          KEY: b7c4e2a91f0d4c6e8a3b5d7f9e1c2a40
+        run: |
+          sleep 60
+          curl -sf "https://survivalbase.net/sitemap.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -s \
+            --arg key "$KEY" '{host: "survivalbase.net", key: $key, keyLocation: ("https://survivalbase.net/" + $key + ".txt"), urlList: .}' \
+            | curl -s -o /dev/null -w "IndexNow: HTTP %{http_code}\n" -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' -d @-

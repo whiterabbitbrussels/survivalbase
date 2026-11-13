@@ -7,6 +7,8 @@ import { LogoMark, Wordmark } from './components/Logo';
 import { HomePage } from './pages/HomePage';
 import { CategoryPage } from './pages/CategoryPage';
 import { ProductPage } from './pages/ProductPage';
+import { GuidePage, GuidesPage } from './pages/GuidePage';
+import { GUIDES, GUIDE_BY_ID, GUIDES_HUB } from './guides';
 
 const WALK_SPEED = 450; // scene px per second
 
@@ -54,6 +56,8 @@ export default function App() {
   }, [cart]);
 
   useEffect(() => {
+    if (route.view === 'guide') { document.title = GUIDE_BY_ID[route.id].title; return; }
+    if (route.view === 'guides') { document.title = GUIDES_HUB.title; return; }
     const name = route.view === 'cat' ? CAT_BY_ID[route.id].name : route.view === 'product' ? PRODUCT_BY_ID[route.id].name : null;
     document.title = name ? name + ' · SurvivalBase' : 'SurvivalBase · ' + t('home.h1');
   }, [route]);
@@ -110,6 +114,7 @@ export default function App() {
         </a>
         <nav style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 500 }}>
           <button onClick={goHome} className="link-btn nav-btn">{t('nav.base')}</button>
+          <a href={hrefFor({ view: 'guides' })} onClick={e => { e.preventDefault(); navigate({ view: 'guides' }); }} className="link-btn nav-btn">GUIDES</a>
           <button onClick={() => goHomeThen('library')} className="link-btn nav-btn">{t('nav.guide')}</button>
           <button onClick={() => setNight(n => !n)} className="btn btn-ink">{night ? t('nav.blackout') : t('nav.daylight')}</button>
           <button onClick={() => goHomeThen('stash')} className="btn btn-orange btn-shadow" style={{ padding: '7px 12px' }}>{t('nav.stash', { n: cart.length })}</button>
@@ -132,6 +137,10 @@ export default function App() {
       {route.view === 'cat' && (
         <CategoryPage cat={CAT_BY_ID[route.id]} onHome={goHome} onAddBook={addBook} onOpenProduct={openProduct} onAdd={p => add(p)} />
       )}
+      {route.view === 'guide' && (
+        <GuidePage key={route.id} guide={GUIDE_BY_ID[route.id]} onGo={navigate} onOpenProduct={openProduct} onAdd={p => add(p)} />
+      )}
+      {route.view === 'guides' && <GuidesPage onGo={navigate} />}
       {route.view === 'product' && (
         <ProductPage key={route.id} product={PRODUCT_BY_ID[route.id]} onHome={goHome} onOpenCat={openCat} onOpenProduct={openProduct} onAdd={add} onAddBook={addBook} />
       )}
@@ -143,6 +152,9 @@ export default function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
           <nav style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
             {LEGAL.map(([key, slug]) => <a key={slug} href={POLICIES + slug} style={{ color: 'inherit' }}>{t(key)}</a>)}
+          </nav>
+          <nav aria-label="Guides" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            {GUIDES.map(g => <a key={g.id} href={hrefFor({ view: 'guide', id: g.id })} style={{ color: 'inherit' }}>{g.h1}</a>)}
           </nav>
           <nav aria-label={t('footer.language')} style={{ display: 'flex', gap: 10 }}>
             {LANGS.map(l => (
