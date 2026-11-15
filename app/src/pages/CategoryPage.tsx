@@ -1,4 +1,4 @@
-import { bundlesForCat, pad, type Category, type Product } from '../data';
+import { bundlesForCat, coverOf, pad, sized, type Category, type Product } from '../data';
 import { ProductCard } from '../components/ProductCard';
 import { KitSection } from '../components/KitSection';
 import { t } from '../i18n';
@@ -23,7 +23,9 @@ export function CategoryPage({ cat, onHome, onAddBook, onOpenProduct, onAdd }: P
           <h1 style={{ margin: 0, fontFamily: 'var(--display)', fontWeight: 900, fontSize: 'clamp(64px,9vw,120px)', lineHeight: 0.85 }}>{cat.name}</h1>
           <p style={{ margin: 0, fontSize: 18, lineHeight: 1.45, maxWidth: 480, textWrap: 'pretty' }}>{cat.blurb}</p>
         </div>
-        <div className="ph" style={{ aspectRatio: '16/10', border: '2px solid var(--ink)', fontSize: 12, padding: 12 }}>section illustration · {cat.name} (Seedream)</div>
+        {coverOf(cat)
+          ? <img src={sized(coverOf(cat)!)} alt={cat.name} style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', border: '2px solid var(--ink)', display: 'block', boxSizing: 'border-box' }} />
+          : <div className="ph" style={{ aspectRatio: '16/10', border: '2px solid var(--ink)' }} />}
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap', background: 'var(--ink)', color: 'var(--paper)', padding: '16px 20px' }}>

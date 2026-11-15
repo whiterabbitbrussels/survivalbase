@@ -22,7 +22,7 @@ export function HomePage(props: SceneProps) {
 
       <Scene {...props} />
 
-      <div style={{ maxWidth: 1600, width: '100%', boxSizing: 'border-box', margin: '0 auto', padding: '18px 24px 40px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div className="quickmap" style={{ maxWidth: 1600, width: '100%', boxSizing: 'border-box', margin: '0 auto', padding: '18px 24px 40px', display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '.08em' }}>{t('home.quickMap')}</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
           {zones.map(z => <button key={z.id} onClick={() => props.onZone(z.id)} className="chip">{z.label}</button>)}

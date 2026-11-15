@@ -42,7 +42,7 @@ const BB = 'https://www.bigbuy.eu/';
 const RAW: RawCategory[] = [
   ['energy', 'Power', 'Surface', 1220, 0, 'The grid had a good run. Solar, wind and batteries for when it stops returning your calls.', [
     ['EcoFlow River 2 Pro Power Station', 462.9, 'LiFePO4 cells. Runs the lamp and the fridge while the street goes dark.', '716 Wh · LiFePO4 · EcoFlow', AE + 'Sb99a506f9d104b23b1f53b75eae465f9w.png_640x640.jpg'],
-    ['EcoFlow River 3 Plus Power Station', null, 'Compact backup for the router, the lights and your patience.', '600 W · Portable · EcoFlow', BB + '7607795/Portable%20Power%20Station%20Ecoflow%20River%203%20Plus%20600%20W.jpg'],
+    ['EcoFlow River 3 Plus Power Station', 289.9, 'Compact backup for the router, the lights and your patience.', '600 W · Portable · EcoFlow', BB + '7607795/Portable%20Power%20Station%20Ecoflow%20River%203%20Plus%20600%20W.jpg'],
     ['ALLPOWERS Foldable Solar Panel', 174.9, 'Unfold, point at the sky, charge everything.', '60–200 W · Foldable · ALLPOWERS', AE + 'S5a2c0abea18b4af388c788d67deb90c2C.png_640x640.jpg'],
     ['MHPOWOS Foldable ETFE Solar Panel', 105.9, 'Pocket-size sun harvesting for phones and power banks.', 'ETFE · Foldable · USB-C + USB-A', AE + 'S01d5b1f8d8384a1a996bc1fbfdd6b841O.jpg_640x640.jpg'],
     ['Hand Crank Solar Power Bank 5-in-1', 64.9, 'Sun when there is sun. Cardio when there is not.', 'Hand crank · Solar · Torch', AE + 'Sb85bf22f92f04bb8b0de91bb080f3e34L.jpg_640x640.jpg'],
@@ -51,7 +51,7 @@ const RAW: RawCategory[] = [
   ['water', 'Water', 'Surface', 990, 0, 'Rivers are free. So is dysentery. Filters, purifiers and storage that keep the two apart.', [
     ['Miniwell L630 Water Filter Straw', 72.9, 'Screws onto a bottle. Turns a lake into a drink.', 'Personal filter · Bottle-mount · Miniwell', AE + 'H4c833e23ad674e2caa926425a4d7cb21S.jpg_640x640.jpg'],
     ['Gravity Water Bag Filter System', 50.9, 'Hang it from a branch, let gravity do the work.', 'Gravity bag · Inline filter · Straw', AE + 'S6bb987ca8def4307abe33dc86a37184c3.jpg_640x640.jpg'],
-    ['Lifetime 20 L Foldable Water Carrier', null, 'Twenty litres when full. A pancake when empty.', '20 L · Foldable · Tap', BB + '5559845/water-carrier-lifetime-20-l-foldable_1095003.jpg'],
+    ['Lifetime 20 L Foldable Water Carrier', 16.9, 'Twenty litres when full. A pancake when empty.', '20 L · Foldable · Tap', BB + '5559845/water-carrier-lifetime-20-l-foldable_1095003.jpg'],
     ['Naturehike Folding Water Bucket', 27.9, 'From river to camp without spilling half of it.', '10 L · Foldable · Naturehike', AE + 'Sb21592114a3d40dbab7d3451c7bfc4121.jpg_640x640.jpg'],
     ['Mini Water Filter Straw', 15.9, 'Drink straight from questionable sources.', 'Personal filter · Straw · Lightweight', AE + 'S3d8aa9d9ca804445976f736c622e817bF.jpg_640x640.jpg'],
     ['Solar Shower Bag 20 L', 20.9, 'Leave it in the sun, get a hot shower. The boiler is optional.', '20 L · Solar heated · Shower head', AE + 'S0d3416dfed5d42a3ae56f9681fbb4b462.png_640x640.jpg'],
@@ -60,17 +60,17 @@ const RAW: RawCategory[] = [
     ['Mesh Mushroom Foraging Bag', 12.9, 'Carries dinner home and sows the next crop on the way.', 'Mesh · Shoulder strap · Spore-friendly', AE + 'S735be6599fa744ec9743cf68231f927dc.jpg_640x640.jpg'],
     ['25-Piece Survival Fishing Kit with Pocket Reel', 50.9, 'Protein, eventually. Now with a reel.', '25 pieces · Pocket reel · Hooks & lures', AE + 'S33c704ed503447959645f76b0a80abe9f.jpg_640x640.jpg'],
     ['Canvas & Leather Bushcraft Foraging Pouch', 6.9, 'A belt pocket for berries, tinder and whatever looks edible.', 'Canvas · Leather trim · Belt loop', AE + 'S4dedb6ecdb084e629189abf60ae0ce329.jpg_640x640.jpg'],
-    ['Garden ID Self-Watering Planter 28 L', null, 'A vegetable patch for the balcony that waters itself.', '28 L · 40 cm · Water reserve', BB + '6879699/Self-watering%20flowerpot%20Garden%20ID%20Anthracite.jpg'],
+    ['Garden ID Self-Watering Planter 28 L', 34.9, 'A vegetable patch for the balcony that waters itself.', '28 L · 40 cm · Water reserve', BB + '6879699/Self-watering%20flowerpot%20Garden%20ID%20Anthracite.jpg'],
     ['Sprouting Jar Kit', 20.9, 'Fresh greens in three days. No soil, no garden, no excuses.', 'Mesh lids · Jars · Stand', AE + 'S2c0b728c9d0a486783bd7a5f92830af0q.jpg_640x640.jpg']]],
   ['comms', 'Comms', 'Surface', 1510, 0, 'Radios that work while the cell towers take a long nap.', [
     ['Hand Crank Solar Emergency Radio 4000 mAh', 60.9, 'News, a torch and a phone charge. Batteries optional.', 'Hand crank · Solar · 4000 mAh', AE + 'S2c99a42402984016a461f73824bac75bi.jpg_640x640.jpg'],
     ['Compact Hand Crank Solar Radio', 34.9, 'Small enough for the 72-hour bag.', 'Hand crank · Solar · Receive only', AE + 'S49401ecb797845ed977a8ae930f87260x.jpg_640x640.jpg'],
-    ['Motorola Talkabout T42 Walkie Talkie, 3 pcs', null, 'One for each of you. No licence needed.', 'PMR446 · Licence-free · 3 units', BB + '7220574/Walkie-Talkie%20Motorola%20T42%20Multicolour.jpg'],
+    ['Motorola Talkabout T42 Walkie Talkie, 3 pcs', 41.9, 'One for each of you. No licence needed.', 'PMR446 · Licence-free · 3 units', BB + '7220574/Walkie-Talkie%20Motorola%20T42%20Multicolour.jpg'],
     ['Baofeng F22 PMR446 Walkie Talkie, pair', 45.9, 'Talk across the valley without a phone mast.', 'PMR446 · Licence-free · USB-C', AE + 'Sd712bfea29fa408cb9624402a75bf34e3.jpg_640x640.jpg'],
     ['Wio Tracker L1 Pro Meshtastic Node', 75.9, 'Text messages with no towers, no SIM and no bill.', 'LoRa 868 MHz · Meshtastic · GPS', AE + 'Sda4723a14cf34f89b0622ab902667791U.jpeg_640x640.jpg']]],
   ['shelter', 'Shelter', 'Surface', 290, 0, 'Tents, tarps and bivvies. Property prices have never been lower.', [
     ['Naturehike Cloud Peak 4-Season Tent, 2P', 291.9, 'Wind, snow, the neighbours. Keeps it all out.', '2 person · 4-season · Naturehike', AE + 'Sc12773a9ca2d45f8879486984c1609e6K.jpg_640x640.jpg'],
-    ['Naturehike 2-Person Tent, Grey', null, 'Ships from the EU. Pitches before the rain does.', '2 person · Grey · Naturehike', BB + '6281945/tent-naturehike-2381600017851-grey-monochrome-2-persons_1195771.jpg'],
+    ['Naturehike 2-Person Tent, Grey', 99.9, 'Ships from the EU. Pitches before the rain does.', '2 person · Grey · Naturehike', BB + '6281945/tent-naturehike-2381600017851-grey-monochrome-2-persons_1195771.jpg'],
     ['Waterproof Camping Tarp, 19 Hang Points', 55.9, 'A roof in four knots.', '3×3 to 4×4 m · 19 hang points · Waterproof', AE + 'S8df4ec22467248e2bb32bb680ff67c0bG.jpg_640x640.jpg'],
     ['Emergency Mylar Bivy Sleeping Bag', 11.9, 'Keeps your body heat. And your dignity.', 'Mylar · Reusable · Pocket size', AE + 'Sa9fa9135fce6406c948509cafd9fb03dE.png_640x640.jpg'],
     ['Paracord 550, 9-Core 4 mm', 8.9, 'The string that holds the apocalypse together.', '550 lb · 9-core · 4 mm', AE + 'S14360a9c5a494b54a5749e84d8dd4f7c7.jpg_640x640.jpg'],
@@ -81,7 +81,7 @@ const RAW: RawCategory[] = [
     ['CHANGE MOORE Secondary-Combustion Wood Stove', 190.9, 'Burns everything twice. Smokes half as much.', 'Secondary combustion · Folding · Stainless', AE + 'S77510e50b9fb47b8ac0cd21d2c4725b3e.jpg_640x640.jpg'],
     ['Waterproof Magnesium Ferro Rod', 5.9, 'Thousands of strikes. Zero matches.', 'Magnesium · Ferrocerium · Waterproof', AE + 'Sff683453d25a47fb9ca2d591c1aa40d33.jpg_640x640.jpg'],
     ['Emergency Mylar Thermal Blankets 130×210 cm', 13.9, 'Sends 90% of your heat straight back at you.', '130×210 cm · Mylar · Multipack', AE + 'Sed8a01ef87e3421aa61e4ef27fd9f85cY.png_640x640.jpg'],
-    ['Rechargeable Flexible Electric Lighter', null, 'No gas, no flint. Charges over USB.', 'USB rechargeable · Flexible neck · InnovaGoods'],
+    ['Rechargeable Flexible Electric Lighter', 24.9, 'No gas, no flint. Charges over USB.', 'USB rechargeable · Flexible neck · InnovaGoods'],
     ['Thermoelectric Stove-Top Fan', 70.9, "Runs on the stove's own heat. No plug, no battery, no idea how. (Physics.)", 'Heat-powered · 6 blades · Stove-top', AE + 'S1db3b4c49c5541be94d0bd80378f007ck.jpg_640x640.jpg'],
     ['Brass Fire Piston', 46.9, 'Fire from a push of air. Like a diesel engine, in your pocket.', 'Brass · Air compression · Tinder chamber', AE + 'S0d0c34acfa514a7192b0ac0dfba8be1br.jpg_640x640.jpg']]],
   ['nav', 'Navigation', 'Surface', 100, 0, 'GPS is someone else\'s satellite. A map and a compass are yours.', [
@@ -92,26 +92,26 @@ const RAW: RawCategory[] = [
     ['Clear Waterproof Map Pouch', 5.9, 'Map and passport stay dry at the river crossing.', 'Transparent · Waterproof · Neck strap', AE + 'S63dc80451ac64906bba031da84b13046u.jpg_640x640.jpg']]],
   ['storage', 'Food Storage', 'Bunker', 472, 1, 'Mylar, vacuum and airtight boxes, built to last. Best before: the next civilisation.', [
     // Price held until the seller confirms EU plug, CE marking and FR/NL manual.
-    ['Electric Vacuum Sealer with Built-in Cutter', null, 'Removes air. Adds years.', 'Vacuum + seal · Built-in cutter', AE + 'Sa5c3bd3795f24d408cc44da4535e247bb.jpg_640x640.jpg'],
-    ['Alfa AL4451 Vacuum Sealer', null, 'EU plug, CE marked, ships from Spain.', 'Vacuum sealer · EU plug · Alfa', BB + '5111491/Vacuum-sealed%20packaging%20Alfa%20AL4451.jpg'],
+    ['Electric Vacuum Sealer with Built-in Cutter', 21.9, 'Removes air. Adds years.', 'Vacuum + seal · Built-in cutter', AE + 'Sa5c3bd3795f24d408cc44da4535e247bb.jpg_640x640.jpg'],
+    ['Alfa AL4451 Vacuum Sealer', 114.9, 'EU plug, CE marked, ships from Spain.', 'Vacuum sealer · EU plug · Alfa', BB + '5111491/Vacuum-sealed%20packaging%20Alfa%20AL4451.jpg'],
     ['5-Gallon Mylar Bags with Oxygen Absorbers, 10', 44.9, 'Long-term storage for rice, beans and optimism.', '5 gallon · 10 bags · O₂ absorbers', AE + 'Sc4f2bee893914031aa73a657d8930f10M.jpg_640x640.jpg'],
     ['Food-Grade Airtight Grain Storage Box', 11.9, 'Rodents not invited.', 'Airtight · Food-grade · Stackable', AE + 'S910fd924e70749548c6136a7ff855df5x.jpg_640x640.jpg'],
     ['Cast-Iron Hand Grain Mill', 107.9, 'Wheat in, flour out. The bakery runs on elbow grease.', 'Cast iron · Clamp-on · Hand crank', AE + 'S2fbf40aabfd643c1ab6f09966848e37aQ.jpg_640x640.jpg'],
     ['12 V Compressor Fridge 21–55 L', 234.9, 'Keeps food cold on a battery or a solar panel.', '12 V · Compressor · App control', AE + 'A55810aa5c86e4ceabf07f5d5b42045d7L.jpg_640x640.jpg']]],
   ['medic', 'First Aid', 'Bunker', 685, 1, 'The nearest emergency room is now you.', [
-    ['Kerbl First Aid Kit', null, 'Wall-mounted, CE marked, where you can reach it.', 'CE marked · Stocked · Kerbl', BB + '6166705/Fist%20Aid%20kit%20Kerbl.jpg'],
+    ['Kerbl First Aid Kit', 24.9, 'Wall-mounted, CE marked, where you can reach it.', 'CE marked · Stocked · Kerbl', BB + '6166705/Fist%20Aid%20kit%20Kerbl.jpg'],
     ['Rhino Rescue Large IFAK Pouch', 56.9, 'Organised for shaking hands. Fill it your way.', 'IFAK · Empty · MOLLE', AE + 'S80f6a7f1e1254e38b5bc95c737e02b9dx.jpg_640x640.jpg'],
     ['Tactical MOLLE First Aid Pouch', 12.9, 'Clips onto any pack. Holds the essentials.', 'MOLLE · Empty · EDC', AE + 'S0f3987604e95438cb9a65fa33dab78f52.jpg_640x640.jpg'],
     ['Compact EVA First Aid Case', 12.9, 'A hard shell for the glovebox or the kitchen drawer.', 'EVA hard case · Empty · Compact', AE + 'Sd68439d021e84dac8cf4a9bdb082c69e4.jpg_640x640.jpg'],
     ['Small Waterproof First Aid Kit', 9.9, 'Plasters and gauze for the bike bag.', 'Stocked · Waterproof · Pocket size', AE + 'S0fc778a04650440f97d58e7527330ae6a.jpg_640x640.jpg']]],
   ['tools', 'Tools', 'Bunker', 972, 1, 'Saws, axes, pliers and light. Duct tape is a lifestyle.', [
-    ['Petzl Tikkina Headlamp 300 lm', null, 'Hands free, light where you look.', '300 lm · Petzl · CE', BB + '4561759/LED%20Head%20Torch%20Petzl%20E060AA03%20Red%20300%20Lm%20%281%20Unit%29.jpg'],
+    ['Petzl Tikkina Headlamp 300 lm', 27.9, 'Hands free, light where you look.', '300 lm · Petzl · CE', BB + '4561759/LED%20Head%20Torch%20Petzl%20E060AA03%20Red%20300%20Lm%20%281%20Unit%29.jpg'],
     ['Stainless Camping Hatchet', 25.9, 'Splits firewood and arguments.', 'Stainless steel · Paracord handle', AE + 'S493d61ecf3ac4fbc9b93a8d210408d7d2.jpg_640x640.jpg'],
     ['Motion Sensor Rechargeable Headlamp', 17.9, 'Wave to switch it on. Useful when your hands are full.', 'COB LED · Motion sensor · Rechargeable', AE + 'S54fa1f7660ab41e9aa38dcc1bdff9dceR.jpg_640x640.jpg'],
     ['AIRAJ Folding Pruning Saw', 12.9, 'Faster than the axe. Quieter too.', 'Folding · Pruning blade · AIRAJ', AE + 'S99ec0c85c13948538148795235a157b1T.jpg_640x640.jpg'],
     ['Stainless Folding Multi-tool', 11.9, 'Pliers, drivers and more in one pocket.', 'Stainless · Folding · Pliers', AE + 'S226b0b421d2947a4b2e374be8093621fY.jpg_640x640.jpg']]],
   ['security', 'Security', 'Bunker', 1185, 1, 'Alarms, lights and signal blocking. Strictly defensive, mostly against raccoons.', [
-    ['Galix Solar Motion Spotlight 300 lm', null, 'Lights up the gate when someone gets close.', '300 lm · Solar · Motion sensor', BB + '5567733/Solar%20lamp%20Galix%20G4565%20300%20Lm.jpg'],
+    ['Galix Solar Motion Spotlight 300 lm', 29.9, 'Lights up the gate when someone gets close.', '300 lm · Solar · Motion sensor', BB + '5567733/Solar%20lamp%20Galix%20G4565%20300%20Lm.jpg'],
     ['Solar Motion Sensor Wall Light', 11.9, 'No wiring. Switches on when it matters.', 'Solar · Motion sensor · IP65', AE + 'Sda19156631c640a9aa57ce5b346a5d37x.jpg_640x640.jpg'],
     ['Wireless PIR Motion Alarm', 8.9, 'Hear them before they hear you.', 'PIR sensor · Wireless chime', AE + 'HTB1KR2iX5DxK1Rjy1zcq6yGeXXaK.jpg_640x640.jpg'],
     ['Faraday Bag Set, 4 sizes', 5.9, 'Keeps phones and keys off the radar.', 'Signal blocking · 4 sizes', AE + 'S31c606a61abc47d2b9d3a8fb21b2b18cX.png_640x640.jpg'],
@@ -198,8 +198,14 @@ const GALLERY: Record<string, string[]> = {
 
 export const CATS: Category[] = RAW.map((r, i) => ({
   id: r[0], name: r[1], where: r[2], x: r[3], lvl: r[4], blurb: r[5], ch: i + 1,
-    items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[4] ? p[1] : null, tagline: p[2], spec: p[3], image: GALLERY[r[0] + '-' + j]?.[0] ?? p[4], gallery: GALLERY[r[0] + '-' + j] })),
+    items: r[6].map((p, j) => ({ id: r[0] + '-' + j, cat: r[0], name: p[0], price: p[1], tagline: p[2], spec: p[3], image: GALLERY[r[0] + '-' + j]?.[0] ?? p[4], gallery: GALLERY[r[0] + '-' + j] })),
 }));
+
+/** Shopify CDN resizes on the fly; the masters are up to 2048 px and several MB. */
+export const sized = (src: string, w = 1200) => (src.includes('cdn.shopify.com') ? src + (src.includes('?') ? '&' : '?') + 'width=' + w : src);
+
+/** Cover photo for a zone: the "in use" AI shot of its first product that has one. */
+export const coverOf = (c: Category) => c.items.find(p => p.gallery)?.gallery?.[0] ?? c.items.find(p => p.image)?.image;
 
 export const CAT_BY_ID: Record<string, Category> = Object.fromEntries(CATS.map(c => [c.id, c]));
 export const PRODUCT_BY_ID: Record<string, Product> = Object.fromEntries(CATS.flatMap(c => c.items.map(p => [p.id, p])));
@@ -236,6 +242,9 @@ export const BUNDLES: Bundle[] = [
 
 export const bundlesFor = (id: string) => BUNDLES.filter(b => b.items.includes(id));
 export const bundlesForCat = (cat: string) => BUNDLES.filter(b => b.items.some(id => id.startsWith(cat + '-')));
+
+/** Below this width the home shows the vertical map: no walking, a tap opens the zone. */
+export const NARROW_QUERY = '(max-width: 760px)';
 
 export type PlaceId = 'library' | 'stash';
 export const PLACES: Record<PlaceId, { x: number; lvl: Level }> = {

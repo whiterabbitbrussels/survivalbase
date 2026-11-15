@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { BOOK, CAT_BY_ID, PRODUCT_BY_ID, isPlace, type CartLine, type Product } from './data';
+import { BOOK, CAT_BY_ID, NARROW_QUERY, PRODUCT_BY_ID, isPlace, type CartLine, type Product } from './data';
 import { LANGS, currentLang, t } from './i18n';
 import { hrefFor, parseLocation, type Route } from './routes';
 import { useWalker } from './useWalker';
@@ -79,7 +79,12 @@ export default function App() {
   });
 
   const walkerWalkTo = walker.walkTo;
-  const walkTo = useCallback((id: string) => { setPanel(null); walkerWalkTo(id); }, [walkerWalkTo]);
+  const walkTo = useCallback((id: string) => {
+    // Phones: no walk, the tap opens the zone at once.
+    if (window.matchMedia(NARROW_QUERY).matches) return isPlace(id) ? setPanel(id) : openCat(id);
+    setPanel(null);
+    walkerWalkTo(id);
+  }, [walkerWalkTo, openCat]);
 
   const goHomeThen = (id: string) => {
     goHome();

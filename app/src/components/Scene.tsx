@@ -1,11 +1,22 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { BOOK, CATS, CAT_BY_ID, FEET, TIP_X, money, pad, type CartLine } from '../data';
+import { BOOK, CATS, CAT_BY_ID, FEET, TIP_X, NARROW_QUERY, coverOf, money, pad, sized, type CartLine } from '../data';
 import type { WalkerState } from '../useWalker';
 import { checkoutUrl, isSellable } from '../shopify';
 import { currentLang, t } from '../i18n';
 
 /** Scene sign for a zone: the drawn English label, or the translated zone name. */
 const sign = (id: string, en: string) => (currentLang() === 'en' ? en : CAT_BY_ID[id].name.toUpperCase());
+
+function useNarrow() {
+  const [narrow, setNarrow] = useState(() => window.matchMedia(NARROW_QUERY).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(NARROW_QUERY);
+    const on = () => setNarrow(mq.matches);
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  return narrow;
+}
 
 const SCENE_W = 1600;
 const SCENE_H = 1000;
@@ -28,7 +39,61 @@ export interface SceneProps {
 const abs = (s: CSSProperties): CSSProperties => ({ position: 'absolute', ...s });
 const Box = (s: CSSProperties) => <div style={abs(s)} />;
 
-export function Scene({ night, cart, walker, panel, onClosePanel, onZone, onAdd, onOpenProduct, onFlash }: SceneProps) {
+export function Scene(props: SceneProps) {
+  return useNarrow() ? <MobileMap {...props} /> : <WideScene {...props} />;
+}
+
+/** Vertical cross-section for phones: surface, then the bunker floors, each zone a photo tile. */
+function MobileMap({ night, cart, panel, onClosePanel, onZone, onAdd, onOpenProduct, onFlash }: SceneProps) {
+  const panelData = panel ? buildPanel(panel, cart, { onAdd, onOpenProduct, onFlash, onZone }) : null;
+  const tile = (id: string) => {
+    const c = CAT_BY_ID[id];
+    const img = coverOf(c);
+    return (
+      <button key={id} onClick={() => onZone(id)} className="mtile">
+        {img ? <img src={sized(img, 480)} alt="" loading="lazy" referrerPolicy="no-referrer" /> : <div className="ph" />}
+        <span className="mtile-label">{c.name.toUpperCase()}</span>
+        <span className="mtile-sub">{t('cat.items', { n: c.items.length })}</span>
+      </button>
+    );
+  };
+  const floor = (label: string, bg: string, ids: string[], extra?: ReactNode) => (
+    <div className="mfloor" style={{ background: bg }}>
+      <div className="mfloor-label">{label}</div>
+      <div className="mgrid">{ids.map(tile)}{extra}</div>
+    </div>
+  );
+  const total = cart.reduce((sum, c) => sum + c.price, 0);
+  return (
+    <div className={'mmap' + (night ? ' mmap-night' : '')}>
+      {floor(t('where.Surface').toUpperCase() + ' · 0 M', night ? '#2a2f45' : '#e7dfcb', ['nav', 'shelter', 'fire', 'food', 'water', 'energy', 'comms'])}
+      <div className="mground" />
+      {floor(t('where.Bunker').toUpperCase() + ' · −1', '#7a5c3d', ['storage', 'medic', 'tools', 'security'])}
+      <div className="mfloor" style={{ background: '#553e2a' }}>
+        <div className="mfloor-label">{t('where.Bunker').toUpperCase()} · −2</div>
+        <div className="mgrid">
+          <button onClick={() => onZone('library')} className="mtile mtile-book">
+            <span className="mbook"><b>SURVIVAL BASE</b><small>{t('scene.bookCover')}</small></span>
+            <span className="mtile-label">{t('scene.guideTitle').toUpperCase()}</span>
+            <span className="mtile-sub">€49</span>
+          </button>
+          <button onClick={() => onZone('stash')} className="mtile mtile-stash">
+            <span className="mstash">{cart.length}</span>
+            <span className="mtile-label">{t('scene.stashTitle').toUpperCase()}</span>
+            <span className="mtile-sub">{cart.length ? money(total) : t('scene.empty')}</span>
+          </button>
+        </div>
+      </div>
+      {panelData && (night
+        ? <TerminalPanel data={panelData} onClose={onClosePanel} sheet />
+        : <DayPanel data={panelData} onClose={onClosePanel} sheet />)}
+    </div>
+  );
+}
+
+const SHEET: CSSProperties = { position: 'fixed', left: 8, right: 8, bottom: 8, top: 'auto', width: 'auto', maxWidth: 'none', maxHeight: '75vh', zIndex: 60 };
+
+function WideScene({ night, cart, walker, panel, onClosePanel, onZone, onAdd, onOpenProduct, onFlash }: SceneProps) {
   const [scale, setScale] = useState(0.6);
   const [tip, setTip] = useState<string | null>(null);
 
@@ -333,9 +398,9 @@ function Survivor({ walker }: { walker: WalkerState }) {
   );
 }
 
-function DayPanel({ data, onClose }: { data: PanelData; onClose: () => void }) {
+function DayPanel({ data, onClose, sheet }: { data: PanelData; onClose: () => void; sheet?: boolean }) {
   return (
-    <div style={{ position: 'absolute', top: 16, right: 16, width: 360, maxWidth: 'calc(100% - 32px)', maxHeight: 'calc(100% - 32px)', overflow: 'auto', boxSizing: 'border-box', background: 'var(--paper)', border: '2px solid var(--ink)', boxShadow: '6px 6px 0 var(--ink)', padding: 18, display: 'flex', flexDirection: 'column', gap: 12, zIndex: 20 }}>
+    <div style={{ position: 'absolute', top: 16, right: 16, width: 360, maxWidth: 'calc(100% - 32px)', maxHeight: 'calc(100% - 32px)', overflow: 'auto', boxSizing: 'border-box', background: 'var(--paper)', border: '2px solid var(--ink)', boxShadow: '6px 6px 0 var(--ink)', padding: 18, display: 'flex', flexDirection: 'column', gap: 12, zIndex: 20, ...(sheet ? SHEET : {}) }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
         <div style={{ fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '.06em' }}>{data.kicker}</div>
         <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: '2px solid var(--ink)', width: 28, height: 28, cursor: 'pointer', fontFamily: 'var(--mono)', fontSize: 14, lineHeight: 1, padding: 0 }}>×</button>
@@ -355,9 +420,9 @@ function DayPanel({ data, onClose }: { data: PanelData; onClose: () => void }) {
   );
 }
 
-function TerminalPanel({ data, onClose }: { data: PanelData; onClose: () => void }) {
+function TerminalPanel({ data, onClose, sheet }: { data: PanelData; onClose: () => void; sheet?: boolean }) {
   return (
-    <div style={{ position: 'absolute', left: 16, bottom: 16, width: 420, maxWidth: 'calc(100% - 32px)', maxHeight: 'calc(100% - 32px)', overflow: 'auto', boxSizing: 'border-box', background: '#0b100c', border: '1px solid #7fe39a', padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 10, zIndex: 20, fontFamily: 'var(--mono)', color: '#9ff0b2', fontSize: 13 }}>
+    <div style={{ position: 'absolute', left: 16, bottom: 16, width: 420, maxWidth: 'calc(100% - 32px)', maxHeight: 'calc(100% - 32px)', overflow: 'auto', boxSizing: 'border-box', background: '#0b100c', border: '1px solid #7fe39a', padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 10, zIndex: 20, fontFamily: 'var(--mono)', color: '#9ff0b2', fontSize: 13, ...(sheet ? SHEET : {}) }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
         <span>// {data.kicker}</span>
         <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#9ff0b2', cursor: 'pointer', fontFamily: 'var(--mono)', fontSize: 13, padding: 0 }}>[esc]</button>
